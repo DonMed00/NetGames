@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "940535124480",
+    "firebase_url": "https://netgames-6441d.firebaseio.com",
+    "project_id": "netgames-6441d",
+    "storage_bucket": "netgames-6441d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940535124480:android:9bbed43bf4dede05743ee5",
+        "android_client_info": {
+          "package_name": "com.donmedapp.netgames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940535124480-fjellg21sg4rp7pmctqs11ci774jqvp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATkoSUhx3sbvG5r9COYpecBWTt9F-YY2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940535124480-fjellg21sg4rp7pmctqs11ci774jqvp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

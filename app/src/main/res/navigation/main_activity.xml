@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.donmedapp.netgames.ui.login.LoginFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/navigateToRegister"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/navigateToPrincipal"
+            app:destination="@id/principalFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.donmedapp.netgames.ui.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/principalFragment"
+        android:name="com.donmedapp.netgames.ui.principal.PrincipalFragment"
+        android:label="principal_fragment"
+        tools:layout="@layout/principal_fragment" />
+</navigation>
