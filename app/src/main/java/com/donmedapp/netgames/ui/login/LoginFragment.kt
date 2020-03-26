@@ -2,9 +2,13 @@ package com.donmedapp.netgames.ui.login
 
 
 import android.app.ProgressDialog
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
@@ -19,6 +23,11 @@ import kotlinx.android.synthetic.main.login_fragment.*
 class LoginFragment : Fragment(R.layout.login_fragment) {
 
 
+
+    private val settings: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(activity)
+    }
+
     private lateinit var mProgressBar: ProgressDialog
 
     //Creamos nuestra variable de autenticación firebase
@@ -26,6 +35,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setTitle(R.string.app_name)
+        }
         initialise()
         btnLogin.setOnClickListener { login() }
         btnCreate.setOnClickListener {
@@ -77,6 +89,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     private fun goPrincipal() {
 //Ocultamos el progress
         mProgressBar.hide()
+        settings.edit {
+            putLong("currentPlayer",1)
+        }
         findNavController().navigate(R.id.navigateToPrincipal)
 
     }
@@ -98,5 +113,6 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     fun register(view: View) {
     }
+
 
 }

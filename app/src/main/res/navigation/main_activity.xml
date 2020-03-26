@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/principalFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -15,7 +15,9 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/navigateToPrincipal"
-            app:destination="@id/principalFragment" />
+            app:destination="@id/principalFragment"
+            app:popUpTo="@+id/principalFragment"
+            app:popUpToInclusive="true" />
 
 
     </fragment>
