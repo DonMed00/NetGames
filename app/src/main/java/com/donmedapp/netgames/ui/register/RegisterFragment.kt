@@ -21,7 +21,7 @@ import kotlin.properties.Delegates
  * A simple [Fragment] subclass.
  */
 class RegisterFragment : Fragment(R.layout.register_fragment) {
-    private lateinit var  progressBar: ProgressDialog
+    private lateinit var progressBar: ProgressDialog
     private lateinit var databaseReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
@@ -34,6 +34,10 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupViews()
+    }
+
+    private fun setupViews() {
         initialise()
         btnRegister.setOnClickListener { createNewAccount() }
     }
@@ -64,7 +68,8 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
 //Verificamos que los campos estén llenos
         if (firstName.isNotEmpty() && email.isNotEmpty()
-            && password.isNotEmpty()) {
+            && password.isNotEmpty()
+        ) {
 
 /*Antes de iniciar nuestro registro bloqueamos la pantalla o también podemos usar una barra de proceso por lo que progressbar está obsoleto*/
 
@@ -90,10 +95,12 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 //Por último nos vamos a la vista home
                     updateUserInfoAndGoHome()
 
-                }.addOnFailureListener{
+                }.addOnFailureListener {
                     // si el registro falla se mostrara este mensaje
-                    Toast.makeText(activity, "Error en la autenticación.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        activity, "Error en la autenticación.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
         } else {
@@ -102,9 +109,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
     }
 
     //llamamos el método de crear cuenta en la accion registrar
-    fun register(view: View){
-        createNewAccount()
-    }
+
 
     private fun updateUserInfoAndGoHome() {
         //Nos vamos a la actividad home
@@ -120,13 +125,17 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 //Verificamos que la tarea se realizó correctamente
                     task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(activity,
+                    Toast.makeText(
+                        activity,
                         "Email " + user.email,
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(activity,
+                    Toast.makeText(
+                        activity,
                         "Error al verificar el correo ",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

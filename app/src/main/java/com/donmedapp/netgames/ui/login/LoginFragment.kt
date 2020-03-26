@@ -23,31 +23,43 @@ import kotlinx.android.synthetic.main.login_fragment.*
 class LoginFragment : Fragment(R.layout.login_fragment) {
 
 
-
     private val settings: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(activity)
     }
 
-    private lateinit var mProgressBar: ProgressDialog
+    //private lateinit var mProgressBar: ProgressDialog
 
     //Creamos nuestra variable de autenticación firebase
     private lateinit var mAuth: FirebaseAuth
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupViews()
+    }
+
+    private fun setupViews() {
+        setupAppBar()
+        initialise()
+        setupBtns()
+    }
+
+    private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
             setTitle(R.string.app_name)
         }
-        initialise()
+    }
+
+    private fun setupBtns() {
         btnLogin.setOnClickListener { login() }
         btnCreate.setOnClickListener {
-            findNavController().navigate(R.id.navigateToRegister) }
+            register()
+        }
     }
 
     /*Creamos un método para inicializar nuestros elementos del diseño y la autenticación de firebase*/
     private fun initialise() {
-        mProgressBar = ProgressDialog(activity)
-        mAuth = FirebaseAuth.getInstance()
+        // mProgressBar = ProgressDialog(activity)
+         mAuth = FirebaseAuth.getInstance()
     }
 
 //Ahora vamos a Iniciar sesión con firebase es muy sencillo
@@ -60,8 +72,8 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         ) {
 
             //Mostramos el progressdialog
-            mProgressBar.setMessage("Registering User...")
-            mProgressBar.show()
+            //mProgressBar.setMessage("Registering User...")
+            // mProgressBar.show()
 
             //Iniciamos sesión con el método signIn y enviamos usuario y contraseña
             mAuth.signInWithEmailAndPassword(txtEmail.text.toString(), txtPassword.text.toString())
@@ -72,9 +84,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                         goPrincipal() // Creamos nuestro método en la parte de abajo
                     } else {
                         // sino le avisamos el usuairo que orcurrio un problema
-                        mProgressBar.hide()
+                        //mProgressBar.hide()
                         Toast.makeText(
-                            activity, "Authentication failed.",
+                            activity, "Authentication failed",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -88,9 +100,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     private fun goPrincipal() {
 //Ocultamos el progress
-        mProgressBar.hide()
+        //mProgressBar.hide()
         settings.edit {
-            putLong("currentPlayer",1)
+            putLong("currentUser", 1)
         }
         findNavController().navigate(R.id.navigateToPrincipal)
 
@@ -109,9 +121,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     }
 
-/*Si quiere registrarse lo enviaremos en la siguiente actividad nos marcara error porque necesitamos crear la actividad*/
-
-    fun register(view: View) {
+    /*Si quiere registrarse lo enviaremos en la siguiente actividad nos marcara error porque necesitamos crear la actividad*/
+    private fun register() {
+        findNavController().navigate(R.id.navigateToRegister)
     }
 
 

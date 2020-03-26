@@ -28,7 +28,7 @@ class PrincipalFragment : Fragment(R.layout.principal_fragment) {
             setTitle(R.string.principal_title)
         }
 
-        if(settings.getLong("currentPlayer",-1)!=1L){
+        if (settings.getLong("currentUser", -1) != 1L) {
             findNavController().navigate(R.id.loginFragment)
         }
     }
