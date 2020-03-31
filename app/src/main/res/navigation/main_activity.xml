@@ -18,6 +18,9 @@
             app:destination="@id/principalFragment"
             app:popUpTo="@+id/principalFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/navigateToForgotPassword"
+            app:destination="@id/forgotPasswordFragment" />
 
 
     </fragment>
@@ -30,4 +33,8 @@
         android:name="com.donmedapp.netgames.ui.principal.PrincipalFragment"
         android:label="principal_fragment"
         tools:layout="@layout/principal_fragment" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.donmedapp.netgames.ui.forgotPassword.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
 </navigation>

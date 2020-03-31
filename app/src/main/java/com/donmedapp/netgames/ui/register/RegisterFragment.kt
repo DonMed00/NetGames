@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 import com.donmedapp.netgames.R
 import com.google.firebase.auth.FirebaseAuth
@@ -40,8 +41,17 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
     private fun setupViews() {
         initialise()
         btnRegister.setOnClickListener { createNewAccount() }
+        setupAppBar()
     }
 
+    private fun setupAppBar() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setTitle(R.string.register_title)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
+
+    }
 /*Creamos un método para inicializar nuestros elementos del diseño y la autenticación y la base de datos de firebase*/
 
     private fun initialise() {
