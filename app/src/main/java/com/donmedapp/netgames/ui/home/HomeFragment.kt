@@ -1,25 +1,22 @@
-package com.donmedapp.netgames.ui.principal
+package com.donmedapp.netgames.ui.home
 
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 
 import com.donmedapp.netgames.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.principal_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class PrincipalFragment : Fragment(R.layout.principal_fragment) {
+class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private val settings: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(activity)
@@ -28,10 +25,7 @@ class PrincipalFragment : Fragment(R.layout.principal_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            setTitle(R.string.principal_title)
-        }
-        mAuth = FirebaseAuth.getInstance()
+        setupViews()
 
 
         if (settings.getString("currentUser", "NOUSER") != "NOUSER") {
@@ -41,8 +35,23 @@ class PrincipalFragment : Fragment(R.layout.principal_fragment) {
                // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
 
         } else {
-            findNavController().navigate(R.id.loginFragment)
+            findNavController().navigate(R.id.loginDestination)
         }
+    }
+
+
+    private fun setupViews() {
+        mAuth = FirebaseAuth.getInstance()
+        setupAppBar()
+        setHasOptionsMenu(true)
+    }
+
+    private fun setupAppBar() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setTitle(R.string.home_title)
+            setDisplayHomeAsUpEnabled(false)
+        }
+
     }
 
     private fun loginUser() {
@@ -70,3 +79,6 @@ class PrincipalFragment : Fragment(R.layout.principal_fragment) {
             }
     }
 }
+
+
+

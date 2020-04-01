@@ -3,38 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity"
-    app:startDestination="@id/principalFragment">
+    app:startDestination="@id/homeDestination">
 
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/loginDestination"
         android:name="com.donmedapp.netgames.ui.login.LoginFragment"
         android:label="@string/app_name"
         tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/navigateToRegister"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerDestination" />
         <action
-            android:id="@+id/navigateToPrincipal"
-            app:destination="@id/principalFragment"
-            app:popUpTo="@+id/principalFragment"
+            android:id="@+id/navigateToHome"
+            app:destination="@id/homeDestination"
+            app:popUpTo="@+id/homeDestination"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/navigateToForgotPassword"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordDestination" />
 
 
     </fragment>
     <fragment
-        android:id="@+id/registerFragment"
+        android:id="@+id/registerDestination"
         android:name="com.donmedapp.netgames.ui.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="@string/register_title" />
     <fragment
-        android:id="@+id/principalFragment"
-        android:name="com.donmedapp.netgames.ui.principal.PrincipalFragment"
-        android:label="principal_fragment"
-        tools:layout="@layout/principal_fragment" />
+        android:id="@+id/homeDestination"
+        android:name="com.donmedapp.netgames.ui.home.HomeFragment"
+        android:label="@string/home_title"
+        tools:layout="@layout/home_fragment" />
     <fragment
-        android:id="@+id/forgotPasswordFragment"
+        android:id="@+id/forgotPasswordDestination"
         android:name="com.donmedapp.netgames.ui.forgotPassword.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" />
+        android:label="@string/send_password_title" />
+    <fragment
+        android:id="@+id/searchDestination"
+        android:name="com.donmedapp.netgames.ui.search.SearchFragment"
+        android:label="@string/search_title"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/userDestination"
+        android:name="com.donmedapp.netgames.ui.user.UserFragment"
+        android:label="user_fragment"
+        tools:layout="@layout/user_fragment" />
 </navigation>

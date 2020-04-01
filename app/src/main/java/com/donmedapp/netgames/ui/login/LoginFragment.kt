@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.ui.MainActivity
+import com.donmedapp.netgames.extensions.invisibleUnless
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 /**
@@ -33,20 +34,22 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
+
     }
 
     private fun setupViews() {
         setupAppBar()
         initialise()
         setupBtns()
+        setHasOptionsMenu(true)
     }
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
             setTitle(R.string.app_name)
-            setHomeButtonEnabled(false)
             setDisplayHomeAsUpEnabled(false)
         }
+
     }
 
     private fun setupBtns() {
@@ -101,7 +104,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
             putString("currentUser", txtEmail.text.toString())
             putString("currentPassword", txtPassword.text.toString())
         }
-        findNavController().navigate(R.id.navigateToPrincipal)
+        findNavController().navigate(R.id.navigateToHome)
 
     }
 
@@ -109,10 +112,10 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     /*Primero creamos nuestro evento login dentro de este llamamos nuestro método loginUser al dar click en el botón se iniciara sesión */
     fun login() {
-        if(txtEmail.text.toString().isNotEmpty() && txtPassword.text.toString().isNotEmpty()){
+        if (txtEmail.text.toString().isNotEmpty() && txtPassword.text.toString().isNotEmpty()) {
             loginUser()
-        }else{
-            Toast.makeText(activity,"esta vacio",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity, "esta vacio", Toast.LENGTH_SHORT).show()
         }
 
     }
