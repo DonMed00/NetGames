@@ -63,10 +63,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         )
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        activity, "Inicio de sesion correcto",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    //Toast.makeText(
+                      //  activity, "Inicio de sesion correcto",
+                      //  Toast.LENGTH_SHORT
+                   // ).show()
                     // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
                 } else {
                     // sino le avisamos el usuairo que orcurrio un problema
