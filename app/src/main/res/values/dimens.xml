@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="main_toolbar_elevation">8dp</dimen>
+
+
+
+    <dimen name="main_margin_half">4dp</dimen>
+    <dimen name="main_margin_1x">8dp</dimen>
+    <dimen name="main_margin_2x">16dp</dimen>
+    <dimen name="main_margin_3x">24dp</dimen>
+    <dimen name="main_margin_4x">32dp</dimen>
+    <dimen name="main_card_elevation">4dp</dimen>
+    <dimen name="main_card_cornerRadius">4dp</dimen>
+    <dimen name="main_textSize_1x">16sp</dimen>
+    <dimen name="main_textSize_2x">20sp</dimen>
+    <dimen name="main_textSize_3x" tools:ignore="UnusedResources">24sp</dimen>
+    <dimen name="main_textSize_4x">28sp</dimen>
+    <dimen name="main_textSize_5x">40sp</dimen>
+    <dimen name="main_textSize_6x">50sp</dimen>
+    <dimen name="main_textSize_7x">76sp</dimen>
+    <dimen name="dial_item_imgAvatar_size">32dp</dimen>
+    <dimen name="recent_item_imgAvatar_size">42dp</dimen>
+    <dimen name="contact_item_imgAvatar_size">42dp</dimen>
 </resources>

@@ -11,7 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import com.donmedapp.netgames.ui.MainActivity
+import com.donmedapp.netgames.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -27,9 +30,10 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     }
 
     //private lateinit var mProgressBar: ProgressDialog
+    var viewmodel : MainViewModel= MainViewModel()
 
     //Creamos nuestra variable de autenticación firebase
-    private lateinit var mAuth: FirebaseAuth
+   // private lateinit var mAuth: FirebaseAuth
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -67,14 +71,13 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     /*Creamos un método para inicializar nuestros elementos del diseño y la autenticación de firebase*/
     private fun initialise() {
         // mProgressBar = ProgressDialog(activity)
-        mAuth = FirebaseAuth.getInstance()
     }
 
     //Ahora vamos a Iniciar sesión con firebase es muy sencillo
     private fun loginUser() {
         //Obtenemos usuario y contraseña
         //Verificamos que los campos no este vacios
-        mAuth.signInWithEmailAndPassword(
+        viewmodel.mAuth.signInWithEmailAndPassword(
             txtEmail.text.toString(), txtPassword.text.toString()
         )
             .addOnCompleteListener(activity!!) { task ->
@@ -104,6 +107,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
             putString("currentUser", txtEmail.text.toString())
             putString("currentPassword", txtPassword.text.toString())
         }
+        txtEmail.hideSoftKeyboard()
         findNavController().navigate(R.id.navigateToHome)
 
     }
