@@ -44,6 +44,7 @@ data class Result(
     @SerializedName("slug") val slug: String = "",
     @SerializedName("rating") val rating: String = "",
     @SerializedName("clip") val clip: Clip? = null,
+    @SerializedName("description") val description: String = "",
     @SerializedName("background_image") val backgroundImage: String = "",
     @SerializedName("metacritic") val metacritic: String? = "",
     @SerializedName("short_screenshots") val shortScreenshots: List<ShortScreenshot> = emptyList(),
@@ -112,7 +113,11 @@ data class Platform(
     @SerializedName("id") val id: Int = 0,
     @SerializedName("name") val name: String = "",
     @SerializedName("slug") val slug: String = ""
-) : Parcelable
+) : Parcelable{
+    override fun toString(): String {
+        return String.format("")
+    }
+}
 
 @Parcelize
 data class RawgResponse(
@@ -131,6 +136,7 @@ data class GameDetailResult(
     @SerializedName("name") val name: String = "",
     @SerializedName("slug") val slug: String = "",
     @SerializedName("background_image") val backgroundImage: String = "",
+    @SerializedName("clip") val clip: Clip? = null,
     @SerializedName("background_image_additional") val backgroundImageAdditional: String = "",
     @SerializedName("description") val description: String = "",
     @SerializedName("metacritic") val metacritic: Long = 0,

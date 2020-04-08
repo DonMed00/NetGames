@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.donmedapp.netgames.GameDetailResult
 import com.donmedapp.netgames.RawgApi
 import com.donmedapp.netgames.Result
 import kotlinx.coroutines.GlobalScope

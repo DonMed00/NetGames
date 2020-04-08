@@ -7,4 +7,5 @@
     <color name="grey">#F2F2F2</color>
     <color name="message">#64b5f6</color>
     <color name="danger">#c62828</color>
+    <color name="avatar_label_background">#88888888</color>
 </resources>

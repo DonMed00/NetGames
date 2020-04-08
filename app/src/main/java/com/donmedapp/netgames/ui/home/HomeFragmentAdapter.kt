@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.bumptech.glide.Glide
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
@@ -49,7 +50,7 @@ class HomeFragmentAdapter :
                 lblNumber.text=position.plus(1).toString() + rating
                 lblName.text = name
                 lblPlatforms.text = platforms!![0].platform!!.name
-                Glide.with(imgGame).load(backgroundImage).into(imgGame)
+                imgGame.load(backgroundImage)
             }
 
         }
