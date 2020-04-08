@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -32,13 +33,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private lateinit var homeAdapter: HomeFragmentAdapter
 
-    var viewmodel : MainViewModel = MainViewModel()
+    var viewmodel: MainViewModel = MainViewModel()
 
 
     private val viewModel: HomeViewmodel by viewModels {
         HomeViewmodelFactory(activity!!.application)
     }
-   // private lateinit var mAuth: FirebaseAuth
+    // private lateinit var mAuth: FirebaseAuth
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -76,11 +77,23 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun setupAdapter() {
         homeAdapter = HomeFragmentAdapter().also {
+            it.onItemClickListener = { navegateToGame(it) }
 
         }
+
     }
+
+    private fun navegateToGame(id: Int) {
+        var gameId = homeAdapter.currentList[id].id
+        findNavController().navigate(
+            R.id.navToGame2, bundleOf(
+                getString(R.string.ARG_GAME_ID) to gameId
+            )
+        )
+    }
+
     private fun observeLiveData() {
-        viewModel.games.observe(this){
+        viewModel.games.observe(this) {
             showGames(it)
         }
 

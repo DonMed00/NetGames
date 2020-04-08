@@ -9,7 +9,7 @@
         android:id="@+id/loginDestination"
         android:name="com.donmedapp.netgames.ui.login.LoginFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/login_fragment" >
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/navigateToRegister"
             app:destination="@id/registerDestination" />
@@ -32,7 +32,11 @@
         android:id="@+id/homeDestination"
         android:name="com.donmedapp.netgames.ui.home.HomeFragment"
         android:label="@string/home_title"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/navToGame2"
+            app:destination="@id/gameDestination" />
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordDestination"
         android:name="com.donmedapp.netgames.ui.forgotPassword.ForgotPasswordFragment"
@@ -41,10 +45,23 @@
         android:id="@+id/searchDestination"
         android:name="com.donmedapp.netgames.ui.search.SearchFragment"
         android:label="@string/search_title"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/navToGame"
+            app:destination="@id/gameDestination" />
+    </fragment>
     <fragment
         android:id="@+id/userDestination"
         android:name="com.donmedapp.netgames.ui.user.UserFragment"
         android:label="user_fragment"
         tools:layout="@layout/user_fragment" />
+    <fragment
+        android:id="@+id/gameDestination"
+        android:name="com.donmedapp.netgames.ui.game.GameFragment"
+        android:label="Game"
+        tools:layout="@layout/game_fragment">
+        <argument
+            android:name="gameId"
+            app:argType="long" />
+    </fragment>
 </navigation>

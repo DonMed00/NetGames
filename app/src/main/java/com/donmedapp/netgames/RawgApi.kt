@@ -8,6 +8,7 @@ import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -23,6 +24,11 @@ interface RawgApi {
     @Headers("User-Agent: com.theobviousexit.rawg")
     @GET("games")
     suspend fun orderByGenres(@Query("genres") name: String): RawgResponse
+
+
+    @Headers("User-Agent: com.theobviousexit.rawg")
+    @GET("games/{gameId}")
+    suspend fun getGame(@Path("gameId") gameId: Long): Result
 
     //https://api.rawg.io/api/games?last_30_days
     //https://api.rawg.io/api/games?this_week
