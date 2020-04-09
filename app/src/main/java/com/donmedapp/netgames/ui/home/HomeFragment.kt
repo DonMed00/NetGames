@@ -85,6 +85,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun navegateToGame(id: Int) {
         var gameId = homeAdapter.currentList[id].id
+        //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
                 getString(R.string.ARG_GAME_ID) to gameId

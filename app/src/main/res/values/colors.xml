@@ -8,4 +8,6 @@
     <color name="message">#64b5f6</color>
     <color name="danger">#c62828</color>
     <color name="avatar_label_background">#88888888</color>
+    <color name="black">#000000</color>
+
 </resources>
