@@ -1,8 +1,8 @@
 package com.donmedapp.netgames
 
 import android.os.Parcelable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
@@ -30,6 +30,10 @@ interface RawgApi {
     @GET("games/{gameId}")
     suspend fun getGame(@Path("gameId") gameId: Long): Result
 
+
+    @GET("games/{gameId}/screenshots")
+    suspend fun get2Game(@Path("gameId") gameId: Long): Screenshot2
+
     //https://api.rawg.io/api/games?last_30_days
     //https://api.rawg.io/api/games?this_week
 
@@ -45,14 +49,20 @@ data class Result(
     @SerializedName("rating") val rating: String = "",
     @SerializedName("clip") val clip: Clip? = null,
     @SerializedName("description") val description: String = "",
+    @SerializedName("screenshots_count") val screenshotsCount : Int,
     @SerializedName("background_image") val backgroundImage: String = "",
     @SerializedName("metacritic") val metacritic: String? = "",
     @SerializedName("short_screenshots") val shortScreenshots: List<ShortScreenshot> = emptyList(),
-    @SerializedName("platforms") val platforms: List<PlatformObj>? = null
+    @SerializedName("platforms") val platforms: List<PlatformObj>? = null,
+    @SerializedName("stores") val stores: List<StoreObj>? = null
+
 
 ) : Parcelable {
     fun hasPlatform(platform: String) =
         platforms?.mapNotNull { t -> t.platform?.slug }?.find { t -> t.contains(platform) } != null
+
+    fun hasStore(store: String) =
+        stores?.mapNotNull { t -> t.store?.slug }?.find { t -> t.contains(store) } != null
 
     fun hasVideoContent() = clip?.clip != null
     fun hasMetacriticRating() = metacritic?.isNotBlank() ?: false
@@ -89,6 +99,16 @@ data class ShortScreenshot(
     @SerializedName("image") val image: String = ""
 ) : Parcelable
 
+
+@Parcelize
+data class Screenshot(
+    @SerializedName("id") var id: Int? = null,
+    @SerializedName("image") var image: String? = null,
+    @SerializedName("width") var width: Int? = null,
+    @SerializedName("height") var height: Int? = null,
+    @SerializedName("is_deleted") var isDeleted: Boolean? = null
+) : Parcelable
+
 @Parcelize
 data class Clip(
     @SerializedName("clip") val clip: String = "",
@@ -113,7 +133,28 @@ data class Platform(
     @SerializedName("id") val id: Int = 0,
     @SerializedName("name") val name: String = "",
     @SerializedName("slug") val slug: String = ""
-) : Parcelable{
+) : Parcelable {
+    override fun toString(): String {
+        return String.format("")
+    }
+}
+
+@Parcelize
+data class StoreObj(
+    @SerializedName("url") var url: String? = null,
+    @SerializedName("store") val store: Store? = null
+) : Parcelable
+
+@Parcelize
+data class Store(
+    @SerializedName("id") var id: Int? = null,
+    @SerializedName("name") var name: String? = null,
+    @SerializedName("domain") var domain: String? = null,
+    @SerializedName("slug") var slug: String? = null,
+    @SerializedName("games_count") var gamesCount: Int? = null,
+    @SerializedName("image_background") var imageBackground: String? = null,
+    @SerializedName("description") var description: String? = null
+) : Parcelable {
     override fun toString(): String {
         return String.format("")
     }
@@ -143,3 +184,47 @@ data class GameDetailResult(
     @SerializedName("saturated_color") val saturatedColor: String = "",
     @SerializedName("dominant_color") val dominantColor: String = ""
 ) : Parcelable
+
+@Parcelize
+
+data class Result2 (
+    @SerializedName("id")
+    @Expose
+    var id: Int? = null,
+
+    @SerializedName("image")
+    @Expose
+    var image: String? = null,
+
+    @SerializedName("width")
+    @Expose
+    var width: Int? = null,
+
+    @SerializedName("height")
+    @Expose
+    var height: Int? = null,
+
+    @SerializedName("is_deleted")
+    @Expose
+    var isDeleted: Boolean? = null
+    ) : Parcelable
+
+
+@Parcelize
+data class Screenshot2 (
+    @SerializedName("count")
+    @Expose
+    var count: Int? = null,
+
+    @SerializedName("next")
+    @Expose
+    var next: Int ,
+
+    @SerializedName("previous")
+    @Expose
+    var previous: Int,
+
+    @SerializedName("results")
+    @Expose
+    var results: List<Result2>? = null
+): Parcelable

@@ -1,4 +1,4 @@
-package com.donmedapp.netgames.ui.home
+package com.donmedapp.netgames.ui.game
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,27 +9,30 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.Result2
+import com.donmedapp.netgames.ShortScreenshot
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.game_screen_item.*
 import kotlinx.android.synthetic.main.home_fragment_item.*
 
-class HomeFragmentAdapter :
-    ListAdapter<Result, HomeFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
+class GameFragmentAdapter :
+    ListAdapter<Result2, GameFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
 
     var onItemClickListener: ((Int) -> Unit)? = null
 
-    var currentPosition: Int = -1
+    var currentId: Long = -1
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemView = layoutInflater.inflate(R.layout.home_fragment_item, parent, false)
+        val itemView = layoutInflater.inflate(R.layout.game_screen_item, parent, false)
         return ViewHolder(itemView)
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val result: Result = currentList[position]
-        holder.bind(result,position)
+        val screenshot = currentList[position]
+        holder.bind(screenshot,position)
     }
 
 
@@ -43,24 +46,17 @@ class HomeFragmentAdapter :
 
         }
 
-        fun bind(result: Result, position: Int) {
-            result.run {
-
-                lblNumber.text=position.plus(1).toString() + rating
-                lblName.text = name
-                imgPc.text = platforms!![0].platform!!.name
-                imgGame.load(backgroundImage)
-            }
-
+        fun bind(screenshot: Result2, position: Int) {
+            imgGameScreen.load(screenshot.image)
         }
     }
 
-    object GameResultDiffCallback : DiffUtil.ItemCallback<Result>() {
-        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-            return oldItem.name == newItem.name
+    object GameResultDiffCallback : DiffUtil.ItemCallback<Result2>() {
+        override fun areItemsTheSame(oldItem: Result2, newItem: Result2): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areContentsTheSame(oldItem: Result2, newItem: Result2): Boolean {
             return oldItem == newItem
         }
 

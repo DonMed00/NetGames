@@ -1,10 +1,12 @@
 package com.donmedapp.netgames.ui.game
 
 
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +14,12 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.donmedapp.netgames.R
+import com.donmedapp.netgames.*
 import com.donmedapp.netgames.data.pojo.UserGame
+import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,13 +34,16 @@ import kotlinx.android.synthetic.main.game_fragment.*
 class GameFragment : Fragment(R.layout.game_fragment) {
 
 
+    private lateinit var gameAdapter: GameFragmentAdapter
+
+
     val myDB = FirebaseFirestore.getInstance()
 
     private val viewModel: GameViewmodel by viewModels {
         GameViewmodelFactory(activity!!.application)
     }
 
-    var viewmodelActivity : MainViewModel = MainViewModel()
+    var viewmodelActivity: MainViewModel = MainViewModel()
 
     private val gameId: Long by lazy {
         arguments!!.getLong(getString(R.string.ARG_GAME_ID))
@@ -43,19 +51,22 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        scrollview.post { scrollview.fullScroll(View.FOCUS_UP)  } //Posible solucion para el scroll
+        //scrollview.post { scrollview.fullScroll(View.FOCUS_UP) } //Posible solucion para el scroll
         viewModel.getGame(gameId)
+        viewModel.getScreenGame(gameId)
         setupViews()
 
     }
 
 
-
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
+        setupAdapter()
+        setupRecyclerView()
         observeLiveData()
         setupLikeBtn()
+        btnBuy.setOnClickListener { navegateToStore() }
     }
 
 
@@ -63,16 +74,17 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
         setupBtn(gameNew)
 
-        likeButton.setOnLikeListener(object : OnLikeListener{
+        likeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
                 gameNew.get().addOnSuccessListener { documentSnapshot ->
                     val userGames = documentSnapshot.toObject(UserGame::class.java)
                     userGames!!.games.add(viewModel.game.value!!.id.toInt())
                     //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid).set(userGames)
+                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+                        .set(userGames)
                 }
 
-                Toast.makeText(activity,"Like",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Like", Toast.LENGTH_SHORT).show()
             }
 
             override fun unLiked(likeButton: LikeButton?) {
@@ -80,9 +92,10 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                     val userGames = documentSnapshot.toObject(UserGame::class.java)
                     userGames!!.games.remove(viewModel.game.value!!.id.toInt())
                     //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid).set(userGames)
+                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+                        .set(userGames)
                 }
-                Toast.makeText(activity,"DisLike",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "DisLike", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -92,8 +105,12 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)!!
             //Thread.sleep(500)
-           // likeButton.isLiked=false
-            likeButton.isLiked = userGames.games.contains(gameId.toInt())
+            // likeButton.isLiked=false
+            likeButton?.let {
+                likeButton.visibility = View.VISIBLE
+                likeButton.isLiked = userGames.games.contains(gameId.toInt())
+            }
+
         }
     }
 
@@ -101,21 +118,65 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         viewModel.game.observe(this) {
             lblName.text = it.name
             imgGameG.load(it.backgroundImage)
-            if(it.hasVideoContent()){
+            lblVideo2.invisibleUnless(!it.hasVideoContent())
+            video.invisibleUnless(it.hasVideoContent())
+            if (it.hasVideoContent()) {
                 playVideo(it.clip!!.clip)
-            }else{
-                video.visibility= View.INVISIBLE
             }
-            if(it.hasMetacriticRating()){
-                lblMetacritic.text=it.metacritic
+            lblMetacritic.invisibleUnless(it.hasMetacriticRating())
+            if (it.hasMetacriticRating()) {
+                lblMetacritic.text = it.metacritic
             }
-            if(!it.description.isNullOrBlank()){
-                lblDescription2.text=HtmlCompat.fromHtml(it.description,HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+            if (!it.description.isNullOrBlank()) {
+                lblDescription2.text =
+                    HtmlCompat.fromHtml(it.description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+            }
+            if (it.platforms != null) {
+                setupPlatforms(it)
+            }
+            if (it.stores != null) {
+                setupSpinner(it.stores)
+            }
+        }
+        viewModel.screenGame.observe(this){
+            showScreens(it.results)
+        }
 
-            }
-            if(it.hasPlatform("pc")){
-                lblPlatforms.text="PC"
-            }
+    }
+
+    private fun setupPlatforms(it: Result) {
+        imgPs4.invisibleUnless(it.hasPlatform("playstation"))
+        imgPc.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
+        imgXbox.invisibleUnless(it.hasPlatform("xbox"))
+        imgNintendo.invisibleUnless(
+            it.hasPlatform("nintendo")
+        )
+        imgMobile.invisibleUnless(it.hasPlatform("ios") || it.hasPlatform("Android"))
+        imgWii.invisibleUnless(it.hasPlatform("wii"))
+    }
+
+    private fun setupSpinner(stores: List<StoreObj>) {
+        var list = ArrayList<String>()
+        stores.forEach { list.add(it.store!!.name!!) }
+        if(list.isEmpty()){
+            list.add(getString(R.string.no_stores))
+        }
+        val adapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, list)
+        spinner1.adapter = adapter
+    }
+
+    private fun navegateToStore() {
+        if (spinner1.selectedItem.toString()!=getString(R.string.no_stores)) {
+            val store = viewModel.game.value!!.stores!![spinner1.selectedItemPosition]
+            var url = store.url!!
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://$url"
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(browserIntent)
+            // btnBuy.setOnClickListener { startActivity(browserIntent) }
+        }else{
+            Toast.makeText(activity!!,"No existen tiendas",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -123,6 +184,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         try {
             activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
             var mediaController = MediaController(activity)
+            mediaController.setAnchorView(video)
             val videoUri = Uri.parse(videopath)
             video.setMediaController(mediaController)
             video.setVideoURI(videoUri)
@@ -142,6 +204,33 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 setDisplayHomeAsUpEnabled(true)
             }
         }
+
+    }
+
+    private fun setupRecyclerView() {
+        lstScreenshots.run {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            adapter = gameAdapter
+
+        }
+    }
+
+    private fun setupAdapter() {
+
+        gameAdapter = GameFragmentAdapter().also {
+
+        }
+
+    }
+
+    private fun showScreens(screenshots: List<Result2>?) {
+        lstScreenshots.post {
+            gameAdapter.submitList(screenshots)
+            lblScreenshots2.invisibleUnless(screenshots!!.isEmpty())
+        }
+       // lstScreenshots.smoothScrollToPosition(0)
+
 
     }
 }

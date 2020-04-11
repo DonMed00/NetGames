@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.donmedapp.netgames.GameDetailResult
-import com.donmedapp.netgames.RawgApi
-import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -29,6 +27,12 @@ class GameViewmodel(
     val game: LiveData<Result>
         get() = _game
 
+
+    private var _screenGame: MutableLiveData<Screenshot2> = MutableLiveData()
+    val screenGame: LiveData<Screenshot2>
+        get() = _screenGame
+
+
     private var _gameId: MutableLiveData<Long> = MutableLiveData(0)
     val gameId: LiveData<Long>
         get() = _gameId
@@ -48,4 +52,14 @@ class GameViewmodel(
         }
 
     }
+
+    fun getScreenGame(id : Long) {
+        GlobalScope.launch {
+             _screenGame.postValue(rawgService.get2Game(id))
+        }
+
+    }
+
+
+
 }

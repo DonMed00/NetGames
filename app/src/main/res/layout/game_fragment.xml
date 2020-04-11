@@ -10,12 +10,19 @@
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/backgroundgra"
-            >
+            android:descendantFocusability="blocksDescendants">
 
             <ImageView
                 android:id="@+id/imgGameG"
@@ -25,33 +32,46 @@
                 android:scaleType="matrix"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/alert_dark_frame" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/lblName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/avatar_label_background"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgGameG"
-            app:layout_constraintEnd_toEndOf="@+id/imgGameG"
-            app:layout_constraintStart_toStartOf="@+id/imgGameG" />
+            <TextView
+                android:id="@+id/lblName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/avatar_label_background"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgGameG"
+                app:layout_constraintEnd_toEndOf="@+id/imgGameG"
+                app:layout_constraintStart_toStartOf="@+id/imgGameG" />
 
-        <TextView
-            android:id="@+id/lblDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="12dp"
-            android:text="Description"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
+            <TextView
+                android:id="@+id/lblMetacritic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="40dp"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
+
+            <TextView
+                android:id="@+id/lblDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                android:text="Description"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
 
             <TextView
                 android:id="@+id/lblDescription2"
@@ -66,61 +86,192 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblDescription" />
 
+
             <TextView
                 android:id="@+id/lblPlatforms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="10dp"
+                android:text="Platforms"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDescription2" />
+
+            <ImageView
+                android:id="@+id/imgPc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:textSize="18dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.513"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_windows"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblDescription2"
-                app:layout_constraintVertical_bias="0.199" />
+                app:layout_constraintTop_toBottomOf="@+id/lblPlatforms" />
+
+            <ImageView
+                android:id="@+id/imgPs4"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/ic_ps4"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPc"
+                app:layout_constraintStart_toEndOf="@+id/imgPc"
+                app:layout_constraintTop_toTopOf="@+id/imgPc" />
+
+            <ImageView
+                android:id="@+id/imgXbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/ic_xbox"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPs4"
+                app:layout_constraintStart_toEndOf="@+id/imgPs4"
+                app:layout_constraintTop_toTopOf="@+id/imgPs4" />
+
+
+            <ImageView
+                android:id="@+id/imgNintendo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/ic_gameboy"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgXbox"
+                app:layout_constraintStart_toEndOf="@+id/imgXbox"
+                app:layout_constraintTop_toTopOf="@+id/imgXbox" />
+
+            <ImageView
+                android:id="@+id/imgMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/ic_mobile"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgNintendo"
+                app:layout_constraintStart_toEndOf="@+id/imgNintendo"
+                app:layout_constraintTop_toTopOf="@+id/imgNintendo" />
+
+            <ImageView
+                android:id="@+id/imgWii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/ic_wii"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imgMobile"
+                app:layout_constraintStart_toEndOf="@+id/imgMobile"
+                app:layout_constraintTop_toTopOf="@+id/imgMobile" />
+
 
             <com.like.LikeButton
                 android:id="@+id/likeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="128dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="88dp"
+                android:visibility="invisible"
                 app:icon_size="25dp"
                 app:icon_type="heart"
-                app:layout_constraintBottom_toBottomOf="@+id/video"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblPlatforms"
-                app:liked="true" />
+                app:layout_constraintTop_toBottomOf="@+id/imgPc" />
+
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:entries="@array/store_choosed"
+                android:prompt="@string/store_choose"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.821"
+                app:layout_constraintStart_toEndOf="@+id/likeButton"
+                app:layout_constraintTop_toTopOf="@+id/likeButton" />
+            <Button
+                android:id="@+id/btnBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                app:layout_constraintEnd_toEndOf="@+id/spinner1"
+                app:layout_constraintStart_toStartOf="@+id/spinner1"
+                app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+            <TextView
+                android:id="@+id/lblVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                android:text="Video"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBuy" />
 
             <VideoView
                 android:id="@+id/video"
-                android:layout_width="330dp"
-                android:layout_height="214dp"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.382"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/likeButton" />
+                app:layout_constraintTop_toBottomOf="@+id/lblVideo" />
 
             <TextView
-                android:id="@+id/lblMetacritic"
+                android:id="@+id/lblVideo2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="40dp"
-                android:textSize="22dp"
-                android:background="@color/black"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
+                android:text="No videos"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
+                app:layout_constraintHorizontal_bias="0.252"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblVideo" />
+
+            <TextView
+                android:id="@+id/lblScreenshots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                android:text="Screenshots"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video" />
+
+            <TextView
+                android:id="@+id/lblScreenshots2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="No screenshots"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.252"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblScreenshots" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstScreenshots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblScreenshots" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
