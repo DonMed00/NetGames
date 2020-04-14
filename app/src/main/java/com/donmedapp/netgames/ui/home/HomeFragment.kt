@@ -46,7 +46,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupViews()
 
 
-        if (settings.getString("currentUser", "NOUSER") != "NOUSER") {
+        if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
             loginUser()
             //lblPrueba.text = mAuth.currentUser!!.email.toString()
 
@@ -121,8 +121,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         //Obtenemos usuario y contraseña
         //Verificamos que los campos no este vacios
         viewmodel.mAuth.signInWithEmailAndPassword(
-            settings.getString("currentUser", "NOUSER")!!,
-            settings.getString("currentPassword", "NOPASSWORD")!!
+            settings.getString("currentUser", getString(R.string.no_user))!!,
+            settings.getString("currentPassword", getString(R.string.no_password))!!
         )
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {

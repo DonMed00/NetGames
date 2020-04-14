@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
@@ -37,8 +38,44 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        //findNavController().graph.remove()
+        if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
+            loginUserAuth()
+            //lblPrueba.text = mAuth.currentUser!!.email.toString()
+
+            // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
+
+
+        }
         setupViews()
 
+    }
+
+    private fun loginUserAuth() {
+        //Obtenemos usuario y contraseña
+        //Verificamos que los campos no este vacios
+        viewmodel.mAuth.signInWithEmailAndPassword(
+            settings.getString("currentUser", getString(R.string.no_user))!!,
+            settings.getString("currentPassword", getString(R.string.no_password))!!
+        )
+            .addOnCompleteListener(activity!!) { task ->
+                if (task.isSuccessful) {
+                    //Toast.makeText(
+                    //  activity, "Inicio de sesion correcto",
+                    //  Toast.LENGTH_SHORT
+                    // ).show()
+                    // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
+                    findNavController().navigate(R.id.navigateToHome)
+
+                } else {
+                    // sino le avisamos el usuairo que orcurrio un problema
+                    //mProgressBar.hide()
+                    Toast.makeText(
+                        activity, "Authentication failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
     private fun setupViews() {

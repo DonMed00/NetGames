@@ -32,7 +32,7 @@ interface RawgApi {
 
 
     @GET("games/{gameId}/screenshots")
-    suspend fun get2Game(@Path("gameId") gameId: Long): Screenshot2
+    suspend fun getScreenshotsOfGame(@Path("gameId") gameId: Long): Screenshot2
 
     //https://api.rawg.io/api/games?last_30_days
     //https://api.rawg.io/api/games?this_week

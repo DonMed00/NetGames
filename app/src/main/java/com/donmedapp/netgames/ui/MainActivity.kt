@@ -1,18 +1,18 @@
 package com.donmedapp.netgames.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +20,11 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.navHostFragment)
     }
 
-    var viewmodel : MainViewModel = MainViewModel()
+    private val settings: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(this)
+    }
+
+    var viewmodel: MainViewModel = MainViewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,10 +66,6 @@ class MainActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
-
-
-
 
 
 }

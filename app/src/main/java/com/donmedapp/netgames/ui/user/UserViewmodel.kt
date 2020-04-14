@@ -1,16 +1,17 @@
-package com.donmedapp.netgames.ui.game
+package com.donmedapp.netgames.ui.user
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.donmedapp.netgames.*
+import com.donmedapp.netgames.RawgApi
+import com.donmedapp.netgames.Result
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GameViewmodel(
+class UserViewmodel(
     private val application: Application
 ) : ViewModel() {
 
@@ -23,43 +24,31 @@ class GameViewmodel(
     private val rawgService = retrofit.create(RawgApi::class.java)
 
 
+    private var _games: MutableLiveData<List<Result>> = MutableLiveData()
+    val games: LiveData<List<Result>>
+        get() = _games
+
     private var _game: MutableLiveData<Result> = MutableLiveData()
     val game: LiveData<Result>
         get() = _game
 
-
-    private var _screenGame: MutableLiveData<Screenshot2> = MutableLiveData()
-    val screenGame: LiveData<Screenshot2>
-        get() = _screenGame
-
-
-    private var _gameId: MutableLiveData<Long> = MutableLiveData(0)
-    val gameId: LiveData<Long>
-        get() = _gameId
-
     init {
-        //getGame(_gameId.value!!)
-    }
-    fun setGameId(id : Long) {
-        _gameId.value=id
-
+        getBestGamesOfYear()
     }
 
-     fun getGame(id : Long) {
 
+    fun getGame(id : Long) {
         GlobalScope.launch {
-           _game.postValue(rawgService.getGame(id))
+            _game.postValue(rawgService.getGame(1))
         }
 
     }
 
-    fun getScreenGame(id : Long) {
+    private fun getBestGamesOfYear() {
         GlobalScope.launch {
-             _screenGame.postValue(rawgService.getScreenshotsOfGame(id))
+            _games.postValue(rawgService.orderByGenres("strategy").results.sortedByDescending { it.rating })
+            //.sortedByDescending { it.rating })
         }
 
     }
-
-
-
 }
