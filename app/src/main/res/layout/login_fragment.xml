@@ -9,80 +9,86 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-366dp">
 
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTxtEmail"
-        style="style/viewCustom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
-
-        <EditText
-            android:id="@+id/txtEmail"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTxtEmail"
+            style="style/viewCustom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTxtPassword"
-        style="@style/viewCustom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_marginStart="8dp"
-
-        android:layout_marginEnd="8dp">
-
-        <EditText
-            android:id="@+id/txtPassword"
-            android:inputType="textPassword"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTxtPassword"
+            style="@style/viewCustom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/password"
 
-    </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="textPassword">
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/viewCustom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/login"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/viewCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/login"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnCreate"
-        style="@style/viewCustom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:onClick="register"
-        android:text="@string/createAct"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"/>
+        <Button
+            android:id="@+id/btnCreate"
+            style="@style/viewCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:onClick="register"
+            android:text="@string/createAct"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/lblForgotPassword"
-        style="@style/viewCustom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:gravity="center_horizontal"
-        android:onClick="forgotPassword"
-        android:text="@string/forgotPassword"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/lblForgotPassword"
+            style="@style/viewCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnLogin"
+            android:gravity="center_horizontal"
+            android:onClick="forgotPassword"
+            android:text="@string/forgotPassword"
+            android:textSize="20sp" />
+
+
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

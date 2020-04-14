@@ -1,6 +1,7 @@
 package com.donmedapp.netgames.ui.login
 
 
+import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -40,7 +41,11 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         super.onActivityCreated(savedInstanceState)
         //findNavController().graph.remove()
         if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
+
+            txtEmail.setText(settings.getString("currentUser", getString(R.string.no_user)))
+            txtPassword.setText(settings.getString("currentPassword", getString(R.string.no_password)))
             loginUserAuth()
+
             //lblPrueba.text = mAuth.currentUser!!.email.toString()
 
             // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
@@ -54,10 +59,14 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     private fun loginUserAuth() {
         //Obtenemos usuario y contraseña
         //Verificamos que los campos no este vacios
+        var progressDialog = ProgressDialog(activity)
+        progressDialog.setTitle("Cargando...")
+        progressDialog.show()
         viewmodel.mAuth.signInWithEmailAndPassword(
             settings.getString("currentUser", getString(R.string.no_user))!!,
             settings.getString("currentPassword", getString(R.string.no_password))!!
         )
+
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
                     //Toast.makeText(
@@ -66,8 +75,9 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                     // ).show()
                     // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
                     findNavController().navigate(R.id.navigateToHome)
-
+                    progressDialog.dismiss()
                 } else {
+                    progressDialog.dismiss()
                     // sino le avisamos el usuairo que orcurrio un problema
                     //mProgressBar.hide()
                     Toast.makeText(
