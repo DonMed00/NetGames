@@ -1,4 +1,4 @@
-package com.donmedapp.netgames.ui.search
+package com.donmedapp.netgames.ui.favourites
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,23 +7,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.bumptech.glide.Glide
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.search_fragment_item.*
+import kotlinx.android.synthetic.main.favorites_fragment_item.*
 
-class SearchFragmentAdapter :
-    ListAdapter<Result, SearchFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
+class FavoritesFragmentAdapter :
+    ListAdapter<Result, FavoritesFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
 
     var onItemClickListener: ((Int) -> Unit)? = null
 
-    var currentId: Long = -1
+    var currentPosition: Int = -1
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemView = layoutInflater.inflate(R.layout.home_fragment_item, parent, false)
+        val itemView = layoutInflater.inflate(R.layout.favorites_fragment_item, parent, false)
         return ViewHolder(itemView)
 
     }
@@ -46,11 +45,11 @@ class SearchFragmentAdapter :
 
         fun bind(result: Result, position: Int) {
             result.run {
-                currentId = id
-                lblNumberS.text=position.plus(1).toString() + rating
-                lblNameS.text = name
-                //lblPlatforms.text = platforms!![0].platform!!.name
-                imgGameS.load(backgroundImage)
+
+                lblNumberF.text=position.toString()
+                lblNameF.text = name
+                lblReleased.text=released
+                imgGameF.load(backgroundImage)
             }
 
         }

@@ -2,7 +2,6 @@ package com.donmedapp.netgames.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -41,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginDestination -> hideBottomNav()
+                R.id.gameDestination -> hideBottomNav()
+                R.id.favoritesDestination -> hideBottomNav()
                 else -> showBottomNav()
             }
         }

@@ -84,10 +84,7 @@ dependencies {
     implementation("io.coil-kt:coil:0.9.5")
 
 
-
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
-
-
 
 
 }

@@ -22,12 +22,11 @@
     <string name="ARG_GAME_ID">Game Id</string>
 
 
-
-
     <string name="store_choose">Choose a store</string>
     <string name="no_stores">No Stores</string>
     <string name="no_user">NOUSER</string>
     <string name="no_password">NOPASSWORD</string>
+    <string name="favorites_title">My favorites</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>

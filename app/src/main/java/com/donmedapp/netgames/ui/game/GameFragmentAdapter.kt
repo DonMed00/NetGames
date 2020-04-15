@@ -13,7 +13,6 @@ import com.donmedapp.netgames.Result2
 import com.donmedapp.netgames.ShortScreenshot
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.game_screen_item.*
-import kotlinx.android.synthetic.main.home_fragment_item.*
 
 class GameFragmentAdapter :
     ListAdapter<Result2, GameFragmentAdapter.ViewHolder>(GameResultDiffCallback) {

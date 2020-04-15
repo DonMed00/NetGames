@@ -31,6 +31,7 @@ interface RawgApi {
     suspend fun getGame(@Path("gameId") gameId: Long): Result
 
 
+
     @GET("games/{gameId}/screenshots")
     suspend fun getScreenshotsOfGame(@Path("gameId") gameId: Long): Screenshot2
 
@@ -49,7 +50,8 @@ data class Result(
     @SerializedName("rating") val rating: String = "",
     @SerializedName("clip") val clip: Clip? = null,
     @SerializedName("description") val description: String = "",
-    @SerializedName("screenshots_count") val screenshotsCount : Int,
+    @SerializedName("released") val released: String = "",
+    @SerializedName("screenshots_count") val screenshotsCount: Int,
     @SerializedName("background_image") val backgroundImage: String = "",
     @SerializedName("metacritic") val metacritic: String? = "",
     @SerializedName("short_screenshots") val shortScreenshots: List<ShortScreenshot> = emptyList(),
@@ -187,7 +189,7 @@ data class GameDetailResult(
 
 @Parcelize
 
-data class Result2 (
+data class Result2(
     @SerializedName("id")
     @Expose
     var id: Int? = null,
@@ -207,18 +209,18 @@ data class Result2 (
     @SerializedName("is_deleted")
     @Expose
     var isDeleted: Boolean? = null
-    ) : Parcelable
+) : Parcelable
 
 
 @Parcelize
-data class Screenshot2 (
+data class Screenshot2(
     @SerializedName("count")
     @Expose
     var count: Int? = null,
 
     @SerializedName("next")
     @Expose
-    var next: Int ,
+    var next: Int,
 
     @SerializedName("previous")
     @Expose
@@ -227,4 +229,4 @@ data class Screenshot2 (
     @SerializedName("results")
     @Expose
     var results: List<Result2>? = null
-): Parcelable
+) : Parcelable

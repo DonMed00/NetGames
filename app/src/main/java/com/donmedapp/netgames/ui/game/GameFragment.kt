@@ -106,6 +106,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             val userGames = documentSnapshot.toObject(UserGame::class.java)!!
             //Thread.sleep(500)
             // likeButton.isLiked=false
+            //arreglar lo del likebutton
             likeButton?.let {
                 likeButton.visibility = View.VISIBLE
                 likeButton.isLiked = userGames.games.contains(gameId.toInt())

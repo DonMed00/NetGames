@@ -4,9 +4,6 @@ package com.donmedapp.netgames.ui.user
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -15,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.ui.MainActivity
 import com.donmedapp.netgames.ui.MainViewModel
 import kotlinx.android.synthetic.main.user_fragment.*
 
@@ -48,7 +44,12 @@ class UserFragment : Fragment(R.layout.user_fragment) {
     }
 
     private fun setupLblOptions() {
+        lblList.setOnClickListener { seeFavourites() }
         lblLogOut.setOnClickListener { logOut() }
+    }
+
+    private fun seeFavourites() {
+        findNavController().navigate(R.id.navigateToFavorites)
     }
 
     private fun logOut() {

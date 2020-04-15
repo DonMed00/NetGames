@@ -60,6 +60,9 @@
             app:destination="@id/loginDestination"
             app:popUpTo="@+id/main_activity"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/navigateToFavorites"
+            app:destination="@id/favoritesDestination" />
     </fragment>
     <fragment
         android:id="@+id/gameDestination"
@@ -69,5 +72,14 @@
         <argument
             android:name="gameId"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesDestination"
+        android:name="com.donmedapp.netgames.ui.favourites.FavoritesFragment"
+        android:label="favourites_fragment"
+        tools:layout="@layout/favorites_fragment" >
+        <action
+            android:id="@+id/navToGame3"
+            app:destination="@id/gameDestination" />
     </fragment>
 </navigation>
