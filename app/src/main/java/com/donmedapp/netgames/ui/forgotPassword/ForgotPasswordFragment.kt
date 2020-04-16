@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.extensions.hideSoftKeyboard
+import com.donmedapp.netgames.extensions.invisibleUnless
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.forgot_password_fragment.*
 
@@ -39,23 +41,27 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
     }
 
     private fun sendPasswordResetEmail() {
+        txtEmailPassword.hideSoftKeyboard()
         val email = txtEmailPassword.text.toString()
         if (email.isNotEmpty()) {
             mAuth
                 .sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(activity, "Email Enviado", Toast.LENGTH_SHORT).show()
+                        txtEmailPassword.invisibleUnless(false)
+                        btnSendPass.invisibleUnless(false)
+                        lblConfirmation.invisibleUnless(true)
+                        Toast.makeText(activity, getString(R.string.forgot_email_enviado), Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(
                             activity,
-                            "No se encontró el usuario con este correo",
+                            task.exception!!.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
         } else {
-            Toast.makeText(activity, "Agregue el correo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Rellene el campo email", Toast.LENGTH_SHORT).show()
         }
     }
 }

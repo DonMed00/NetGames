@@ -12,9 +12,11 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.favorites_fragment.*
  * A simple [Fragment] subclass.
  */
 class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
+
 
     private val settings: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(activity)
@@ -41,6 +44,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel.setupData()
         setupViews()
 
     }
@@ -51,24 +55,16 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
         setHasOptionsMenu(true)
         setupAdapter()
         setupRecyclerView()
-        setupData()
+        //setupData()
         observeLiveData()
     }
 
-    private fun setupData() {
-        val myDB = FirebaseFirestore.getInstance()
-        val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-        gameNew.get().addOnSuccessListener { documentSnapshot ->
-            val userGames = documentSnapshot.toObject(UserGame::class.java)
-            viewModel.setGameId(userGames!!.games)
 
-        }
-    }
 
     private fun setupRecyclerView() {
         lstFavorites.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            layoutManager = GridLayoutManager(activity, 2)
             adapter = favAdapter
 
         }
@@ -83,7 +79,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     }
 
     private fun navegateToGame(id: Int) {
-        var gameId = favAdapter.currentList[id].id
+        var gameId = favAdapter.currentList[id].gameId.toLong()
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame3, bundleOf(
@@ -93,20 +89,15 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     }
 
     private fun observeLiveData() {
-        viewModel.gamesId.observe(this){
-            for(num in it){
-                viewModel.getGame(num.toLong())
+       // Thread.sleep(5000)
 
-            }
-        }
-
-        viewModel.games.observe(this){
+        viewModel.games.observe(this) {
             showGames(it)
         }
 
     }
 
-    private fun showGames(results: List<Result>) {
+    private fun showGames(results: List<Game>) {
         lstFavorites.post {
             favAdapter.submitList(results)
 

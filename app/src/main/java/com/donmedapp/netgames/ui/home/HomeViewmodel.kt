@@ -29,14 +29,14 @@ class HomeViewmodel(
         get() = _games
 
     init {
-        getBestGamesOfYear()
+        getGamesByGenre("strategy")
     }
 
 
-    private fun getBestGamesOfYear() {
+     fun getGamesByGenre(filter: String) {
 
         GlobalScope.launch {
-           _games.postValue(rawgService.orderByGenres("strategy").results.sortedByDescending { it.rating })
+            _games.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
             //.sortedByDescending { it.rating })
         }
 

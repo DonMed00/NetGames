@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.data.pojo.Game
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.favorites_fragment_item.*
 
 class FavoritesFragmentAdapter :
-    ListAdapter<Result, FavoritesFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
+    ListAdapter<Game, FavoritesFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
 
     var onItemClickListener: ((Int) -> Unit)? = null
 
@@ -28,7 +29,7 @@ class FavoritesFragmentAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val result: Result = currentList[position]
+        val result: Game = currentList[position]
         holder.bind(result,position)
     }
 
@@ -43,24 +44,24 @@ class FavoritesFragmentAdapter :
 
         }
 
-        fun bind(result: Result, position: Int) {
+        fun bind(result: Game, position: Int) {
             result.run {
 
                 lblNumberF.text=position.toString()
                 lblNameF.text = name
                 lblReleased.text=released
-                imgGameF.load(backgroundImage)
+                imgGameF.load(backgroundImg)
             }
 
         }
     }
 
-    object GameResultDiffCallback : DiffUtil.ItemCallback<Result>() {
-        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-            return oldItem.name == newItem.name
+    object GameResultDiffCallback : DiffUtil.ItemCallback<Game>() {
+        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.gameId == newItem.gameId
         }
 
-        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
             return oldItem == newItem
         }
 

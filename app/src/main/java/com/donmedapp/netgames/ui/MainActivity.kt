@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginDestination -> hideBottomNav()
                 R.id.gameDestination -> hideBottomNav()
                 R.id.favoritesDestination -> hideBottomNav()
+                R.id.registerDestination -> hideBottomNav()
+                R.id.forgotPasswordDestination -> hideBottomNav()
+
                 else -> showBottomNav()
             }
         }

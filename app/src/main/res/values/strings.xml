@@ -27,6 +27,11 @@
     <string name="no_user">NOUSER</string>
     <string name="no_password">NOPASSWORD</string>
     <string name="favorites_title">My favorites</string>
+    <string name="register_rellene_toast">Rellene todos los campos</string>
+    <string name="register_email_error">Error al verificar el correo</string>
+    <string name="register_confirm_account">Email successfully registered. Check your inbox and confirm your account.</string>
+    <string name="forgot_email_enviado">Email enviado</string>
+    <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>

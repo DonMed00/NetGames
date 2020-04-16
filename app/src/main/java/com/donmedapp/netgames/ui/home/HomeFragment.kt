@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
-import com.donmedapp.netgames.ui.MainActivity
+import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.home_fragment.*
 
 
@@ -43,30 +44,46 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        findNavController().graph.startDestination=R.id.homeDestination
+       // viewModel.getGamesByGenre("strategy")
         setupViews()
 
 
-        if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
-            loginUser()
+       // if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
+          //  loginUser()
             //lblPrueba.text = mAuth.currentUser!!.email.toString()
 
             // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
 
-        } else {
-            findNavController().navigate(R.id.loginDestination)
-        }
+       // } else {
+          //  findNavController().navigate(R.id.loginDestination)
+       // }
     }
 
 
     private fun setupViews() {
+        setupFirebaseData()
         setupAppBar()
         setHasOptionsMenu(true)
         setupAdapter()
-        setupRecyclerView()
+        setupRecyclerViews()
         observeLiveData()
     }
 
-    private fun setupRecyclerView() {
+    private fun setupFirebaseData() {
+        val myDB = FirebaseFirestore.getInstance()
+        val gameNew = myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
+        gameNew.get().addOnSuccessListener { documentSnapshot ->
+            val userGames = documentSnapshot.toObject(UserGame::class.java)
+            if(userGames==null){
+                myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
+                    .set(UserGame())
+            }
+        }
+
+    }
+
+    private fun setupRecyclerViews() {
         lstResults.run {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)

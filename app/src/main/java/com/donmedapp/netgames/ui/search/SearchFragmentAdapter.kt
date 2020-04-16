@@ -23,7 +23,7 @@ class SearchFragmentAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemView = layoutInflater.inflate(R.layout.home_fragment_item, parent, false)
+        val itemView = layoutInflater.inflate(R.layout.search_fragment_item, parent, false)
         return ViewHolder(itemView)
 
     }

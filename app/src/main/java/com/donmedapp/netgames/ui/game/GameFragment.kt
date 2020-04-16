@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.donmedapp.netgames.*
+import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
@@ -78,10 +79,20 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             override fun liked(likeButton: LikeButton?) {
                 gameNew.get().addOnSuccessListener { documentSnapshot ->
                     val userGames = documentSnapshot.toObject(UserGame::class.java)
-                    userGames!!.games.add(viewModel.game.value!!.id.toInt())
+                    viewModel.game.value.run {
+                        userGames!!.games.add(
+                            Game(
+                                this!!.id.toString(),
+                                name,
+                                backgroundImage,
+                                released
+                            )
+                        )
+
+                    }
                     //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
                     myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                        .set(userGames)
+                        .set(userGames!!)
                 }
 
                 Toast.makeText(activity, "Like", Toast.LENGTH_SHORT).show()
@@ -90,10 +101,19 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             override fun unLiked(likeButton: LikeButton?) {
                 gameNew.get().addOnSuccessListener { documentSnapshot ->
                     val userGames = documentSnapshot.toObject(UserGame::class.java)
-                    userGames!!.games.remove(viewModel.game.value!!.id.toInt())
+                    viewModel.game.value.run {
+                        userGames!!.games.remove(
+                            Game(
+                                this!!.id.toString(),
+                                name,
+                                backgroundImage,
+                                released
+                            )
+                        )
+                    }
                     //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
                     myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                        .set(userGames)
+                        .set(userGames!!)
                 }
                 Toast.makeText(activity, "DisLike", Toast.LENGTH_SHORT).show()
             }
@@ -103,14 +123,26 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupBtn(gameNew: DocumentReference) {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
-            val userGames = documentSnapshot.toObject(UserGame::class.java)!!
+            val userGames = documentSnapshot.toObject(UserGame::class.java)
+            lateinit var game : Game
+            viewModel.game.observe(this){
+                game = Game(
+                    it.id.toString(),
+                    it.name,
+                    it.backgroundImage,
+                    it.released)
+                likeButton?.let {
+                    likeButton.visibility = View.VISIBLE
+                    likeButton.isLiked = userGames?.games!!.contains(game)
+                }
+            }
+
+
             //Thread.sleep(500)
             // likeButton.isLiked=false
             //arreglar lo del likebutton
-            likeButton?.let {
-                likeButton.visibility = View.VISIBLE
-                likeButton.isLiked = userGames.games.contains(gameId.toInt())
-            }
+
+
 
         }
     }
@@ -139,7 +171,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 setupSpinner(it.stores)
             }
         }
-        viewModel.screenGame.observe(this){
+        viewModel.screenGame.observe(this) {
             showScreens(it.results)
         }
 
@@ -159,7 +191,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupSpinner(stores: List<StoreObj>) {
         var list = ArrayList<String>()
         stores.forEach { list.add(it.store!!.name!!) }
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             list.add(getString(R.string.no_stores))
         }
         val adapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, list)
@@ -167,7 +199,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun navegateToStore() {
-        if (spinner1.selectedItem.toString()!=getString(R.string.no_stores)) {
+        if (spinner1.selectedItem.toString() != getString(R.string.no_stores)) {
             val store = viewModel.game.value!!.stores!![spinner1.selectedItemPosition]
             var url = store.url!!
             if (!url.startsWith("http://") && !url.startsWith("https://"))
@@ -176,8 +208,8 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(browserIntent)
             // btnBuy.setOnClickListener { startActivity(browserIntent) }
-        }else{
-            Toast.makeText(activity!!,"No existen tiendas",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity!!, "No existen tiendas", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -230,7 +262,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             gameAdapter.submitList(screenshots)
             lblScreenshots2.invisibleUnless(screenshots!!.isEmpty())
         }
-       // lstScreenshots.smoothScrollToPosition(0)
+        // lstScreenshots.smoothScrollToPosition(0)
 
 
     }

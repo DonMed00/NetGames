@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundgra">
 
 
     <LinearLayout
@@ -14,7 +15,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-366dp">
+        tools:layout_editor_absoluteY="-366dp"
+        android:descendantFocusability="afterDescendants">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -30,7 +32,10 @@
             <EditText
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:maxLines="1"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,9 +53,11 @@
 
             <EditText
                 android:id="@+id/txtPassword"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:imeOptions="actionDone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,20 +67,21 @@
             style="@style/viewCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:alpha="0.60"
+            android:background="@drawable/backgroundgra"
             android:text="@string/login"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnCreate"
             style="@style/viewCustom"
+            android:alpha="0.60"
+            android:background="@drawable/backgroundgra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:onClick="register"
             android:text="@string/createAct"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -83,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btnLogin"
             android:gravity="center_horizontal"
-            android:onClick="forgotPassword"
             android:text="@string/forgotPassword"
             android:textSize="20sp" />
 
