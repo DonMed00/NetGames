@@ -84,7 +84,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                             Game(
                                 this!!.id.toString(),
                                 name,
-                                backgroundImage,
+                                backgroundImage ?: "",
                                 released
                             )
                         )
@@ -106,7 +106,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                             Game(
                                 this!!.id.toString(),
                                 name,
-                                backgroundImage,
+                                backgroundImage ?: "",
                                 released
                             )
                         )
@@ -124,13 +124,14 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupBtn(gameNew: DocumentReference) {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
-            lateinit var game : Game
-            viewModel.game.observe(this){
+            lateinit var game: Game
+            viewModel.game.observe(this) {
                 game = Game(
                     it.id.toString(),
                     it.name,
-                    it.backgroundImage,
-                    it.released)
+                    it.backgroundImage ?: "",
+                    it.released
+                )
                 likeButton?.let {
                     likeButton.visibility = View.VISIBLE
                     likeButton.isLiked = userGames?.games!!.contains(game)
@@ -143,14 +144,16 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             //arreglar lo del likebutton
 
 
-
         }
     }
 
     private fun observeLiveData() {
         viewModel.game.observe(this) {
             lblName.text = it.name
-            imgGameG.load(it.backgroundImage)
+            if (!it.backgroundImage.isNullOrBlank()) {
+                imgGameG.load(it.backgroundImage)
+
+            }
             lblVideo2.invisibleUnless(!it.hasVideoContent())
             video.invisibleUnless(it.hasVideoContent())
             if (it.hasVideoContent()) {
@@ -179,7 +182,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupPlatforms(it: Result) {
         imgPs4.invisibleUnless(it.hasPlatform("playstation"))
-        imgPc.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
+        lblPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
         imgXbox.invisibleUnless(it.hasPlatform("xbox"))
         imgNintendo.invisibleUnless(
             it.hasPlatform("nintendo")
@@ -222,7 +225,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             video.setMediaController(mediaController)
             video.setVideoURI(videoUri)
             video.setOnPreparedListener {
-                it.start()
+                //it.start()
             }
         } catch (e: Exception) {
             println("Video Play Error :" + e.message)

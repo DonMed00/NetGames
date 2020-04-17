@@ -63,6 +63,9 @@
         <action
             android:id="@+id/navigateToFavorites"
             app:destination="@id/favoritesDestination" />
+        <action
+            android:id="@+id/navToAccount"
+            app:destination="@id/accountDestination" />
     </fragment>
     <fragment
         android:id="@+id/gameDestination"
@@ -75,11 +78,15 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesDestination"
-        android:name="com.donmedapp.netgames.ui.favourites.FavoritesFragment"
+        android:name="com.donmedapp.netgames.ui.favorites.FavoritesFragment"
         android:label="favourites_fragment"
         tools:layout="@layout/favorites_fragment" >
         <action
             android:id="@+id/navToGame3"
             app:destination="@id/gameDestination" />
     </fragment>
+    <fragment
+        android:id="@+id/accountDestination"
+        android:name="com.donmedapp.netgames.ui.account.AccountFragment"
+        android:label="AccountFragment" />
 </navigation>

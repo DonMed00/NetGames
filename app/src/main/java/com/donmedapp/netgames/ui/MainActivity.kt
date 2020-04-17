@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.favoritesDestination -> hideBottomNav()
                 R.id.registerDestination -> hideBottomNav()
                 R.id.forgotPasswordDestination -> hideBottomNav()
+                R.id.accountDestination -> hideBottomNav()
 
                 else -> showBottomNav()
             }

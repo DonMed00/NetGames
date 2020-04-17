@@ -45,8 +45,12 @@ class UserFragment : Fragment(R.layout.user_fragment) {
 
     private fun setupLblOptions() {
         lblList.setOnClickListener { seeFavourites() }
+        lblAccount.setOnClickListener { goAccount() }
         lblLogOut.setOnClickListener { logOut() }
     }
+
+    private fun goAccount() {
+        findNavController().navigate(R.id.navToAccount)    }
 
     private fun seeFavourites() {
         findNavController().navigate(R.id.navigateToFavorites)

@@ -47,10 +47,10 @@ class SearchFragmentAdapter :
         fun bind(result: Result, position: Int) {
             result.run {
                 currentId = id
-                lblNumberS.text=position.plus(1).toString() + rating
-                lblNameS.text = name
-                //lblPlatforms.text = platforms!![0].platform!!.name
-                imgGameS.load(backgroundImage)
+                lblNumber.text=position.plus(1).toString()
+                lblName.text = name
+                lblPlatformsH.text = toStringPlatforms()
+                imgGame.load(backgroundImage)
             }
 
         }

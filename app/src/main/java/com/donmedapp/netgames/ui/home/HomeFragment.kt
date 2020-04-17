@@ -17,7 +17,6 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -32,7 +31,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         PreferenceManager.getDefaultSharedPreferences(activity)
     }
 
-    private lateinit var homeAdapter: HomeFragmentAdapter
+    private lateinit var actionAdapter: HomeFragmentAdapter
+
+    private lateinit var strategyAdapter: HomeFragmentAdapter
+
+    private lateinit var sportsAdapter: HomeFragmentAdapter
+
+    private lateinit var adventureAdapter: HomeFragmentAdapter
+
 
     var viewmodel: MainViewModel = MainViewModel()
 
@@ -44,20 +50,20 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        findNavController().graph.startDestination=R.id.homeDestination
-       // viewModel.getGamesByGenre("strategy")
+        findNavController().graph.startDestination = R.id.homeDestination
+        // viewModel.getGamesByGenre("strategy")
         setupViews()
 
 
-       // if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
-          //  loginUser()
-            //lblPrueba.text = mAuth.currentUser!!.email.toString()
+        // if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
+        //  loginUser()
+        //lblPrueba.text = mAuth.currentUser!!.email.toString()
 
-            // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
 
-       // } else {
-          //  findNavController().navigate(R.id.loginDestination)
-       // }
+        // } else {
+        //  findNavController().navigate(R.id.loginDestination)
+        // }
     }
 
 
@@ -65,7 +71,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupFirebaseData()
         setupAppBar()
         setHasOptionsMenu(true)
-        setupAdapter()
+        setupAdapters()
         setupRecyclerViews()
         observeLiveData()
     }
@@ -75,7 +81,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         val gameNew = myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
-            if(userGames==null){
+            if (userGames == null) {
                 myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
                     .set(UserGame())
             }
@@ -84,24 +90,37 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setupRecyclerViews() {
-        lstResults.run {
+        setupRecycler(lstAction, actionAdapter)
+        setupRecycler(lstStrategy, strategyAdapter)
+        setupRecycler(lstSports, sportsAdapter)
+        setupRecycler(lstAdventure, adventureAdapter)
+    }
+
+    private fun setupRecycler(lst: RecyclerView, adapterH: HomeFragmentAdapter) {
+        lst.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            adapter = homeAdapter
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            adapter = adapterH
 
         }
     }
 
-    private fun setupAdapter() {
-        homeAdapter = HomeFragmentAdapter().also {
+    private fun setupAdapters() {
+        actionAdapter = setupAdapter()
+        strategyAdapter = setupAdapter()
+        sportsAdapter = setupAdapter()
+        adventureAdapter = setupAdapter()
+
+    }
+
+
+    private fun setupAdapter() =
+        HomeFragmentAdapter().also {
             it.onItemClickListener = { navegateToGame(it) }
-
         }
-
-    }
 
     private fun navegateToGame(id: Int) {
-        var gameId = homeAdapter.currentList[id].id
+        var gameId = actionAdapter.currentList[id].id
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
@@ -111,15 +130,25 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun observeLiveData() {
-        viewModel.games.observe(this) {
-            showGames(it)
+        viewModel.gamesAction.observe(this) {
+            showGames(lstAction, actionAdapter, it)
+        }
+        viewModel.gamesStrategy.observe(this) {
+            showGames(lstStrategy, strategyAdapter, it)
+        }
+
+        viewModel.gamesSports.observe(this) {
+            showGames(lstSports, sportsAdapter, it)
+        }
+        viewModel.gamesAdventure.observe(this) {
+            showGames(lstAdventure, adventureAdapter, it)
         }
 
     }
 
-    private fun showGames(results: List<Result>) {
-        lstResults.post {
-            homeAdapter.submitList(results)
+    private fun showGames(lst: RecyclerView, adapter: HomeFragmentAdapter, results: List<Result>) {
+        lst.post {
+            adapter.submitList(results)
 
         }
 

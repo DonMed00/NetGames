@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import com.donmedapp.netgames.ui.home.HomeFragmentAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
 
 /**
@@ -52,7 +54,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     private fun setupRecyclerView() {
         lstSearch.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            layoutManager = GridLayoutManager(activity, 3)
             adapter = searchAdapter
 
         }

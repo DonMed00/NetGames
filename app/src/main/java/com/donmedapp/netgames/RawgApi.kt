@@ -31,7 +31,6 @@ interface RawgApi {
     suspend fun getGame(@Path("gameId") gameId: Long): Result
 
 
-
     @GET("games/{gameId}/screenshots")
     suspend fun getScreenshotsOfGame(@Path("gameId") gameId: Long): Screenshot2
 
@@ -52,7 +51,7 @@ data class Result(
     @SerializedName("description") val description: String = "",
     @SerializedName("released") val released: String = "",
     @SerializedName("screenshots_count") val screenshotsCount: Int,
-    @SerializedName("background_image") val backgroundImage: String = "",
+    @SerializedName("background_image") val backgroundImage : String? = "",
     @SerializedName("metacritic") val metacritic: String? = "",
     @SerializedName("short_screenshots") val shortScreenshots: List<ShortScreenshot> = emptyList(),
     @SerializedName("platforms") val platforms: List<PlatformObj>? = null,
@@ -79,6 +78,27 @@ data class Result(
         imageVisibility.value = false
         videoVisibility.value = true
         playVideoIconVisibility.value = false
+    }
+
+    fun toStringPlatforms(): String {
+        var platformsFormatted = ""
+        if(hasPlatform("pc") ||hasPlatform("linux")||hasPlatform("mac")){
+            platformsFormatted = "PC "
+        }
+        if(hasPlatform("playstation")||hasPlatform("xbox")||hasPlatform("nitentdo")||hasPlatform("wii")){
+            platformsFormatted= platformsFormatted.plus("Console ")
+        }
+        if(hasPlatform("ios")||hasPlatform("android")){
+            platformsFormatted= platformsFormatted.plus("Mobile ")
+        }
+        if(platformsFormatted.isNotEmpty()){
+            platformsFormatted = platformsFormatted.substring(0,platformsFormatted.lastIndex)
+        }else{
+            return "No platforms"
+        }
+
+        return platformsFormatted.replace(" "," - ")
+
     }
 
     @IgnoredOnParcel

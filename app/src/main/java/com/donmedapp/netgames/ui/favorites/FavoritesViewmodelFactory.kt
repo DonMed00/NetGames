@@ -1,4 +1,4 @@
-package com.donmedapp.netgames.ui.favourites
+package com.donmedapp.netgames.ui.favorites
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

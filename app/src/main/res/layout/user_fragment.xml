@@ -6,60 +6,66 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundgra">
 
-    <TableLayout
-        android:layout_width="409dp"
-        android:layout_height="158dp"
+
+    <TextView
+        android:id="@+id/lblList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My favourites"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319"
-        android:padding="10dp">
+        app:layout_constraintVertical_bias="0.255" />
 
-        <TableRow>
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:background="#FF909090"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblList" />
 
-            <TextView
-                android:id="@+id/lblList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My favourites"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="2dip"
-            android:background="#FF909090" />
+    <TextView
+        android:id="@+id/lblAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Account"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.02" />
 
-        <TableRow>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:background="#FF909090"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblAccount" />
 
-            <TextView
-                android:id="@+id/lblAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Account"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
+    <TextView
+        android:id="@+id/lblLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_bias="0.017" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="wrap_content"
-            android:layout_height="2dip"
-            android:background="#FF909090" />
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/lblLogOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log Out"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
-    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

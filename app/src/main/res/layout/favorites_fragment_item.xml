@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clRoot"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_viewFav"
-        android:layout_width="164dp"
-        android:layout_height="215dp"
-        android:background="@drawable/backgroundgra"
+        android:layout_width="@dimen/cardview_width"
+        android:layout_height="@dimen/cardview_height"
+        android:background="@color/black"
         app:cardCornerRadius="@dimen/main_card_cornerRadius"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:backgroundTint="@color/blueLight">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,13 +37,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@tools:sample/avatars"/>
 
             <TextView
                 android:id="@+id/lblNameF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/avatar_label_background"
+                android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/white"

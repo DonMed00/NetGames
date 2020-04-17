@@ -1,4 +1,4 @@
-package com.donmedapp.netgames.ui.favourites
+package com.donmedapp.netgames.ui.favorites
 
 
 import android.content.SharedPreferences
@@ -9,17 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.data.pojo.Game
-import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
 /**

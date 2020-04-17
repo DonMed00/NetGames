@@ -1,4 +1,4 @@
-package com.donmedapp.netgames.ui.favourites
+package com.donmedapp.netgames.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.data.pojo.Game
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.favorites_fragment_item.*

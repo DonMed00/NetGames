@@ -21,4 +21,9 @@
     <dimen name="dial_item_imgAvatar_size">32dp</dimen>
     <dimen name="recent_item_imgAvatar_size">42dp</dimen>
     <dimen name="contact_item_imgAvatar_size">42dp</dimen>
+    <dimen name="cardview_width">164dp</dimen>
+    <dimen name="cardview_height">215dp</dimen>
+    <dimen name="cardview_title_size">18sp</dimen>
+    <dimen name="marginstart_lbl_home">20dp</dimen>
+    <dimen name="margintop_lbl_home">10dp</dimen>
 </resources>

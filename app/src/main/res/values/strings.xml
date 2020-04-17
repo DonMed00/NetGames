@@ -32,6 +32,7 @@
     <string name="register_confirm_account">Email successfully registered. Check your inbox and confirm your account.</string>
     <string name="forgot_email_enviado">Email enviado</string>
     <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
+    <string name="account_title">My account</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>

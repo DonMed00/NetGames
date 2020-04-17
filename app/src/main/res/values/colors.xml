@@ -8,7 +8,7 @@
     <color name="message">#64b5f6</color>
     <color name="blueLight">#006064</color>
     <color name="blueLight2">#0097a7</color>
-    <color name="avatar_label_background">#88888888</color>
+    <color name="game_label_background">#88888888</color>
     <color name="black">#000000</color>
 
 </resources>

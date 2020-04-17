@@ -24,19 +24,42 @@ class HomeViewmodel(
     private val rawgService = retrofit.create(RawgApi::class.java)
 
 
-    private var _games: MutableLiveData<List<Result>> = MutableLiveData()
-    val games: LiveData<List<Result>>
-        get() = _games
+    private var _gamesAction: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesAction: LiveData<List<Result>>
+        get() = _gamesAction
+
+    private var _gamesStrategy: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesStrategy: LiveData<List<Result>>
+        get() = _gamesStrategy
+
+
+    private var _gamesSports: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesSports: LiveData<List<Result>>
+        get() = _gamesSports
+
+
+    private var _gamesAdventure: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesAdventure: LiveData<List<Result>>
+        get() = _gamesAdventure
 
     init {
-        getGamesByGenre("strategy")
+        getGamesByGenre(_gamesAction,"action")
+
+        getGamesByGenre(_gamesStrategy,"strategy")
+
+        getGamesByGenre(_gamesSports,"sports")
+
+        getGamesByGenre(_gamesAdventure,"adventure")
+
+
+
     }
 
 
-     fun getGamesByGenre(filter: String) {
+     fun getGamesByGenre(list : MutableLiveData<List<Result>>,filter: String) {
 
         GlobalScope.launch {
-            _games.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
+            list.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
             //.sortedByDescending { it.rating })
         }
 
