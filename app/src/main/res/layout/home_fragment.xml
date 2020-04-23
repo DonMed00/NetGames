@@ -10,6 +10,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -87,16 +88,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblSports" />
 
             <TextView
-                android:id="@+id/lblAdventure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adventures"
-                android:layout_marginStart="@dimen/marginstart_lbl_home"
-                android:layout_marginTop="@dimen/margintop_lbl_home"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lstSports" />
+            android:id="@+id/lblAdventure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adventures"
+            android:layout_marginStart="@dimen/marginstart_lbl_home"
+            android:layout_marginTop="@dimen/margintop_lbl_home"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lstSports" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lstAdventure"
@@ -106,6 +107,50 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblAdventure" />
+
+            <TextView
+            android:id="@+id/lblSimulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simulation"
+            android:layout_marginStart="@dimen/marginstart_lbl_home"
+            android:layout_marginTop="@dimen/margintop_lbl_home"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lstAdventure" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstSimulation"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
+
+            <TextView
+                android:id="@+id/lblFavs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My favourites"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstFavs"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblFavs" />
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

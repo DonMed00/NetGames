@@ -4,20 +4,21 @@ package com.donmedapp.netgames.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
-import com.donmedapp.netgames.ui.home.HomeFragmentAdapter
 import kotlinx.android.synthetic.main.search_fragment.*
 
 /**
@@ -29,7 +30,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
         SearchViewmodelFactory(activity!!.application)
     }
 
-    private lateinit var searchAdapter: SearchFragmentAdapter
+    private var searchAdapter= SearchFragmentAdapter()
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,15 +55,14 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     private fun setupRecyclerView() {
         lstSearch.run {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(activity, 3)
+            layoutManager = LinearLayoutManager(activity,RecyclerView.VERTICAL,false)
             adapter = searchAdapter
 
         }
     }
 
     private fun setupAdapter() {
-
-        searchAdapter = SearchFragmentAdapter().also {
+        searchAdapter.also {
             it.onItemClickListener = {navegateToGame(it)}
 
         }
@@ -88,7 +88,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
             searchAdapter.submitList(results)
             emptyView.invisibleUnless(results.isEmpty())
         }
-        lstSearch.smoothScrollToPosition(0)
+        //lstSearch.smoothScrollToPosition(0)
 
 
     }

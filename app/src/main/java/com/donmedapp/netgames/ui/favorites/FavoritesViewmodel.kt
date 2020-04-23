@@ -24,7 +24,7 @@ class FavoritesViewmodel(
 
 
     init {
-        setupData()
+        //setupData()
     }
 
 

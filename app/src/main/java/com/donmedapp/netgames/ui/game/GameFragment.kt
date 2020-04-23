@@ -10,14 +10,19 @@ import android.widget.ArrayAdapter
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.donmedapp.netgames.*
+import com.donmedapp.netgames.R
+import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.Result2
+import com.donmedapp.netgames.StoreObj
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
@@ -94,8 +99,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                     myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
                         .set(userGames!!)
                 }
-
-                Toast.makeText(activity, "Like", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Game added", Toast.LENGTH_SHORT).show()
             }
 
             override fun unLiked(likeButton: LikeButton?) {
@@ -115,7 +119,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                     myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
                         .set(userGames!!)
                 }
-                Toast.makeText(activity, "DisLike", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Game Deleted", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -154,8 +158,17 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 imgGameG.load(it.backgroundImage)
 
             }
+            if(it.toStringPlatforms()=="No platforms"){
+                lblPlatformsNo.invisibleUnless(true)
+
+            }
+
             lblVideo2.invisibleUnless(!it.hasVideoContent())
             video.invisibleUnless(it.hasVideoContent())
+            if(!video.isVisible){
+
+                video.layoutParams = ConstraintLayout.LayoutParams(0,0)
+            }
             if (it.hasVideoContent()) {
                 playVideo(it.clip!!.clip)
             }

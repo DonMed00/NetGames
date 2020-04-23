@@ -6,6 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.donmedapp.netgames.RawgApi
 import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.data.pojo.Game
+import com.donmedapp.netgames.data.pojo.UserGame
+import com.donmedapp.netgames.ui.MainViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -19,6 +23,9 @@ class HomeViewmodel(
     private val retrofit = Retrofit.Builder().baseUrl("https://api.rawg.io/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    private val myDB = FirebaseFirestore.getInstance()
+    private val gameNew = myDB.collection("users").document(MainViewModel().mAuth.currentUser!!.uid)
 
 
     private val rawgService = retrofit.create(RawgApi::class.java)
@@ -42,6 +49,14 @@ class HomeViewmodel(
     val gamesAdventure: LiveData<List<Result>>
         get() = _gamesAdventure
 
+    private var _gamesSimulation: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesSimulation: LiveData<List<Result>>
+        get() = _gamesSimulation
+
+    private var _myGamesList: MutableLiveData<List<Game>> = MutableLiveData()
+    val myGamesList: LiveData<List<Game>>
+        get() = _myGamesList
+
     init {
         getGamesByGenre(_gamesAction,"action")
 
@@ -51,12 +66,23 @@ class HomeViewmodel(
 
         getGamesByGenre(_gamesAdventure,"adventure")
 
+        getGamesByGenre(_gamesSimulation,"simulation")
+
+        //setupData()
 
 
     }
 
+    fun setupData() {
+        gameNew.get().addOnSuccessListener { documentSnapshot ->
+            _myGamesList.value = documentSnapshot.toObject(UserGame::class.java)!!.games
 
-     fun getGamesByGenre(list : MutableLiveData<List<Result>>,filter: String) {
+
+        }
+    }
+
+
+     private fun getGamesByGenre(list : MutableLiveData<List<Result>>, filter: String) {
 
         GlobalScope.launch {
             list.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })

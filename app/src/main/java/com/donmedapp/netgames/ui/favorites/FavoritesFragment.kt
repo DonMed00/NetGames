@@ -50,7 +50,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
         setHasOptionsMenu(true)
         setupAdapter()
         setupRecyclerView()
-        //setupData()
+        viewmodelActivity.setupData()
         observeLiveData()
     }
 
@@ -86,7 +86,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     private fun observeLiveData() {
        // Thread.sleep(5000)
 
-        viewModel.games.observe(this) {
+        viewmodelActivity.gamesFav.observe(this) {
             showGames(it)
         }
 

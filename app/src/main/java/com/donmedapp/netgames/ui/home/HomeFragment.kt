@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
+import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -31,13 +33,17 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         PreferenceManager.getDefaultSharedPreferences(activity)
     }
 
-    private lateinit var actionAdapter: HomeFragmentAdapter
+    private var actionAdapter = HomeFragmentAdapter()
 
-    private lateinit var strategyAdapter: HomeFragmentAdapter
+    private var strategyAdapter = HomeFragmentAdapter()
 
-    private lateinit var sportsAdapter: HomeFragmentAdapter
+    private var sportsAdapter = HomeFragmentAdapter()
 
-    private lateinit var adventureAdapter: HomeFragmentAdapter
+    private var adventureAdapter = HomeFragmentAdapter()
+
+    private var simulationAdapter = HomeFragmentAdapter()
+
+    private var myFavsAdapter = FavoritesFragmentAdapter()
 
 
     var viewmodel: MainViewModel = MainViewModel()
@@ -50,6 +56,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        //viewModel.setupData()
         findNavController().graph.startDestination = R.id.homeDestination
         // viewModel.getGamesByGenre("strategy")
         setupViews()
@@ -74,6 +81,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupAdapters()
         setupRecyclerViews()
         observeLiveData()
+        viewmodel.setupData()
     }
 
     private fun setupFirebaseData() {
@@ -94,6 +102,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupRecycler(lstStrategy, strategyAdapter)
         setupRecycler(lstSports, sportsAdapter)
         setupRecycler(lstAdventure, adventureAdapter)
+        setupRecycler(lstSimulation, simulationAdapter)
+        lstFavs.run {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            adapter = myFavsAdapter
+
+        }
     }
 
     private fun setupRecycler(lst: RecyclerView, adapterH: HomeFragmentAdapter) {
@@ -106,25 +121,46 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setupAdapters() {
-        actionAdapter = setupAdapter()
-        strategyAdapter = setupAdapter()
-        sportsAdapter = setupAdapter()
-        adventureAdapter = setupAdapter()
+
+        myFavsAdapter = FavoritesFragmentAdapter().also {
+            it.onItemClickListener = { navegateToGameFavs(it) }
+
+
+            setupAdapter(actionAdapter)
+            setupAdapter(strategyAdapter)
+            setupAdapter(sportsAdapter)
+            setupAdapter(adventureAdapter)
+            setupAdapter(simulationAdapter)
+
+
+        }
+
 
     }
 
 
-    private fun setupAdapter() =
-        HomeFragmentAdapter().also {
-            it.onItemClickListener = { navegateToGame(it) }
+    private fun setupAdapter(adapter: HomeFragmentAdapter) {
+        adapter.also {
+            it.onItemClickListener = { navegateToGame(it, adapter) }
         }
+    }
 
-    private fun navegateToGame(id: Int) {
-        var gameId = actionAdapter.currentList[id].id
+    private fun navegateToGame(id: Int, adapter: HomeFragmentAdapter) {
+        var gameId = adapter.currentList[id].id
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
                 getString(R.string.ARG_GAME_ID) to gameId
+            )
+        )
+    }
+
+    private fun navegateToGameFavs(id: Int) {
+        var gameId = myFavsAdapter.currentList[id].gameId
+        //Thread.sleep(500)
+        findNavController().navigate(
+            R.id.navToGame2, bundleOf(
+                getString(R.string.ARG_GAME_ID) to gameId.toLong()
             )
         )
     }
@@ -142,6 +178,17 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         }
         viewModel.gamesAdventure.observe(this) {
             showGames(lstAdventure, adventureAdapter, it)
+        }
+
+        viewModel.gamesSimulation.observe(this) {
+            showGames(lstSimulation, simulationAdapter, it)
+        }
+
+        viewmodel.gamesFav.observe(this) {
+            lstFavs.post {
+                myFavsAdapter.submitList(it)
+
+            }
         }
 
     }

@@ -27,16 +27,21 @@ class SearchViewmodel(
     private var _games: MutableLiveData<List<Result>> = MutableLiveData()
     val games: LiveData<List<Result>>
         get() = _games
+    private val listOfWordsOfQuery : List<String> = listOf("fifa","call of duty","counter strike","gta","f1","fortnite","ufc","wwe","battlefield")
 
     init {
-        getBestGamesOfYear()
+        setupInitSearch(listOfWordsOfQuery)
+    }
+
+    private fun setupInitSearch(listOfWordsOfQuery: List<String>) {
+        search(listOfWordsOfQuery.shuffled()[0])
     }
 
 
     fun search(text: String) {
         // _games.value = listOf()
         GlobalScope.launch {
-            _games.postValue(rawgService.getGames(text, 1, 50).results)
+            _games.postValue(rawgService.getGames(text, 1, 50).results.sortedByDescending { it.rating })
             //.sortedByDescending { it.rating })
         }
 

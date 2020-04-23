@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clRoot"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_viewResult"
-        android:layout_width="@dimen/cardview_width"
-        android:layout_height="@dimen/cardview_height"
+        android:layout_width="match_parent"
+        android:layout_height="212dp"
         android:backgroundTint="@color/blueLight"
         app:cardCornerRadius="@dimen/main_card_cornerRadius"
         app:cardElevation="@dimen/cardview_default_elevation"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/lblName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@color/game_label_background"
                 android:gravity="center"
@@ -72,12 +72,12 @@
                 android:id="@+id/lblNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
                 android:background="@color/black"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:text="1"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
