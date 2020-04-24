@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,7 +45,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var myFavsAdapter = FavoritesFragmentAdapter()
 
 
-    var viewmodel: MainViewModel = MainViewModel()
+    var viewmodelActivity: MainViewModel = MainViewModel()
 
 
     private val viewModel: HomeViewmodel by viewModels {
@@ -81,16 +80,16 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupAdapters()
         setupRecyclerViews()
         observeLiveData()
-        viewmodel.setupData()
+        viewmodelActivity.setupData()
     }
 
     private fun setupFirebaseData() {
         val myDB = FirebaseFirestore.getInstance()
-        val gameNew = myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
+        val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
             if (userGames == null) {
-                myDB.collection("users").document(viewmodel.mAuth.currentUser!!.uid)
+                myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
                     .set(UserGame())
             }
         }
@@ -184,7 +183,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             showGames(lstSimulation, simulationAdapter, it)
         }
 
-        viewmodel.gamesFav.observe(this) {
+        viewmodelActivity.gamesFav.observe(this) {
             lstFavs.post {
                 myFavsAdapter.submitList(it)
 
@@ -213,7 +212,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun loginUser() {
         //Obtenemos usuario y contraseña
         //Verificamos que los campos no este vacios
-        viewmodel.mAuth.signInWithEmailAndPassword(
+        viewmodelActivity.mAuth.signInWithEmailAndPassword(
             settings.getString("currentUser", getString(R.string.no_user))!!,
             settings.getString("currentPassword", getString(R.string.no_password))!!
         )

@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/favorites_fragment_item" />
 
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_games_black_24dp"
+        android:drawablePadding="@dimen/main_margin_1x"
+        android:text="@string/favs_no_games"
+        app:layout_constraintBottom_toBottomOf="@+id/lstFavorites"
+        app:layout_constraintEnd_toEndOf="@+id/lstFavorites"
+        app:layout_constraintStart_toStartOf="@+id/lstFavorites"
+        app:layout_constraintTop_toTopOf="@+id/lstFavorites"
+        tools:visibility="visible" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

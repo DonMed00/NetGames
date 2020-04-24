@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.data.pojo.Game
+import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
@@ -95,6 +96,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     private fun showGames(results: List<Game>) {
         lstFavorites.post {
             favAdapter.submitList(results)
+            emptyView.invisibleUnless(results.isEmpty())
 
         }
 

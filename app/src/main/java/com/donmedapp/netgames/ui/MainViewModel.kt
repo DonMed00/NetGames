@@ -3,6 +3,7 @@ package com.donmedapp.netgames.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
@@ -49,9 +50,16 @@ class MainViewModel : ViewModel() {
     fun setupData() {
         gameNew = myDB.collection("users").document(mAuth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener { documentSnapshot ->
-            _gamesFav.value = documentSnapshot.toObject(UserGame::class.java)!!.games
-            _avatar.value = documentSnapshot.toObject(UserGame::class.java)!!.avatar
-            _avatarName.value = documentSnapshot.toObject(UserGame::class.java)!!.name
+            if(documentSnapshot.toObject(UserGame::class.java)==null){
+                _gamesFav.value = arrayListOf()
+                _avatar.value = R.drawable.ic_person_black_24dp
+                _avatarName.value = ""
+            }else{
+                _gamesFav.value = documentSnapshot.toObject(UserGame::class.java)!!.games
+                _avatar.value = documentSnapshot.toObject(UserGame::class.java)!!.avatar
+                _avatarName.value = documentSnapshot.toObject(UserGame::class.java)!!.name
+            }
+
         }
     }
 
