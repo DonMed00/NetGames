@@ -3,7 +3,6 @@ package com.donmedapp.netgames.ui.account
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -13,7 +12,6 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.ui.MainViewModel
 import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.account_fragment.*
 
 
@@ -43,7 +41,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
         setHasOptionsMenu(true)
         txtEmail.setText(viewmodel.mAuth.currentUser!!.email)
         txtPassword.setText("PASSWORD")
-        img1.setOnClickListener { updateEmail() }
+        imgEdit.setOnClickListener { updateEmail() }
         img2.setOnClickListener { updatePassword() }
 
     }

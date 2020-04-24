@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 
@@ -33,14 +34,35 @@ class UserFragment : Fragment(R.layout.user_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewmodelMain.setupData()
         setupViews()
-
     }
 
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
         setupLblOptions()
+        observeLiveData()
+        imgEdit.setOnClickListener { goToEdit() }
+    }
+
+    private fun observeLiveData() {
+        viewmodelMain.avatar.observe(this){
+            imgPerfil.setImageResource(it)
+        }
+        viewmodelMain.avatarName.observe(this){
+            if(it==""){
+                lblName.text="Nickname"
+
+            }else{
+                lblName.text=it
+
+            }
+        }
+    }
+
+    private fun goToEdit() {
+        findNavController().navigate(R.id.navToEdit)
     }
 
     private fun setupLblOptions() {

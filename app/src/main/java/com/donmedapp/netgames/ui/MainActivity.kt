@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -46,11 +47,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.registerDestination -> hideBottomNav()
                 R.id.forgotPasswordDestination -> hideBottomNav()
                 R.id.accountDestination -> hideBottomNav()
+                R.id.editDestination -> hideBottomNav()
 
                 else -> showBottomNav()
             }
         }
+        /* var  menu = bottomNavigationView.menu
+         viewmodel.avatar.observe(this){
+             menu.findItem(R.id.userDestination).setIcon(it)
+
+         }
+         */
+
     }
+
 
     private fun showBottomNav() {
         bottomNavigationView.visibility = View.VISIBLE

@@ -4,51 +4,33 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.donmedapp.netgames.RawgApi
-import com.donmedapp.netgames.Result
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.donmedapp.netgames.data.pojo.UserGame
+import com.donmedapp.netgames.ui.MainViewModel
 
 class UserViewmodel(
     private val application: Application
 ) : ViewModel() {
 
-
-    private val retrofit = Retrofit.Builder().baseUrl("https://api.rawg.io/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    var viewmodelActivity: MainViewModel = MainViewModel()
 
 
-    private val rawgService = retrofit.create(RawgApi::class.java)
+
+    private var _avatar: MutableLiveData<Int> = MutableLiveData()
+    val avatar: LiveData<Int>
+        get() = _avatar
 
 
-    private var _games: MutableLiveData<List<Result>> = MutableLiveData()
-    val games: LiveData<List<Result>>
-        get() = _games
-
-    private var _game: MutableLiveData<Result> = MutableLiveData()
-    val game: LiveData<Result>
-        get() = _game
 
     init {
-        getBestGamesOfYear()
+        setupAvatar()
     }
 
 
-    fun getGame(id : Long) {
-        GlobalScope.launch {
-            _game.postValue(rawgService.getGame(1))
+    fun setupAvatar() {
+        viewmodelActivity.gameNew.get().addOnSuccessListener { documentSnapshot ->
+            _avatar.value = documentSnapshot.toObject(UserGame::class.java)!!.avatar
         }
-
     }
 
-    private fun getBestGamesOfYear() {
-        GlobalScope.launch {
-            _games.postValue(rawgService.orderByGenres("strategy").results.sortedByDescending { it.rating })
-            //.sortedByDescending { it.rating })
-        }
 
-    }
 }

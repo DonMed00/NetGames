@@ -66,6 +66,9 @@
         <action
             android:id="@+id/navToAccount"
             app:destination="@id/accountDestination" />
+        <action
+            android:id="@+id/navToEdit"
+            app:destination="@id/editDestination" />
     </fragment>
     <fragment
         android:id="@+id/gameDestination"
@@ -89,4 +92,9 @@
         android:id="@+id/accountDestination"
         android:name="com.donmedapp.netgames.ui.account.AccountFragment"
         android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/editDestination"
+        android:name="com.donmedapp.netgames.ui.edit.EditFragment"
+        android:label="edit_fragment"
+        tools:layout="@layout/edit_fragment" />
 </navigation>
