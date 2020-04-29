@@ -35,6 +35,7 @@
     <string name="account_title">My account</string>
     <string name="edit_title">Edit</string>
     <string name="favs_no_games">No favorites yet</string>
+    <string name="nickname">Nickname</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>

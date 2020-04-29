@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.data.pojo.UserGame
+import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
 import com.google.firebase.firestore.FirebaseFirestore
@@ -186,8 +187,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewmodelActivity.gamesFav.observe(this) {
             lstFavs.post {
                 myFavsAdapter.submitList(it)
-
             }
+            lblFavsEmpty.invisibleUnless(it.isEmpty())
         }
 
     }

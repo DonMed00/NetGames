@@ -2,11 +2,8 @@ package com.donmedapp.netgames.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -82,6 +79,5 @@ class MainActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 
 }

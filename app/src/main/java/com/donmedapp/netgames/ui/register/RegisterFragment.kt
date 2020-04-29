@@ -1,25 +1,19 @@
 package com.donmedapp.netgames.ui.register
 
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.register_fragment.*
-import kotlin.properties.Delegates
 
 /**
  * A simple [Fragment] subclass.
@@ -52,6 +46,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
         txtEmail.hideSoftKeyboard()
         if (txtEmail.text.toString().isNotEmpty()
             && txtPassword.text.toString().isNotEmpty()
+            && txtNickRegister.text.toString().isNotEmpty()
         ) {
             auth.createUserWithEmailAndPassword(
                 txtEmail.text.toString(),
@@ -60,37 +55,61 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
                 .addOnCompleteListener(activity!!) {
                     if (it.isSuccessful) {
                         val user: FirebaseUser = auth.currentUser!!
+                        setupFirebaseData(user)
                         verifyEmail(user)
                     }
 
                 }.addOnFailureListener {
-                    Toast.makeText(
-                        activity, it.message,
-                        Toast.LENGTH_SHORT
+                    Snackbar.make(
+                        txtEmail,
+                        it.message!!,
+                        Snackbar.LENGTH_SHORT
                     ).show()
+
                 }
 
         } else {
-            Toast.makeText(activity, getString(R.string.register_rellene_toast), Toast.LENGTH_SHORT)
+            Snackbar.make(
+                txtEmail,
+                getString(R.string.register_rellene_toast),
+                Snackbar.LENGTH_SHORT
+            )
                 .show()
         }
     }
 
+    private fun setupFirebaseData(user: FirebaseUser) {
+        val myDB = FirebaseFirestore.getInstance()
+        val gameNew = myDB.collection("users").document(user.uid)
+        gameNew.get().addOnSuccessListener {
+            val userGames = UserGame(
+                arrayListOf(),
+                txtNickRegister.text.toString(),
+                R.drawable.ic_person_black_24dp
+            )
+            myDB.collection("users").document(user.uid)
+                .set(userGames)
+
+        }
+
+    }
+
     private fun verifyEmail(user: FirebaseUser) {
         user.sendEmailVerification()
-            .addOnCompleteListener(activity!!) {
-                    task ->
+            .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
                     txtEmail.invisibleUnless(false)
                     txtPassword.invisibleUnless(false)
+                    txtNickRegister.invisibleUnless(false)
                     btnRegister.invisibleUnless(false)
                     lblConfirmation.invisibleUnless(true)
                 } else {
-                    Toast.makeText(
-                        activity,
+                    Snackbar.make(
+                        txtEmail,
                         getString(R.string.register_email_error),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
                 }
             }
     }

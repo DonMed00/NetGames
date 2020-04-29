@@ -61,6 +61,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:indeterminateDrawable="@drawable/progresbardraw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -72,6 +79,7 @@
             android:text="@string/login"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
+
 
         <Button
             android:id="@+id/btnCreate"
@@ -93,6 +101,8 @@
             android:gravity="center_horizontal"
             android:text="@string/forgotPassword"
             android:textSize="20sp" />
+
+
 
 
     </LinearLayout>

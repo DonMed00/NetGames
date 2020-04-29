@@ -179,6 +179,8 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             if (!it.description.isNullOrBlank()) {
                 lblDescription2.text =
                     HtmlCompat.fromHtml(it.description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+            }else{
+                lblDescription2.text = "No description"
             }
             if (it.platforms != null) {
                 setupPlatforms(it)

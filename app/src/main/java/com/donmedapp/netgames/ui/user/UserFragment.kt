@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.ui.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.user_fragment.*
 
 /**
@@ -47,6 +48,9 @@ class UserFragment : Fragment(R.layout.user_fragment) {
     }
 
     private fun observeLiveData() {
+        //if(!viewmodelMain.mAuth.currentUser!!.isEmailVerified){
+        //    Snackbar.make(imgPerfil,"Verifica",Snackbar.LENGTH_SHORT).show()
+        //}
         viewmodelMain.avatar.observe(this){
             imgPerfil.setImageResource(it)
         }

@@ -1,7 +1,6 @@
 package com.donmedapp.netgames.ui.login
 
 
-import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -9,17 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
-import com.donmedapp.netgames.extensions.invisibleUnless
-import com.donmedapp.netgames.ui.MainActivity
 import com.donmedapp.netgames.ui.MainViewModel
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -53,9 +49,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     private fun loginUserAuth() {
 
-        var progressDialog = ProgressDialog(activity)
-        progressDialog.setTitle("Cargando...")
-        progressDialog.show()
+        showProgressbar()
         viewmodel.mAuth.signInWithEmailAndPassword(
             settings.getString("currentUser", getString(R.string.no_user))!!,
             settings.getString("currentPassword", getString(R.string.no_password))!!
@@ -64,15 +58,28 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.navigateToHome)
-                    progressDialog.dismiss()
                 } else {
-                    progressDialog.dismiss()
                     Toast.makeText(
                         activity, task.exception!!.message,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+               // hideProgressbar()
+
             }
+    }
+
+    private fun hideProgressbar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressbar() {
+        progressBar.visibility=View.VISIBLE
+        val r = Runnable {
+            progressBar.visibility=View.GONE
+        }
+        GlobalScope.launch { r }
+
     }
 
     private fun setupAppBar() {
@@ -98,6 +105,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
 
     private fun loginUser() {
+        showProgressbar()
         viewmodel.mAuth.signInWithEmailAndPassword(
             txtEmail.text.toString(), txtPassword.text.toString()
         )
@@ -114,6 +122,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                hideProgressbar()
             }
     }
 

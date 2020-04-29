@@ -22,7 +22,7 @@ class UserViewmodel(
 
 
     init {
-        setupAvatar()
+        //setupAvatar()
     }
 
 
