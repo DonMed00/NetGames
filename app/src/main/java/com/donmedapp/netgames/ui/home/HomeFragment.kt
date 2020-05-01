@@ -20,6 +20,7 @@ import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 
@@ -204,7 +205,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            setTitle(R.string.home_title)
+            setTitle(R.string.app_name)
             setDisplayHomeAsUpEnabled(false)
         }
 

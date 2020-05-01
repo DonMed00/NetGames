@@ -1,13 +1,15 @@
 package com.donmedapp.netgames.ui.search
 
 
+import android.app.Activity
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +21,9 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_fragment.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -118,9 +122,12 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            setTitle(R.string.search_title)
+            setTitle(R.string.app_name)
+
             setDisplayHomeAsUpEnabled(false)
         }
 
     }
+
+
 }

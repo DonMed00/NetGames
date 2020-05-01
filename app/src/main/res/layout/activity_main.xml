@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blueLight"
+        android:background="@color/blueLight2"
         android:elevation="@dimen/main_toolbar_elevation"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
@@ -38,6 +38,7 @@
         android:background="@color/blueLight"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
-        app:menu="@menu/main_activity_bottom_navigation_view" />
+        app:menu="@menu/main_activity_bottom_navigation_view"
+        app:labelVisibilityMode="unlabeled" />
 
 </LinearLayout>

@@ -1,9 +1,15 @@
 package com.donmedapp.netgames.ui
 
+import android.app.Activity
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -31,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupBottomNav()
         setupAppBar()
+
     }
 
     private fun setupBottomNav() {
         bottomNavigationView.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginDestination -> hideBottomNav()
@@ -49,12 +55,8 @@ class MainActivity : AppCompatActivity() {
                 else -> showBottomNav()
             }
         }
-        /* var  menu = bottomNavigationView.menu
-         viewmodel.avatar.observe(this){
-             menu.findItem(R.id.userDestination).setIcon(it)
+        bottomNavigationView.itemIconTintList = null
 
-         }
-         */
 
     }
 
@@ -79,5 +81,4 @@ class MainActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 }
