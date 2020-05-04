@@ -2,11 +2,14 @@ package com.donmedapp.netgames.ui.user
 
 
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.core.graphics.drawable.RoundedBitmapDrawable
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -14,6 +17,8 @@ import androidx.preference.PreferenceManager
 
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.ui.MainViewModel
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.donmedapp.netgames.utils.roundedImg
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.user_fragment.*
 
@@ -42,6 +47,8 @@ class UserFragment : Fragment(R.layout.user_fragment) {
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
+
+
         setupLblOptions()
         observeLiveData()
         imgEdit.setOnClickListener { goToEdit() }
@@ -52,7 +59,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         //    Snackbar.make(imgPerfil,"Verifica",Snackbar.LENGTH_SHORT).show()
         //}
         viewmodelMain.avatar.observe(this){
-            imgPerfil.setImageResource(it)
+            imgPerfil.setImageDrawable(roundedImg(it,resources))
         }
         viewmodelMain.avatarName.observe(this){
             if(it==""){
@@ -64,6 +71,8 @@ class UserFragment : Fragment(R.layout.user_fragment) {
             }
         }
     }
+
+
 
     private fun goToEdit() {
         findNavController().navigate(R.id.navToEdit)
@@ -88,7 +97,11 @@ class UserFragment : Fragment(R.layout.user_fragment) {
             putString("currentPassword", getString(R.string.no_password))
         }
         viewmodelMain.mAuth.signOut()
-        Toast.makeText(activity, "Log Out", Toast.LENGTH_SHORT).show()
+        Snackbar.make(
+            lblAccount,
+            getString(R.string.user_logout),
+            Snackbar.LENGTH_SHORT
+        ).show()
         findNavController().navigate(R.id.navegateLogOut)
 
     }

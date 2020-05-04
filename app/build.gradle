@@ -87,4 +87,5 @@ dependencies {
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
 
+    implementation 'com.alexvasilkov:gesture-views:2.6.0'
 }

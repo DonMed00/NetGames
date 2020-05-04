@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.ui.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import kotlinx.android.synthetic.main.account_fragment.*
 
@@ -42,7 +43,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
         txtEmail.setText(viewmodel.mAuth.currentUser!!.email)
         txtPassword.setText("PASSWORD")
         imgEdit.setOnClickListener { updateEmail() }
-        img2.setOnClickListener { updatePassword() }
+        imgEdit2.setOnClickListener { updatePassword() }
 
     }
 
@@ -69,14 +70,17 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                             settings.edit {
                                 putString("currentPassword", txtPassword.text.toString())
                             }
-                            Toast.makeText(
-                                activity,
-                                "Contraseña cambiada correctamente",
-                                Toast.LENGTH_SHORT
+                            Snackbar.make(
+                                txtPassword,
+                                getString(R.string.account_password_changed),
+                                Snackbar.LENGTH_SHORT
                             ).show()
                         } else {
-                            Toast.makeText(activity, task.exception!!.message, Toast.LENGTH_SHORT)
-                                .show()
+                            Snackbar.make(
+                                txtPassword,
+                                task.exception!!.message!!,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
 
                         }
                     }
@@ -107,14 +111,18 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                             settings.edit {
                                 putString("currentUser", txtEmail.text.toString())
                             }
-                            Toast.makeText(
-                                activity,
-                                "Email cambiado correctamente",
-                                Toast.LENGTH_SHORT
+                            Snackbar.make(
+                                txtPassword,
+                                getString(R.string.account_email_changed),
+                                Snackbar.LENGTH_SHORT
                             ).show()
+
                         } else {
-                            Toast.makeText(activity, task.exception!!.message, Toast.LENGTH_SHORT)
-                                .show()
+                            Snackbar.make(
+                                txtPassword,
+                                task.exception!!.message!!,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
 
                         }
                     }

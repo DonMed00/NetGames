@@ -15,6 +15,8 @@ import com.donmedapp.netgames.avatars
 import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.ui.MainViewModel
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.donmedapp.netgames.utils.roundedImg
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.edit_fragment.*
 
@@ -57,7 +59,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
     private fun observeLiveData() {
         viewmodelActivity.avatar.observe(this) {
             if (it != -1) {
-                imgActualAvatar.setImageResource(it)
+                imgActualAvatar.setImageDrawable(roundedImg(it,resources))
 
             }
         }
@@ -99,14 +101,16 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
 
     private fun saveAvatar() {
         txtNick.hideSoftKeyboard()
-        if(txtNick.text.toString().isEmpty()){
-            viewmodelActivity.setMessage("Nickname is empty")
-        }else {
-            viewmodelActivity.setName(txtNick.text.toString())
-            viewmodelActivity.setupAvatar()
+        if(isNetDisponible(context!!)){
+            if(txtNick.text.toString().isEmpty()){
+                viewmodelActivity.setMessage("Nickname is empty")
+            }else {
+                viewmodelActivity.setName(txtNick.text.toString())
+                viewmodelActivity.setupAvatar()
+            }
+        }else{
+            viewmodelActivity.setMessage(getString(R.string.no_conection_detected))
         }
-
-
     }
 
     private fun showGames() {

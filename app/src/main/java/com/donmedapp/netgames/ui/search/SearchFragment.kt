@@ -21,6 +21,8 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_fragment.*
 
@@ -47,13 +49,21 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
         setupAppBar()
         setHasOptionsMenu(true)
         //search()
-        setupAdapter()
-        setupRecyclerView()
-        observeLiveData()
-        imgSearch.setOnClickListener {
-            searchText(txtSearch.text.toString())
-            txtSearch.hideSoftKeyboard()
-        }
+        if(isNetDisponible(context!!)){
+            setupAdapter()
+            setupRecyclerView()
+            observeLiveData()
+            imgSearch.setOnClickListener {
+                searchText(txtSearch.text.toString())
+                txtSearch.hideSoftKeyboard()
+            }
+        }else{
+            Snackbar.make(
+                lstSearch,
+                getString(R.string.no_conection_detected),
+                Snackbar.LENGTH_SHORT
+            ).show()        }
+
     }
 
     private fun setupRecyclerView() {

@@ -51,15 +51,15 @@
                 android:id="@+id/lblMetacritic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="40dp"
-                android:background="@color/black"
                 android:textColor="@color/white"
-                android:textSize="22dp"
+                android:textSize="24dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
+                app:layout_constraintHorizontal_bias="0.704"
+                app:layout_constraintStart_toEndOf="@+id/lblDescription"
+                app:layout_constraintTop_toTopOf="@+id/lblDescription"/>
 
             <TextView
                 android:id="@+id/lblDescription"
@@ -250,6 +250,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblScreenshots" />
 
+            <ImageView
+                android:id="@+id/expanded_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblScreenshots"
+                app:layout_constraintBottom_toTopOf="@+id/lblVideo"/>
+
             <TextView
                 android:id="@+id/lblVideo"
                 android:layout_width="wrap_content"
@@ -265,10 +275,9 @@
             <VideoView
                 android:id="@+id/video"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="300dp"
                 android:layout_marginHorizontal="5dp"
                 android:visibility="invisible"
-                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblVideo"

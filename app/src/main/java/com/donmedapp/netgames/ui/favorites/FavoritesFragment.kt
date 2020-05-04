@@ -16,6 +16,9 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
 /**
@@ -49,10 +52,19 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
-        setupAdapter()
-        setupRecyclerView()
-        viewmodelActivity.setupData()
-        observeLiveData()
+        if(isNetDisponible(context!!)){
+            setupAdapter()
+            setupRecyclerView()
+            viewmodelActivity.setupData()
+            observeLiveData()
+        }else{
+            Snackbar.make(
+                lstFavorites,
+                getString(R.string.no_conection_detected),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.donmedapp.netgames.ui.game
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.net.Uri
@@ -27,6 +28,8 @@ import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.like.LikeButton
@@ -55,11 +58,15 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         arguments!!.getLong(getString(R.string.ARG_GAME_ID))
     }
 
+
+    // The system "short" animation time duration, in milliseconds. This
+    // duration is ideal for subtle animations or animations that occur
+    // very frequently.
+    private var shortAnimationDuration: Int = 0
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //scrollview.post { scrollview.fullScroll(View.FOCUS_UP) } //Posible solucion para el scroll
-        viewModel.getGame(gameId)
-        viewModel.getScreenGame(gameId)
         setupViews()
 
     }
@@ -68,61 +75,117 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
-        setupAdapter()
-        setupRecyclerView()
-        observeLiveData()
-        setupLikeBtn()
-        btnBuy.setOnClickListener { navegateToStore() }
+        setLblVisibility()
+        if(isNetDisponible(context!!)){
+            viewModel.getGame(gameId)
+            viewModel.getScreenGame(gameId)
+            setupAdapter()
+            setupRecyclerView()
+            observeLiveData()
+            setupLikeBtn()
+            btnBuy.setOnClickListener { navegateToStore() }
+        }else{
+            Snackbar.make(
+                lblDescription,
+                getString(R.string.no_conection_detected),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+
+
+    }
+    private fun setLblVisibility() {
+        imgGameG.invisibleUnless(isNetDisponible(context!!))
+        lblName.invisibleUnless(isNetDisponible(context!!))
+        lblDescription.invisibleUnless(isNetDisponible(context!!))
+        lblPlatforms.invisibleUnless(isNetDisponible(context!!))
+        spinner1.invisibleUnless(isNetDisponible(context!!))
+        btnBuy.invisibleUnless(isNetDisponible(context!!))
+        lblScreenshots.invisibleUnless(isNetDisponible(context!!))
+        lblScreenshots2.invisibleUnless(!isNetDisponible(context!!))
+        lblVideo.invisibleUnless(!isNetDisponible(context!!))
+        lblVideo2.invisibleUnless(!isNetDisponible(context!!))
+
+
     }
 
 
     private fun setupLikeBtn() {
+
         val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
         setupBtn(gameNew)
 
-        likeButton.setOnLikeListener(object : OnLikeListener {
-            override fun liked(likeButton: LikeButton?) {
-                gameNew.get().addOnSuccessListener { documentSnapshot ->
-                    val userGames = documentSnapshot.toObject(UserGame::class.java)
-                    viewModel.game.value.run {
-                        userGames!!.games.add(
-                            Game(
-                                this!!.id.toString(),
-                                name,
-                                backgroundImage ?: "",
-                                released
+            likeButton.setOnLikeListener(object : OnLikeListener {
+                override fun liked(likeButton: LikeButton?) {
+                    gameNew.get().addOnSuccessListener { documentSnapshot ->
+                        val userGames = documentSnapshot.toObject(UserGame::class.java)
+                        viewModel.game.value.run {
+                            userGames!!.games.add(
+                                Game(
+                                    this!!.id.toString(),
+                                    name,
+                                    backgroundImage ?: "",
+                                    released
+                                )
                             )
-                        )
 
+                        }
+                        //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
+                        myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+                            .set(userGames!!)
                     }
-                    //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                        .set(userGames!!)
-                }
-                Toast.makeText(activity, "Game added", Toast.LENGTH_SHORT).show()
-            }
+                    if(isNetDisponible(context!!)) {
+                        Snackbar.make(
+                            lblDescription,
+                            getString(R.string.game_gameadded),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }else {
+                        Snackbar.make(
+                            lblDescription,
+                            getString(R.string.no_conection_detected),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
 
-            override fun unLiked(likeButton: LikeButton?) {
-                gameNew.get().addOnSuccessListener { documentSnapshot ->
-                    val userGames = documentSnapshot.toObject(UserGame::class.java)
-                    viewModel.game.value.run {
-                        userGames!!.games.remove(
-                            Game(
-                                this!!.id.toString(),
-                                name,
-                                backgroundImage ?: "",
-                                released
+
+                }
+
+                override fun unLiked(likeButton: LikeButton?) {
+                    gameNew.get().addOnSuccessListener { documentSnapshot ->
+                        val userGames = documentSnapshot.toObject(UserGame::class.java)
+                        viewModel.game.value.run {
+                            userGames!!.games.remove(
+                                Game(
+                                    this!!.id.toString(),
+                                    name,
+                                    backgroundImage ?: "",
+                                    released
+                                )
                             )
-                        )
+                        }
+                        //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
+                        myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+                            .set(userGames!!)
                     }
-                    //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                    myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                        .set(userGames!!)
-                }
-                Toast.makeText(activity, "Game Deleted", Toast.LENGTH_SHORT).show()
-            }
+                    if(isNetDisponible(context!!)) {
+                        Snackbar.make(
+                            lblDescription,
+                            getString(R.string.game_gameremoved),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }else {
+                        Snackbar.make(
+                            lblDescription,
+                            getString(R.string.no_conection_detected),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
 
-        })
+                }
+
+            })
+
     }
 
     private fun setupBtn(gameNew: DocumentReference) {
@@ -158,28 +221,28 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 imgGameG.load(it.backgroundImage)
 
             }
-            if(it.toStringPlatforms()=="No platforms"){
+            if (it.toStringPlatforms() == "No platforms") {
                 lblPlatformsNo.invisibleUnless(true)
 
             }
 
             lblVideo2.invisibleUnless(!it.hasVideoContent())
             video.invisibleUnless(it.hasVideoContent())
-            if(!video.isVisible){
+            if (!video.isVisible) {
 
-                video.layoutParams = ConstraintLayout.LayoutParams(0,0)
+                video.layoutParams = ConstraintLayout.LayoutParams(0, 0)
             }
             if (it.hasVideoContent()) {
                 playVideo(it.clip!!.clip)
             }
             lblMetacritic.invisibleUnless(it.hasMetacriticRating())
             if (it.hasMetacriticRating()) {
-                lblMetacritic.text = it.metacritic
+                lblMetacritic.text = (it.metacritic!!.toFloat()/10).toString()
             }
             if (!it.description.isNullOrBlank()) {
                 lblDescription2.text =
                     HtmlCompat.fromHtml(it.description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
-            }else{
+            } else {
                 lblDescription2.text = "No description"
             }
             if (it.platforms != null) {
@@ -227,15 +290,21 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             startActivity(browserIntent)
             // btnBuy.setOnClickListener { startActivity(browserIntent) }
         } else {
-            Toast.makeText(activity!!, "No existen tiendas", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                lblDescription,
+                getString(R.string.game_noshops),
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun playVideo(videopath: String) {
         try {
             activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
-            var mediaController = MediaController(activity)
+            var mediaController = MediaController(this.context)
             mediaController.setAnchorView(video)
+            mediaController.setBackgroundResource(R.color.white)
             val videoUri = Uri.parse(videopath)
             video.setMediaController(mediaController)
             video.setVideoURI(videoUri)
@@ -243,7 +312,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 //it.start()
             }
         } catch (e: Exception) {
-            println("Video Play Error :" + e.message)
+            Snackbar.make(
+                lblDescription,
+                "Video Play Error :" + e.message,
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -269,10 +342,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupAdapter() {
 
-        gameAdapter = GameFragmentAdapter().also {
+        gameAdapter = GameFragmentAdapter(this.requireActivity()).also {
+            it.onItemClickListener = {
 
+            }
         }
-
     }
 
     private fun showScreens(screenshots: List<Result2>?) {
@@ -281,7 +355,6 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             lblScreenshots2.invisibleUnless(screenshots!!.isEmpty())
         }
         // lstScreenshots.smoothScrollToPosition(0)
-
-
     }
 }
+

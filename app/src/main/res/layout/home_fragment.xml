@@ -8,6 +8,20 @@
     android:background="@drawable/backgroundgra">
 
 
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_games_black_24dp"
+        android:drawablePadding="@dimen/main_margin_1x"
+        android:text="@string/search_no_games2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollHome"
@@ -142,7 +156,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
 
             <TextView
-                android:id="@+id/lblFavsEmpty"
+                android:id="@+id/lblHomeEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -162,6 +176,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblFavs"
                 tools:listitem="@layout/favorites_fragment_item"/>
+
+
 
 
         </LinearLayout>

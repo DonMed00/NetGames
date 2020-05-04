@@ -33,29 +33,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:pressedTranslationZ="@dimen/main_margin_1x" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_Edit"
-        android:layout_width="106dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="60dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <ImageView
             android:id="@+id/imgActualAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
+            android:layout_marginTop="60dp"
+            android:layout_width="@dimen/imgUser_width"
+            android:layout_height="@dimen/imgUser_height"
             android:scaleType="centerCrop"
-            android:background="@color/blueLight"/>
-    </androidx.cardview.widget.CardView>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
 
 
 
@@ -70,7 +57,7 @@
         android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_Edit" />
+        app:layout_constraintTop_toBottomOf="@+id/imgActualAvatar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

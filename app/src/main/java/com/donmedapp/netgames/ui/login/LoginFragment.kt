@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.ui.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -57,14 +58,20 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
+                    Snackbar.make(
+                        txtEmail,
+                        getString(R.string.login_session_init_correct),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     findNavController().navigate(R.id.navigateToHome)
                 } else {
-                    Toast.makeText(
-                        activity, task.exception!!.message,
-                        Toast.LENGTH_SHORT
+                    Snackbar.make(
+                        txtEmail,
+                        task.exception!!.message!!,
+                        Snackbar.LENGTH_SHORT
                     ).show()
                 }
-               // hideProgressbar()
+                hideProgressbar()
 
             }
     }
@@ -111,16 +118,20 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         )
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        activity, "Inicio de sesion correcto",
-                        Toast.LENGTH_SHORT
+                    Snackbar.make(
+                        txtEmail,
+                        getString(R.string.login_session_init_correct),
+                        Snackbar.LENGTH_SHORT
                     ).show()
+
                     goPrincipal()
                 } else {
-                    Toast.makeText(
-                        activity, task.exception!!.message,
-                        Toast.LENGTH_SHORT
+                    Snackbar.make(
+                        txtEmail,
+                        task.exception!!.message!!,
+                        Snackbar.LENGTH_SHORT
                     ).show()
+
                 }
                 hideProgressbar()
             }
@@ -142,7 +153,11 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         if (txtEmail.text.toString().isNotEmpty() && txtPassword.text.toString().isNotEmpty()) {
             loginUser()
         } else {
-            Toast.makeText(activity, getString(R.string.register_rellene_toast), Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                txtEmail,
+                getString(R.string.forgot_rellenar_campos),
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
 
     }

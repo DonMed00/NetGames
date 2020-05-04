@@ -19,6 +19,8 @@ import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
+import com.donmedapp.netgames.utils.isNetDisponible
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -76,13 +78,35 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
 
     private fun setupViews() {
-        setupFirebaseData()
         setupAppBar()
         setHasOptionsMenu(true)
-        setupAdapters()
-        setupRecyclerViews()
-        observeLiveData()
-        viewmodelActivity.setupData()
+        setLblVisibility()
+        if(isNetDisponible(context!!)){
+
+            setupFirebaseData()
+            setupAdapters()
+            setupRecyclerViews()
+            observeLiveData()
+            viewmodelActivity.setupData()
+        }else{
+            Snackbar.make(
+                lblAction,
+                getString(R.string.no_conection_detected),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    private fun setLblVisibility() {
+        lblAction.invisibleUnless(isNetDisponible(context!!))
+        lblStrategy.invisibleUnless(isNetDisponible(context!!))
+        lblSports.invisibleUnless(isNetDisponible(context!!))
+        lblAdventure.invisibleUnless(isNetDisponible(context!!))
+        lblSimulation.invisibleUnless(isNetDisponible(context!!))
+        lblFavs.invisibleUnless(isNetDisponible(context!!))
+        lblHomeEmpty.invisibleUnless(isNetDisponible(context!!))
+        emptyView.invisibleUnless(!isNetDisponible(context!!))
     }
 
     private fun setupFirebaseData() {
@@ -189,7 +213,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             lstFavs.post {
                 myFavsAdapter.submitList(it)
             }
-            lblFavsEmpty.invisibleUnless(it.isEmpty())
+            lblHomeEmpty.invisibleUnless(it.isEmpty())
         }
 
     }

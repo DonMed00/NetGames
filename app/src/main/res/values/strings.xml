@@ -36,6 +36,17 @@
     <string name="edit_title">Edit</string>
     <string name="favs_no_games">No favorites yet</string>
     <string name="nickname">Nickname</string>
+    <string name="account_password_changed">Password changed correctly</string>
+    <string name="account_email_changed">E-mail changed correctly</string>
+    <string name="forgot_rellenar_campos">Rellene el campo email</string>
+    <string name="game_gameadded">Game added</string>
+    <string name="game_gameremoved">Game removed</string>
+    <string name="game_noshops">No existen tiendas</string>
+    <string name="login_session_init_correct">Inicio de sesion correcto</string>
+    <string name="user_logout">Log Out</string>
+    <string name="connect_to_internet">Connect to internet</string>
+    <string name="no_conection_detected">No connection detected</string>
+    <string name="search_no_games2">No games</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>

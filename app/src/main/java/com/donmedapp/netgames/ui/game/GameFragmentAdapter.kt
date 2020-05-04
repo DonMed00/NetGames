@@ -1,22 +1,22 @@
 package com.donmedapp.netgames.ui.game
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.alexvasilkov.gestures.Settings
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.Result2
-import com.donmedapp.netgames.ShortScreenshot
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.game_screen_item.*
 
-class GameFragmentAdapter :
+class GameFragmentAdapter(val c : Activity) :
     ListAdapter<Result2, GameFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
-
     var onItemClickListener: ((Int) -> Unit)? = null
 
     var currentId: Long = -1
@@ -46,7 +46,19 @@ class GameFragmentAdapter :
         }
 
         fun bind(screenshot: Result2, position: Int) {
+            imgGameScreen.controller.settings
+                .setMaxZoom(2f)
+                .setDoubleTapZoom(-1f) // Falls back to max zoom level
+                .setPanEnabled(true)
+                .setZoomEnabled(false)
+                .setDoubleTapEnabled(true)
+                .setRotationEnabled(false)
+                .setRestrictRotation(false)
+                .setOverscrollDistance(0f, 0f)
+                .setOverzoomFactor(2f).isFillViewport = false
+
             imgGameScreen.load(screenshot.image)
+
         }
     }
 

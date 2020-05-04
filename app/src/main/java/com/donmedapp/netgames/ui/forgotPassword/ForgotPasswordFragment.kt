@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.forgot_password_fragment.*
 
@@ -51,17 +52,25 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
                         txtEmailPassword.invisibleUnless(false)
                         btnSendPass.invisibleUnless(false)
                         lblConfirmation.invisibleUnless(true)
-                        Toast.makeText(activity, getString(R.string.forgot_email_enviado), Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            txtEmailPassword,
+                            getString(R.string.forgot_email_enviado),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     } else {
-                        Toast.makeText(
-                            activity,
-                            task.exception!!.message,
-                            Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            txtEmailPassword,
+                            task.exception!!.message!!,
+                            Snackbar.LENGTH_SHORT
                         ).show()
                     }
                 }
         } else {
-            Toast.makeText(activity, "Rellene el campo email", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                txtEmailPassword,
+                getString(R.string.forgot_rellenar_campos),
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 }

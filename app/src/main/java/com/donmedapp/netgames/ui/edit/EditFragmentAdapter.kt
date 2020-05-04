@@ -1,12 +1,16 @@
 package com.donmedapp.netgames.ui.edit
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.utils.roundedImg
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.edit_fragment_item.*
 
@@ -16,6 +20,9 @@ class EditFragmentAdapter :
     var onItemClickListener: ((Int) -> Unit)? = null
 
     var currentPosition: Int = -1
+
+    //in the Constructor, pass the context in the parametres
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,8 +47,9 @@ class EditFragmentAdapter :
         }
 
         fun bind(img: Int) {
-            imgPerfilEdit.setImageResource(img)
+            imgPerfilEdit.setImageDrawable(roundedImg(img,imgPerfilEdit.context.resources))
         }
+
     }
 
     object IntDiffCallback : DiffUtil.ItemCallback<Int>() {
