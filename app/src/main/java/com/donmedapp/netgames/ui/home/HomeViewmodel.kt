@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.donmedapp.netgames.RawgApi
 import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
@@ -25,7 +26,11 @@ class HomeViewmodel(
         .build()
 
     private val myDB = FirebaseFirestore.getInstance()
-    private val gameNew = myDB.collection("users").document(MainViewModel().mAuth.currentUser!!.uid)
+    var viewmodelActivity: MainViewModel = MainViewModel()
+
+    private val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+
+
 
 
     private val rawgService = retrofit.create(RawgApi::class.java)
@@ -53,9 +58,8 @@ class HomeViewmodel(
     val gamesSimulation: LiveData<List<Result>>
         get() = _gamesSimulation
 
-    private var _myGamesList: MutableLiveData<List<Game>> = MutableLiveData()
-    val myGamesList: LiveData<List<Game>>
-        get() = _myGamesList
+    private val _message: MutableLiveData<Event<String>> = MutableLiveData()
+    val message: LiveData<Event<String>> get() = _message
 
     init {
         getGamesByGenre(_gamesAction,"action")
@@ -72,16 +76,6 @@ class HomeViewmodel(
 
 
     }
-
-    fun setupData() {
-        gameNew.get().addOnSuccessListener { documentSnapshot ->
-            _myGamesList.value = documentSnapshot.toObject(UserGame::class.java)!!.games
-
-
-        }
-    }
-
-
      private fun getGamesByGenre(list : MutableLiveData<List<Result>>, filter: String) {
 
         GlobalScope.launch {
@@ -89,5 +83,20 @@ class HomeViewmodel(
             //.sortedByDescending { it.rating })
         }
 
+    }
+
+    fun setMessage(text: String) {
+        _message.value = Event(text)
+    }
+
+
+    fun setupFirebaseData(){
+        gameNew.get().addOnSuccessListener { documentSnapshot ->
+            val userGames = documentSnapshot.toObject(UserGame::class.java)
+            if (userGames == null) {
+                myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
+                    .set(UserGame())
+            }
+        }
     }
 }

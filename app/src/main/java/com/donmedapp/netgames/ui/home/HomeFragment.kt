@@ -24,6 +24,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.emptyView
+import kotlinx.android.synthetic.main.search_fragment.*
 
 
 /**
@@ -83,14 +85,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setLblVisibility()
         if(isNetDisponible(context!!)){
 
-            setupFirebaseData()
+            viewModel.setupFirebaseData()
             setupAdapters()
             setupRecyclerViews()
             observeLiveData()
             viewmodelActivity.setupData()
-        }else{
+        }else {
             Snackbar.make(
-                lblAction,
+                lstAction,
                 getString(R.string.no_conection_detected),
                 Snackbar.LENGTH_SHORT
             ).show()
@@ -221,9 +223,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun showGames(lst: RecyclerView, adapter: HomeFragmentAdapter, results: List<Result>) {
         lst.post {
             adapter.submitList(results)
-
         }
-
     }
 
 

@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.MediaController
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
@@ -24,6 +23,7 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.Result2
 import com.donmedapp.netgames.StoreObj
+import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
@@ -31,10 +31,11 @@ import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.game_fragment.*
+import kotlinx.android.synthetic.main.game_fragment.emptyView
+import kotlinx.android.synthetic.main.search_fragment.*
 
 
 /**
@@ -46,10 +47,8 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private lateinit var gameAdapter: GameFragmentAdapter
 
 
-    val myDB = FirebaseFirestore.getInstance()
-
-    private val viewModel: GameViewmodel by viewModels {
-        GameViewmodelFactory(activity!!.application)
+    private val viewmodel: GameViewmodel by viewModels {
+        GameViewmodelFactory(activity!!, activity!!.application)
     }
 
     var viewmodelActivity: MainViewModel = MainViewModel()
@@ -58,15 +57,8 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         arguments!!.getLong(getString(R.string.ARG_GAME_ID))
     }
 
-
-    // The system "short" animation time duration, in milliseconds. This
-    // duration is ideal for subtle animations or animations that occur
-    // very frequently.
-    private var shortAnimationDuration: Int = 0
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //scrollview.post { scrollview.fullScroll(View.FOCUS_UP) } //Posible solucion para el scroll
         setupViews()
 
     }
@@ -76,24 +68,34 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         setupAppBar()
         setHasOptionsMenu(true)
         setLblVisibility()
-        if(isNetDisponible(context!!)){
-            viewModel.getGame(gameId)
-            viewModel.getScreenGame(gameId)
+        observeMessage()
+        if (isNetDisponible(context!!)) {
+            viewmodel.getGame(gameId)
+            viewmodel.getScreenGame(gameId)
             setupAdapter()
             setupRecyclerView()
             observeLiveData()
             setupLikeBtn()
             btnBuy.setOnClickListener { navegateToStore() }
-        }else{
+        } else {
             Snackbar.make(
                 lblDescription,
                 getString(R.string.no_conection_detected),
                 Snackbar.LENGTH_SHORT
             ).show()
         }
-
-
     }
+
+    private fun observeMessage() {
+        viewmodel.message.observeEvent(this) {
+            Snackbar.make(
+                lblDescription,
+                it,
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     private fun setLblVisibility() {
         imgGameG.invisibleUnless(isNetDisponible(context!!))
         lblName.invisibleUnless(isNetDisponible(context!!))
@@ -109,85 +111,23 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         emptyView.invisibleUnless(!isNetDisponible(context!!))
 
 
-
     }
 
 
     private fun setupLikeBtn() {
+        setupBtn(viewmodel.gameNew)
 
-        val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-        setupBtn(gameNew)
+        likeButton.setOnLikeListener(object : OnLikeListener {
+            override fun liked(likeButton: LikeButton?) {
+                viewmodel.addGame()
+            }
 
-            likeButton.setOnLikeListener(object : OnLikeListener {
-                override fun liked(likeButton: LikeButton?) {
-                    gameNew.get().addOnSuccessListener { documentSnapshot ->
-                        val userGames = documentSnapshot.toObject(UserGame::class.java)
-                        viewModel.game.value.run {
-                            userGames!!.games.add(
-                                Game(
-                                    this!!.id.toString(),
-                                    name,
-                                    backgroundImage ?: "",
-                                    released
-                                )
-                            )
+            override fun unLiked(likeButton: LikeButton?) {
+                viewmodel.removeGame()
 
-                        }
-                        //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                        myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                            .set(userGames!!)
-                    }
-                    if(isNetDisponible(context!!)) {
-                        Snackbar.make(
-                            lblDescription,
-                            getString(R.string.game_gameadded),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }else {
-                        Snackbar.make(
-                            lblDescription,
-                            getString(R.string.no_conection_detected),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
+            }
 
-
-                }
-
-                override fun unLiked(likeButton: LikeButton?) {
-                    gameNew.get().addOnSuccessListener { documentSnapshot ->
-                        val userGames = documentSnapshot.toObject(UserGame::class.java)
-                        viewModel.game.value.run {
-                            userGames!!.games.remove(
-                                Game(
-                                    this!!.id.toString(),
-                                    name,
-                                    backgroundImage ?: "",
-                                    released
-                                )
-                            )
-                        }
-                        //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
-                        myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                            .set(userGames!!)
-                    }
-                    if(isNetDisponible(context!!)) {
-                        Snackbar.make(
-                            lblDescription,
-                            getString(R.string.game_gameremoved),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }else {
-                        Snackbar.make(
-                            lblDescription,
-                            getString(R.string.no_conection_detected),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
-
-                }
-
-            })
+        })
 
     }
 
@@ -195,7 +135,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
             lateinit var game: Game
-            viewModel.game.observe(this) {
+            viewmodel.game.observe(this) {
                 game = Game(
                     it.id.toString(),
                     it.name,
@@ -207,18 +147,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                     likeButton.isLiked = userGames?.games!!.contains(game)
                 }
             }
-
-
-            //Thread.sleep(500)
-            // likeButton.isLiked=false
-            //arreglar lo del likebutton
-
-
         }
     }
 
     private fun observeLiveData() {
-        viewModel.game.observe(this) {
+        viewmodel.game.observe(this) {
             lblName.text = it.name
             if (!it.backgroundImage.isNullOrBlank()) {
                 imgGameG.load(it.backgroundImage)
@@ -236,11 +169,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 video.layoutParams = ConstraintLayout.LayoutParams(0, 0)
             }
             if (it.hasVideoContent()) {
-                playVideo(it.clip!!.clip)
+                setupVideo(it.clip!!.clip)
             }
             lblMetacritic.invisibleUnless(it.hasMetacriticRating())
             if (it.hasMetacriticRating()) {
-                lblMetacritic.text = (it.metacritic!!.toFloat()/10).toString()
+                lblMetacritic.text = (it.metacritic!!.toFloat() / 10).toString()
             }
             if (!it.description.isNullOrBlank()) {
                 lblDescription2.text =
@@ -255,7 +188,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 setupSpinner(it.stores)
             }
         }
-        viewModel.screenGame.observe(this) {
+        viewmodel.screenGame.observe(this) {
             showScreens(it.results)
         }
 
@@ -283,26 +216,15 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun navegateToStore() {
-        if (spinner1.selectedItem.toString() != getString(R.string.no_stores)) {
-            val store = viewModel.game.value!!.stores!![spinner1.selectedItemPosition]
-            var url = store.url!!
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                url = "http://$url"
+        if (viewmodel.navigateToStore(spinner1).isNotEmpty()) {
             val browserIntent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                Intent(Intent.ACTION_VIEW, Uri.parse(viewmodel.navigateToStore(spinner1)))
             startActivity(browserIntent)
-            // btnBuy.setOnClickListener { startActivity(browserIntent) }
-        } else {
-            Snackbar.make(
-                lblDescription,
-                getString(R.string.game_noshops),
-                Snackbar.LENGTH_SHORT
-            ).show()
         }
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun playVideo(videopath: String) {
+    private fun setupVideo(videopath: String) {
         try {
             activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
             var mediaController = MediaController(this.context)
@@ -312,20 +234,16 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             video.setMediaController(mediaController)
             video.setVideoURI(videoUri)
             video.setOnPreparedListener {
-                //it.start()
+
             }
         } catch (e: Exception) {
-            Snackbar.make(
-                lblDescription,
-                "Video Play Error :" + e.message,
-                Snackbar.LENGTH_SHORT
-            ).show()
+            viewmodel.setMessage("Video Play Error :" + e.message)
         }
     }
 
     private fun setupAppBar() {
 
-        viewModel.game.observe(this) {
+        viewmodel.game.observe(this) {
             (requireActivity() as AppCompatActivity).supportActionBar?.run {
                 title = it.name
                 setDisplayHomeAsUpEnabled(true)
@@ -357,7 +275,6 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             gameAdapter.submitList(screenshots)
             lblScreenshots2.invisibleUnless(screenshots!!.isEmpty())
         }
-        // lstScreenshots.smoothScrollToPosition(0)
     }
 }
 
