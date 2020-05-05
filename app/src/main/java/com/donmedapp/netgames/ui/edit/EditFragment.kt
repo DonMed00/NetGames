@@ -116,9 +116,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
     private fun showGames() {
         lstAvatars.post {
             avatarAdapter.submitList(avatars)
-
         }
-
     }
 
 

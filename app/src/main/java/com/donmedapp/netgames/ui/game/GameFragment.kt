@@ -102,9 +102,12 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         spinner1.invisibleUnless(isNetDisponible(context!!))
         btnBuy.invisibleUnless(isNetDisponible(context!!))
         lblScreenshots.invisibleUnless(isNetDisponible(context!!))
-        lblScreenshots2.invisibleUnless(!isNetDisponible(context!!))
-        lblVideo.invisibleUnless(!isNetDisponible(context!!))
-        lblVideo2.invisibleUnless(!isNetDisponible(context!!))
+        lstScreenshots.invisibleUnless(isNetDisponible(context!!))
+        lblScreenshots2.invisibleUnless(isNetDisponible(context!!))
+        lblVideo.invisibleUnless(isNetDisponible(context!!))
+        lblVideo2.invisibleUnless(isNetDisponible(context!!))
+        emptyView.invisibleUnless(!isNetDisponible(context!!))
+
 
 
     }

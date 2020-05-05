@@ -1,15 +1,15 @@
 package com.donmedapp.netgames.ui.search
 
 
-import android.app.Activity
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,20 +23,19 @@ import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_fragment.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchFragment : Fragment(R.layout.search_fragment) {
+class SearchFragment : Fragment(R.layout.search_fragment){
 
     private val viewModel: SearchViewmodel by viewModels {
         SearchViewmodelFactory(activity!!.application)
     }
 
-    private var searchAdapter= SearchFragmentAdapter()
+    private var searchAdapter = SearchFragmentAdapter()
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,30 +45,44 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     }
 
     private fun setupViews() {
+
         setupAppBar()
         setHasOptionsMenu(true)
         //search()
-        if(isNetDisponible(context!!)){
+        if (isNetDisponible(context!!)) {
             setupAdapter()
             setupRecyclerView()
             observeLiveData()
+            setupOnEditorAction()
             imgSearch.setOnClickListener {
                 searchText(txtSearch.text.toString())
-                txtSearch.hideSoftKeyboard()
             }
-        }else{
+        } else {
             Snackbar.make(
                 lstSearch,
                 getString(R.string.no_conection_detected),
                 Snackbar.LENGTH_SHORT
-            ).show()        }
+            ).show()
+        }
+
+    }
+
+    private fun setupOnEditorAction() {
+        txtSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchText(txtSearch.text.toString())
+                txtSearch.hideSoftKeyboard()
+                return@OnEditorActionListener true
+            }
+            false
+        })
 
     }
 
     private fun setupRecyclerView() {
         lstSearch.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity,RecyclerView.VERTICAL,false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             adapter = searchAdapter
 
         }
@@ -77,7 +90,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private fun setupAdapter() {
         searchAdapter.also {
-            it.onItemClickListener = {navegateToGame(it)}
+            it.onItemClickListener = { navegateToGame(it) }
 
         }
 
@@ -85,9 +98,11 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private fun navegateToGame(id: Int) {
         var gameId = searchAdapter.currentList[id].id
-        findNavController().navigate(R.id.navToGame, bundleOf(
-            getString(R.string.ARG_GAME_ID) to gameId
-        ))
+        findNavController().navigate(
+            R.id.navToGame, bundleOf(
+                getString(R.string.ARG_GAME_ID) to gameId
+            )
+        )
     }
 
     private fun observeLiveData() {
@@ -127,7 +142,9 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     private fun searchText(text: String) {
         if (text.isNotEmpty()) {
             viewModel.search(text)
+            txtSearch.clearFocus()
         }
+        txtSearch.hideSoftKeyboard()
     }
 
     private fun setupAppBar() {
@@ -138,6 +155,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
         }
 
     }
+
 
 
 }

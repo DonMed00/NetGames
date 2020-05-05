@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.google.android.material.snackbar.Snackbar
@@ -19,17 +21,40 @@ import kotlinx.android.synthetic.main.forgot_password_fragment.*
 class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
 
 
+    private val viewmodel: ForgotPasswordViewmodel by viewModels {
+        ForgotPasswordViewmodelFactory(activity!!.application, activity!!)
+    }
     //Firebase references
-    private lateinit var mAuth: FirebaseAuth
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
     }
 
     private fun setupViews() {
-        mAuth = FirebaseAuth.getInstance()
-        btnSendPass!!.setOnClickListener { sendPasswordResetEmail() }
         setupAppBar()
+        observeMessage()
+        btnSendPass!!.setOnClickListener {
+            sendResetPasswordToEmail()
+        }
+    }
+
+    private fun observeMessage() {
+        viewmodel.message.observeEvent(this) {
+            Snackbar.make(
+                txtEmailPassword,
+                it,
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun sendResetPasswordToEmail() {
+        if (viewmodel.sendPasswordResetEmail(txtEmailPassword, txtEmailPassword.text.toString())) {
+            txtEmailPassword.invisibleUnless(false)
+            btnSendPass.invisibleUnless(false)
+            lblConfirmation.invisibleUnless(true)
+        }
     }
 
     private fun setupAppBar() {
@@ -41,36 +66,5 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
 
     }
 
-    private fun sendPasswordResetEmail() {
-        txtEmailPassword.hideSoftKeyboard()
-        val email = txtEmailPassword.text.toString()
-        if (email.isNotEmpty()) {
-            mAuth
-                .sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        txtEmailPassword.invisibleUnless(false)
-                        btnSendPass.invisibleUnless(false)
-                        lblConfirmation.invisibleUnless(true)
-                        Snackbar.make(
-                            txtEmailPassword,
-                            getString(R.string.forgot_email_enviado),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Snackbar.make(
-                            txtEmailPassword,
-                            task.exception!!.message!!,
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-        } else {
-            Snackbar.make(
-                txtEmailPassword,
-                getString(R.string.forgot_rellenar_campos),
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-    }
+
 }

@@ -47,6 +47,9 @@
     <string name="connect_to_internet">Connect to internet</string>
     <string name="no_conection_detected">No connection detected</string>
     <string name="search_no_games2">No games</string>
+    <string name="account_password_different">The password entered is the same</string>
+    <string name="account_email_different">The email entered is the same</string>
+    <string name="search_no_game">No game info</string>
     <string-array name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>
