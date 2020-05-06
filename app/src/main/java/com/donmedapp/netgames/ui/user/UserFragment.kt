@@ -4,6 +4,9 @@ package com.donmedapp.netgames.ui.user
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +16,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.preference.PreferenceManager
 
 import com.donmedapp.netgames.R
@@ -89,6 +93,15 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         lblList.setOnClickListener { seeFavourites() }
         lblAccount.setOnClickListener { goAccount() }
         lblLogOut.setOnClickListener { logOut() }
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_settings,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController()) ||
+                super.onOptionsItemSelected(item)
     }
 
     private fun goAccount() {

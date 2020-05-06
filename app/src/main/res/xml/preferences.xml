@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:defaultValue="@bool/prefDarkMode_default"
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:key="@string/prefDarkMode_key"
+        android:title="@string/prefDarkMode_title" />
+
+</PreferenceScreen>
