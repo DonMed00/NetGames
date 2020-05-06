@@ -131,4 +131,8 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
                 Event(application.getString(R.string.register_rellene_toast))
         }
     }
+
+    fun deleteAccount(){
+
+    }
 }

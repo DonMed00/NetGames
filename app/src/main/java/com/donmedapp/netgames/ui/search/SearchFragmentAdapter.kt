@@ -47,7 +47,6 @@ class SearchFragmentAdapter :
         fun bind(result: Result, position: Int) {
             result.run {
                 currentId = id
-                lblNumber.text=position.plus(1).toString()
                 lblName.text = name
                 lblPlatformsH.text = toStringPlatforms()
                 imgGame.load(backgroundImage)
@@ -58,7 +57,7 @@ class SearchFragmentAdapter :
 
     object GameResultDiffCallback : DiffUtil.ItemCallback<Result>() {
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {

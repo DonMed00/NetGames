@@ -97,4 +97,5 @@
         android:name="com.donmedapp.netgames.ui.edit.EditFragment"
         android:label="edit_fragment"
         tools:layout="@layout/edit_fragment" />
+
 </navigation>

@@ -10,5 +10,6 @@
     <color name="blueLight2">#2e7d32</color>
     <color name="game_label_background">#88888888</color>
     <color name="black">#000000</color>
+    <color name="blue">#1976d2</color>
 
 </resources>

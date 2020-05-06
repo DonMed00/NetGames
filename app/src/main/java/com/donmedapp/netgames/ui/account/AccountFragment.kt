@@ -1,5 +1,6 @@
 package com.donmedapp.netgames.ui.account
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.ui.MainViewModel
@@ -34,6 +36,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
 
 
     private fun setupViews() {
+        lblDeleteAccount.paintFlags = lblDeleteAccount.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         setupAppBar()
         setHasOptionsMenu(true)
         observeMessage()
@@ -53,11 +56,10 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                 txtPassword.text.toString()
             )
         }
-
     }
 
     private fun setupOnEditorAction(editText: EditText) {
-        editText.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        editText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (editText == txtEmail) {
                     viewmodel.updateEmail(txtEmail, txtEmail.text.toString())
