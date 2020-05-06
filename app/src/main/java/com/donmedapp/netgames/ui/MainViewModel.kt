@@ -1,8 +1,11 @@
 package com.donmedapp.netgames.ui
 
+import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.Game
@@ -10,12 +13,13 @@ import com.donmedapp.netgames.data.pojo.UserGame
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.edit_fragment_item.*
 
-class MainViewModel : ViewModel() {
+class MainViewModel() : ViewModel() {
 
     val myDB = FirebaseFirestore.getInstance()
     lateinit var gameNew: DocumentReference
-     var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
 
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
@@ -35,6 +39,14 @@ class MainViewModel : ViewModel() {
         get() = _avatarName
 
 
+    private val _onBack: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val onBack: LiveData<Event<Boolean>> get() = _onBack
+
+    //var activity = MainActivity()
+
+
+
+
     fun setMessage(text: String) {
         _message.value = Event(text)
     }
@@ -50,14 +62,16 @@ class MainViewModel : ViewModel() {
     fun setupData() {
         gameNew = myDB.collection("users").document(mAuth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener { documentSnapshot ->
-            if(documentSnapshot.toObject(UserGame::class.java)==null){
+            if (documentSnapshot.toObject(UserGame::class.java) == null) {
                 _gamesFav.value = arrayListOf()
                 _avatar.value = R.drawable.ic_person_black_24dp
                 _avatarName.value = ""
-            }else{
+            } else {
                 _gamesFav.value = documentSnapshot.toObject(UserGame::class.java)!!.games
-                _avatar.value = documentSnapshot.toObject(UserGame::class.java)!!.avatar
                 _avatarName.value = documentSnapshot.toObject(UserGame::class.java)!!.name
+                _avatar.value = documentSnapshot.toObject(UserGame::class.java)!!.avatar
+
+
             }
 
         }
@@ -74,8 +88,9 @@ class MainViewModel : ViewModel() {
                 myDB.collection("users")
                     .document(mAuth.currentUser!!.uid)
                     .set(userGames!!)
-
                 _message.value = Event("Avatar changed")
+                _onBack.value=Event(true)
+
             }
 
 

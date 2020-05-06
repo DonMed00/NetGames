@@ -2,10 +2,15 @@ package com.donmedapp.netgames.ui.register
 
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.extensions.invisibleUnless
@@ -19,7 +24,11 @@ import kotlinx.android.synthetic.main.register_fragment.*
  * A simple [Fragment] subclass.
  */
 class RegisterFragment : Fragment(R.layout.register_fragment) {
-    private lateinit var auth: FirebaseAuth
+
+
+    private val viewmodel: RegisterViewmodel by viewModels {
+        RegisterViewmodelFactory(activity!!.application, activity!!)
+    }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -28,9 +37,43 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
     }
 
     private fun setupViews() {
-        auth = FirebaseAuth.getInstance()
-        btnRegister.setOnClickListener { createNewAccount() }
         setupAppBar()
+        observeMessage()
+        setupOnEditorAction()
+        btnRegister.setOnClickListener {
+            createNewAccount()
+        }
+
+    }
+
+    private fun createNewAccount() {
+        txtEmail.clearFocus()
+        txtPassword.clearFocus()
+        txtNickRegister.clearFocus()
+        viewmodel.createNewAccount(
+            txtEmail,
+            txtEmail.text.toString(),
+            txtPassword.text.toString(),
+            txtNickRegister.text.toString()
+        )
+
+    }
+
+    private fun observeMessage() {
+        viewmodel.message.observeEvent(this) {
+            Snackbar.make(
+                txtEmail,
+                it,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+        viewmodel.onBack.observeEvent(this) {
+            if (it) {
+                activity!!.onBackPressed()
+            }
+        }
+
+
     }
 
     private fun setupAppBar() {
@@ -42,75 +85,15 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
     }
 
-    private fun createNewAccount() {
-        txtEmail.hideSoftKeyboard()
-        if (txtEmail.text.toString().isNotEmpty()
-            && txtPassword.text.toString().isNotEmpty()
-            && txtNickRegister.text.toString().isNotEmpty()
-        ) {
-            auth.createUserWithEmailAndPassword(
-                txtEmail.text.toString(),
-                txtPassword.text.toString()
-            )
-                .addOnCompleteListener(activity!!) {
-                    if (it.isSuccessful) {
-                        val user: FirebaseUser = auth.currentUser!!
-                        setupFirebaseData(user)
-                        verifyEmail(user)
-                    }
-
-                }.addOnFailureListener {
-                    Snackbar.make(
-                        txtEmail,
-                        it.message!!,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-
-                }
-
-        } else {
-            Snackbar.make(
-                txtEmail,
-                getString(R.string.register_rellene_toast),
-                Snackbar.LENGTH_SHORT
-            )
-                .show()
-        }
-    }
-
-    private fun setupFirebaseData(user: FirebaseUser) {
-        val myDB = FirebaseFirestore.getInstance()
-        val gameNew = myDB.collection("users").document(user.uid)
-        gameNew.get().addOnSuccessListener {
-            val userGames = UserGame(
-                arrayListOf(),
-                txtNickRegister.text.toString(),
-                R.drawable.ic_person_black_24dp
-            )
-            myDB.collection("users").document(user.uid)
-                .set(userGames)
-
-        }
-
-    }
-
-    private fun verifyEmail(user: FirebaseUser) {
-        user.sendEmailVerification()
-            .addOnCompleteListener(activity!!) { task ->
-                if (task.isSuccessful) {
-                    txtEmail.invisibleUnless(false)
-                    txtPassword.invisibleUnless(false)
-                    txtNickRegister.invisibleUnless(false)
-                    btnRegister.invisibleUnless(false)
-                    lblConfirmation.invisibleUnless(true)
-                } else {
-                    Snackbar.make(
-                        txtEmail,
-                        getString(R.string.register_email_error),
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
-                }
+    private fun setupOnEditorAction() {
+        txtNickRegister.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                createNewAccount()
+                return@OnEditorActionListener true
             }
+            false
+        })
+
     }
+
 }

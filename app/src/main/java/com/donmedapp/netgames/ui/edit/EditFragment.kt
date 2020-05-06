@@ -3,6 +3,8 @@ package com.donmedapp.netgames.ui.edit
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,8 +53,9 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
         setupAdapter()
         setupRecyclerView()
         viewmodelActivity.setupData()
-        observeMessage()
+        observeLiveDatas()
         observeLiveData()
+        setupOnEditorAction()
         fab.setOnClickListener { saveAvatar() }
     }
 
@@ -70,9 +73,14 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
         }
     }
 
-    private fun observeMessage() {
+    private fun observeLiveDatas() {
         viewmodelActivity.message.observeEvent(this) {
             Snackbar.make(lstAvatars, it, Snackbar.LENGTH_SHORT).show()
+        }
+        viewmodelActivity.onBack.observeEvent(this) {
+            if (it) {
+                activity!!.onBackPressed()
+            }
         }
     }
 
@@ -100,6 +108,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
     }
 
     private fun saveAvatar() {
+        txtNick.clearFocus()
         txtNick.hideSoftKeyboard()
         if(isNetDisponible(context!!)){
             if(txtNick.text.toString().isEmpty()){
@@ -107,7 +116,8 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
             }else {
                 viewmodelActivity.setName(txtNick.text.toString())
                 viewmodelActivity.setupAvatar()
-            }
+
+                }
         }else{
             viewmodelActivity.setMessage(getString(R.string.no_conection_detected))
         }
@@ -125,6 +135,17 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
             setTitle(R.string.edit_title)
             setDisplayHomeAsUpEnabled(true)
         }
+
+    }
+
+    private fun setupOnEditorAction() {
+        txtNick.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                saveAvatar()
+                return@OnEditorActionListener true
+            }
+            false
+        })
 
     }
 }

@@ -8,5 +8,5 @@ data class UserGame(
     @Exclude var name: String,
     @Exclude var avatar: Int
 ) {
-    constructor() : this(arrayListOf(),"", R.drawable.ic_person_black_24dp)
+    constructor() : this(arrayListOf(),"", R.drawable.no_imagen)
 }

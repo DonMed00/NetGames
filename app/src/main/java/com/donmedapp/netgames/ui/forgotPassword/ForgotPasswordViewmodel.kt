@@ -23,19 +23,23 @@ class ForgotPasswordViewmodel(var application: Application, var activity: Activi
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
     val message: LiveData<Event<String>> get() = _message
 
+    private val _onBack: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val onBack: LiveData<Event<Boolean>> get() = _onBack
+
+
+
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    fun sendPasswordResetEmail(view: View, txtPasswordReset: String): Boolean {
+    fun sendPasswordResetEmail(view: View, txtPasswordReset: String){
         view.hideSoftKeyboard()
         view.clearFocus()
-        var flag = false
         if (txtPasswordReset.isNotEmpty()) {
             mAuth
                 .sendPasswordResetEmail(txtPasswordReset)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        flag = true
                         _message.value = Event(application.getString(R.string.forgot_email_enviado))
+                        _onBack.value=Event(true)
 
                     } else {
                         _message.value = Event(task.exception!!.message!!)
@@ -43,9 +47,6 @@ class ForgotPasswordViewmodel(var application: Application, var activity: Activi
                 }
         } else {
             _message.value = Event(application.getString(R.string.forgot_rellenar_campos))
-
         }
-
-        return flag
     }
 }

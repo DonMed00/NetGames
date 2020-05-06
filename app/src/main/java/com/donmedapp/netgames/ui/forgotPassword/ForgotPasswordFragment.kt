@@ -2,17 +2,15 @@ package com.donmedapp.netgames.ui.forgotPassword
 
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
-import com.donmedapp.netgames.extensions.hideSoftKeyboard
-import com.donmedapp.netgames.extensions.invisibleUnless
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.forgot_password_fragment.*
 
 /**
@@ -33,13 +31,25 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
 
     private fun setupViews() {
         setupAppBar()
-        observeMessage()
+        observeLiveDatas()
+        setupOnEditorAction()
         btnSendPass!!.setOnClickListener {
             sendResetPasswordToEmail()
         }
     }
 
-    private fun observeMessage() {
+    private fun setupOnEditorAction() {
+        txtEmailPassword.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                sendResetPasswordToEmail()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+    }
+
+    private fun observeLiveDatas() {
         viewmodel.message.observeEvent(this) {
             Snackbar.make(
                 txtEmailPassword,
@@ -47,14 +57,15 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
                 Snackbar.LENGTH_SHORT
             ).show()
         }
+        viewmodel.onBack.observeEvent(this) {
+            if (it) {
+                activity!!.onBackPressed()
+            }
+        }
     }
 
     private fun sendResetPasswordToEmail() {
-        if (viewmodel.sendPasswordResetEmail(txtEmailPassword, txtEmailPassword.text.toString())) {
-            txtEmailPassword.invisibleUnless(false)
-            btnSendPass.invisibleUnless(false)
-            lblConfirmation.invisibleUnless(true)
-        }
+        viewmodel.sendPasswordResetEmail(txtEmailPassword, txtEmailPassword.text.toString())
     }
 
     private fun setupAppBar() {

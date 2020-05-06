@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.donmedapp.netgames.utils.roundedImg
@@ -46,12 +47,17 @@ class UserFragment : Fragment(R.layout.user_fragment) {
 
     private fun setupViews() {
         setupAppBar()
+        observeMessage()
         setHasOptionsMenu(true)
-
-
         setupLblOptions()
         observeLiveData()
         imgEdit.setOnClickListener { goToEdit() }
+    }
+
+    private fun observeMessage() {
+        viewmodelMain.message.observeEvent(this) {
+            Snackbar.make(lblAccount, it, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun observeLiveData() {
@@ -59,6 +65,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         //    Snackbar.make(imgPerfil,"Verifica",Snackbar.LENGTH_SHORT).show()
         //}
         viewmodelMain.avatar.observe(this){
+            //imgPerfil.setImageResource(it)
             imgPerfil.setImageDrawable(roundedImg(it,resources))
         }
         viewmodelMain.avatarName.observe(this){

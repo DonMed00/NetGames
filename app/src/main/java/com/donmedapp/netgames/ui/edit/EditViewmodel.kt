@@ -17,6 +17,8 @@ class EditViewmodel(
     val message: LiveData<Event<String>> get() = _message
 
 
+
+
     var viewmodelActivity: MainViewModel = MainViewModel()
 
 
@@ -59,7 +61,7 @@ class EditViewmodel(
 
                 viewmodelActivity.myDB.collection("users")
                     .document(viewmodelActivity.mAuth.currentUser!!.uid)
-                    .set(userGames!!)
+                    .set(userGames)
 
                 _message.value = Event("Avatar changed")
             }
