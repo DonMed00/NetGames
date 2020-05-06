@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/lblEmail"
+        android:textColor="@color/textColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -19,6 +20,8 @@
 
     <TextView
         android:id="@+id/lblPassword"
+        android:textColor="@color/textColor"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
@@ -31,6 +34,8 @@
 
     <EditText
         android:id="@+id/txtEmail"
+        android:textColor="@color/textColor"
+
         android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:ems="15"
@@ -44,6 +49,8 @@
 
     <EditText
         android:id="@+id/txtPassword"
+        android:textColor="@color/textColor"
+
         android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:ems="15"
@@ -82,16 +89,5 @@
         app:layout_constraintTop_toTopOf="@+id/txtPassword"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/lblDeleteAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="Delete account"
-        android:textSize="15dp"
-        android:textColor="@color/blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

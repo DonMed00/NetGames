@@ -35,7 +35,6 @@ import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.game_fragment.*
 import kotlinx.android.synthetic.main.game_fragment.emptyView
-import kotlinx.android.synthetic.main.search_fragment.*
 
 
 /**
@@ -196,7 +195,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupPlatforms(it: Result) {
         imgPs4.invisibleUnless(it.hasPlatform("playstation"))
-        lblPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
+        imgPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
         imgXbox.invisibleUnless(it.hasPlatform("xbox"))
         imgNintendo.invisibleUnless(
             it.hasPlatform("nintendo")

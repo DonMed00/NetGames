@@ -95,7 +95,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         lblLogOut.setOnClickListener { logOut() }
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_settings,menu)
+       // inflater.inflate(R.menu.menu_settings,menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

@@ -41,48 +41,16 @@
 
             <TextView
                 android:id="@+id/lblNameF"
+                android:textColor="@color/textColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgGameF"
                 app:layout_constraintEnd_toEndOf="@+id/imgGameF"
                 app:layout_constraintStart_toStartOf="@+id/imgGameF" />
-
-            <TextView
-                android:id="@+id/lblReleased"
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="@tools:sample/us_phones" />
-
-            <TextView
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/lblNumberF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <com.like.LikeButton
-                android:id="@+id/likeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                app:icon_size="10dp"
-                app:icon_type="heart"
-                app:liked="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

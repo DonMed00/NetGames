@@ -87,7 +87,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-                    viewmodel.setMessage(getString(R.string.login_session_init_correct))
+                   // viewmodel.setMessage(getString(R.string.login_session_init_correct))
                     findNavController().navigate(R.id.navigateToHome)
                 } else {
                     viewmodel.setMessage(
@@ -144,13 +144,16 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     private fun loginUser() {
         txtEmail.clearFocus()
         txtPassword.clearFocus()
+        layoutTxtEmail.clearFocus()
+        layoutTxtPassword.clearFocus()
+
         showProgressbar()
         viewmodel.mAuth.signInWithEmailAndPassword(
             txtEmail.text.toString(), txtPassword.text.toString()
         )
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-                    viewmodel.setMessage(getString(R.string.login_session_init_correct))
+                    //viewmodel.setMessage(getString(R.string.login_session_init_correct))
                     goPrincipal()
                 } else {
                     viewmodel.setMessage(

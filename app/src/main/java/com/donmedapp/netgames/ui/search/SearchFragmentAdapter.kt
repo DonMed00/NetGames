@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.bumptech.glide.Glide
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import kotlinx.android.extensions.LayoutContainer
@@ -48,7 +47,7 @@ class SearchFragmentAdapter :
             result.run {
                 currentId = id
                 lblName.text = name
-                lblPlatformsH.text = toStringPlatforms()
+                imgPlatformsH.text = toStringPlatforms()
                 imgGame.load(backgroundImage)
             }
 

@@ -54,7 +54,7 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
             Snackbar.make(
                 txtEmailPassword,
                 it,
-                Snackbar.LENGTH_SHORT
+                Snackbar.LENGTH_LONG
             ).show()
         }
         viewmodel.onBack.observeEvent(this) {

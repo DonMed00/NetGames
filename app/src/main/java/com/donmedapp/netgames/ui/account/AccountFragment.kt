@@ -36,7 +36,6 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
 
 
     private fun setupViews() {
-        lblDeleteAccount.paintFlags = lblDeleteAccount.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         setupAppBar()
         setHasOptionsMenu(true)
         observeMessage()

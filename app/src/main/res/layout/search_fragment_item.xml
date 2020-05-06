@@ -49,13 +49,13 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/lblPlatformsH"
+                app:layout_constraintBottom_toTopOf="@+id/imgPlatformsH"
                 app:layout_constraintEnd_toEndOf="@+id/imgGame"
                 app:layout_constraintStart_toStartOf="@+id/imgGame"
                 tools:text="@tools:sample/full_names" />
 
             <TextView
-                android:id="@+id/lblPlatformsH"
+                android:id="@+id/imgPlatformsH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/game_label_background"

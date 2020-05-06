@@ -36,12 +36,13 @@
 
             <TextView
                 android:id="@+id/lblName"
+                android:textColor="@color/textColor"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="30dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgGameG"
                 app:layout_constraintEnd_toEndOf="@+id/imgGameG"
@@ -49,10 +50,11 @@
 
             <TextView
                 android:id="@+id/lblMetacritic"
+                android:textColor="@color/textColor"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
-                android:textColor="@color/white"
                 android:textSize="24dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
@@ -63,6 +65,8 @@
 
             <TextView
                 android:id="@+id/lblDescription"
+                android:textColor="@color/textColor"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -75,6 +79,8 @@
 
             <TextView
                 android:id="@+id/lblDescription2"
+                android:textColor="@color/textColor"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -89,6 +95,8 @@
 
             <TextView
                 android:id="@+id/lblPlatforms"
+                android:textColor="@color/textColor"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -104,6 +112,8 @@
 
             <TextView
                 android:id="@+id/lblPlatformsNo"
+                android:textColor="@color/textColor"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -116,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblPlatforms" />
 
             <ImageView
-                android:id="@+id/lblPlatformsH"
+                android:id="@+id/imgPlatformsH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -134,9 +144,9 @@
                 android:layout_marginStart="2dp"
                 android:src="@drawable/ic_ps4"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/lblPlatformsH"
-                app:layout_constraintStart_toEndOf="@+id/lblPlatformsH"
-                app:layout_constraintTop_toTopOf="@+id/lblPlatformsH" />
+                app:layout_constraintBottom_toBottomOf="@+id/imgPlatformsH"
+                app:layout_constraintStart_toEndOf="@+id/imgPlatformsH"
+                app:layout_constraintTop_toTopOf="@+id/imgPlatformsH" />
 
             <ImageView
                 android:id="@+id/imgXbox"
@@ -194,10 +204,11 @@
                 app:icon_size="25dp"
                 app:icon_type="heart"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblPlatformsH" />
+                app:layout_constraintTop_toBottomOf="@+id/imgPlatformsH" />
 
 
             <Spinner
+                android:textColor="@color/textColor"
                 android:id="@+id/spinner1"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -207,7 +218,10 @@
                 app:layout_constraintHorizontal_bias="0.821"
                 app:layout_constraintStart_toEndOf="@+id/likeButton"
                 app:layout_constraintTop_toTopOf="@+id/likeButton" />
+
             <Button
+                android:textColor="@color/textColor"
+
                 android:id="@+id/btnBuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -218,6 +232,8 @@
 
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblScreenshots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -230,6 +246,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnBuy" />
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblScreenshots2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -261,6 +279,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/lblVideo"/>
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblVideo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -284,6 +304,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblVideo2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

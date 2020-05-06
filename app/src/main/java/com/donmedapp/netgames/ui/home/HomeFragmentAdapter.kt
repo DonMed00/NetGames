@@ -46,9 +46,8 @@ class HomeFragmentAdapter :
         fun bind(result: Result, position: Int) {
             result.run {
 
-                lblNumber.text=position.plus(1).toString()
                 lblName.text = name
-                lblPlatformsH.text = toStringPlatforms()
+                imgPlatformsH.text = toStringPlatforms()
                 imgGame.load(backgroundImage)
             }
 

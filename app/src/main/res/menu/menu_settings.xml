@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/settingsDestination"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="@string/settings_title"
+        android:id="@+id/infoDestination"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="@string/info_title"
         app:showAsAction="ifRoom|withText"/>
 
 </menu>

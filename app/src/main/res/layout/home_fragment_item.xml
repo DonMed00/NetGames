@@ -50,40 +50,29 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"
+                android:textColor="@color/textColor"
+
                 android:textSize="@dimen/cardview_title_size"
-                app:layout_constraintBottom_toTopOf="@+id/lblPlatformsH"
+                app:layout_constraintBottom_toTopOf="@+id/imgPlatformsH"
                 app:layout_constraintEnd_toEndOf="@+id/imgGame"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/imgGame"
                 tools:text="@tools:sample/full_names" />
 
             <TextView
-                android:id="@+id/lblPlatformsH"
+                android:id="@+id/imgPlatformsH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/game_label_background"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/textColor"
+
                 android:textAlignment="center"
                 android:text="PC,PS4"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/lblNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:textSize="12sp"
-                android:textColor="@color/white"
-                android:background="@color/black"
-                android:text="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

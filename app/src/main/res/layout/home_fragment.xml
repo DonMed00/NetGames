@@ -10,6 +10,8 @@
 
     <TextView
         android:id="@+id/emptyView"
+        android:textColor="@color/textColor"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -40,6 +42,8 @@
 
         <TextView
             android:id="@+id/lblAction"
+            android:textColor="@color/textColor"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Action"
@@ -60,6 +64,8 @@
             app:layout_constraintTop_toBottomOf="@+id/lblAction" />
 
         <TextView
+            android:textColor="@color/textColor"
+
             android:id="@+id/lblStrategy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,6 +87,8 @@
             app:layout_constraintTop_toBottomOf="@+id/lblStrategy" />
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblSports"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +110,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblSports" />
 
             <TextView
-            android:id="@+id/lblAdventure"
+                android:textColor="@color/textColor"
+
+                android:id="@+id/lblAdventure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Adventures"
@@ -123,7 +133,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblAdventure" />
 
             <TextView
-            android:id="@+id/lblSimulation"
+                android:textColor="@color/textColor"
+
+                android:id="@+id/lblSimulation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Simulation"
@@ -144,6 +156,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblFavs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,6 +170,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
 
             <TextView
+                android:textColor="@color/textColor"
+
                 android:id="@+id/lblHomeEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,6 +184,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblVideo" />
 
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/lstFavs"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"

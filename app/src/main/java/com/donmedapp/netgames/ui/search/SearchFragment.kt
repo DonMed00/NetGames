@@ -4,11 +4,9 @@ package com.donmedapp.netgames.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
+import android.view.View.OnTouchListener
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -45,7 +43,6 @@ class SearchFragment : Fragment(R.layout.search_fragment){
     }
 
     private fun setupViews() {
-
         setupAppBar()
         setHasOptionsMenu(true)
         //search()
@@ -54,9 +51,6 @@ class SearchFragment : Fragment(R.layout.search_fragment){
             setupRecyclerView()
             observeLiveData()
             setupOnEditorAction()
-            imgSearch.setOnClickListener {
-                searchText(txtSearch.text.toString())
-            }
         } else {
             Snackbar.make(
                 lstSearch,
@@ -66,6 +60,8 @@ class SearchFragment : Fragment(R.layout.search_fragment){
         }
 
     }
+
+
 
     private fun setupOnEditorAction() {
         txtSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->

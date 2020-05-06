@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
+import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
         setupBottomNav()
         setupAppBar()
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 else -> showBottomNav()
             }
         }
-        bottomNavigationView.itemIconTintList = null
+       // bottomNavigationView.itemIconTintList = null
 
 
     }
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
+        bottomNavigationView.hideSoftKeyboard()
         onBackPressed()
         return true
     }

@@ -46,9 +46,7 @@ class FavoritesFragmentAdapter :
         fun bind(result: Game, position: Int) {
             result.run {
 
-                lblNumberF.text=position.toString()
                 lblNameF.text = name
-                lblReleased.text=released
                 imgGameF.load(backgroundImg)
             }
 
