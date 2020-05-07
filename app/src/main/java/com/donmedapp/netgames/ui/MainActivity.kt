@@ -1,22 +1,18 @@
 package com.donmedapp.netgames.ui
 
-import android.app.Activity
 import android.content.SharedPreferences
-import android.graphics.Typeface
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.login_fragment.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,11 +29,11 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupBottomNav()
         setupAppBar()
-
     }
 
     private fun setupBottomNav() {
@@ -55,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 else -> showBottomNav()
             }
         }
+
+        bottomNavigationView.setOnNavigationItemReselectedListener { }
        // bottomNavigationView.itemIconTintList = null
 
 

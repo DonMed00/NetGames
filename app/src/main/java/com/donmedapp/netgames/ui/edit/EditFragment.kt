@@ -112,7 +112,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
         txtNick.hideSoftKeyboard()
         if(isNetDisponible(context!!)){
             if(txtNick.text.toString().isEmpty()){
-                viewmodelActivity.setMessage("Nickname is empty")
+                viewmodelActivity.setMessage(getString(R.string.nickname_empty))
             }else {
                 viewmodelActivity.setName(txtNick.text.toString())
                 viewmodelActivity.setupAvatar()

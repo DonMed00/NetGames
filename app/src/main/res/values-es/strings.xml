@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">NetGames</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="forgotPassword">Olvidaste tu contraseña?</string>
+    <string name="firstName">Nombre</string>
+    <string name="lastName">Apellido</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="createAcccount">Crear cuenta</string>
+    <string name="principal_title">Principal</string>
+    <string name="send_password_title">Restablecer contraseña</string>
+    <string name="register_title">Registro</string>
+    <string name="home_title">Principal</string>
+    <string name="search_title">Buscar</string>
+    <string name="user_title">Usuario</string>
+    <string name="search_txtSearch">Buscar</string>
+    <string name="search_no_games">Sin resultados</string>
+    <string name="ARG_GAME_ID">Game Id</string>
+
+
+    <string name="store_choose">Selecciona una tienda</string>
+    <string name="no_stores">No exiten tiendas</string>
+    <string name="no_user">NOUSER</string>
+    <string name="no_password">NOPASSWORD</string>
+    <string name="favorites_title">Mi lista</string>
+    <string name="register_rellene_toast">No puede haber campos vacíos</string>
+    <string name="register_email_error">Error al verificar el correo</string>
+    <string name="register_confirm_account">Correo registrado correctamente. Comprueba tu bandeja y verifica tu cuenta</string>
+    <string name="forgot_email_enviado">Correo de recuperación de contraseña enviado</string>
+    <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
+    <string name="account_title">Mi cuenta</string>
+    <string name="edit_title">Editar</string>
+    <string name="favs_no_games">No hay juegos favoritos aún</string>
+    <string name="nickname">Nickname</string>
+    <string name="account_password_changed">Contraseña cambiada correctamente</string>
+    <string name="account_email_changed">Correo cambiado correctamente</string>
+    <string name="forgot_rellenar_campos">El campo del correo no puede estar vacío</string>
+    <string name="game_gameadded">Juego añadido a Mi lista</string>
+    <string name="game_gameremoved">Juego eliminado de Mi lista</string>
+    <string name="game_noshops">No existen tiendas</string>
+    <string name="login_session_init_correct">Inicio de sesión con éxito</string>
+    <string name="user_logout">Cerrar sesión</string>
+    <string name="connect_to_internet">No hay conexión a internet</string>
+    <string name="no_conection_detected">No hay conexión a internet</string>
+    <string name="search_no_games2">No hay juegos</string>
+    <string name="account_password_different">La contraseña introducida es la misma</string>
+    <string name="account_email_different">El correo introducido es el mismo</string>
+    <string name="game_no_game">No hay información de juego</string>
+    <string name="info_title">Información</string>
+    <string name="send_password">Recuperar contraseña</string>
+    <string name="game_description">Descripción</string>
+    <string name="game_platforms">Plataformas</string>
+    <string name="game_no_platforms">No existen plataformas.</string>
+    <string name="game_buy">Comprar</string>
+    <string name="game_screenshots">Imágenes</string>
+    <string name="game_no_screenshots">No existen imágenes</string>
+    <string name="game_video">Video</string>
+    <string name="game_no_videos">No hay videos</string>
+    <string name="user_my_favorites">Mi lista</string>
+    <string name="user_my_account">Mi cuenta</string>
+    <string name="user_log_out">Cerrar sesion</string>
+    <string name="home_action">Acción</string>
+    <string name="home_strategy">Estrategia</string>
+    <string name="home_sports">Deportes</string>
+    <string name="home_adventures">Aventuras</string>
+    <string name="home_simulation">Simulación</string>
+    <string name="home_my_favorites">My lista</string>
+    <string name="home_no_favorites">No hay juegos en tu lista aún</string>
+    <string name="logout_make">Cierre de sesión correcto</string>
+    <string name="avatar_changed">Avatar cambiado</string>
+    <string name="nickname_empty">El campo nickname está vacío</string>
+    <string-array name="store_choosed">
+        <item>Steam</item>
+        <item>Xbox Store</item>
+        <item>Playstation Store</item>
+        <item>App Store</item>
+        <item>Google Play</item>
+    </string-array>
+</resources>

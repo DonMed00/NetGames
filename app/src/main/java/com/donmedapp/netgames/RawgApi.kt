@@ -83,7 +83,7 @@ data class Result(
     fun toStringPlatforms(): String {
         var platformsFormatted = ""
         if(hasPlatform("pc") ||hasPlatform("linux")||hasPlatform("mac")){
-            platformsFormatted = "PC "
+            platformsFormatted = "PC"
         }
         if(hasPlatform("playstation")||hasPlatform("xbox")||hasPlatform("nitentdo")||hasPlatform("wii")){
             platformsFormatted= platformsFormatted.plus("Console ")

@@ -6,9 +6,17 @@
         <item name="colorPrimary">@color/blueLight2</item>
         <item name="colorPrimaryDark">@color/blueLight</item>
         <item name="colorAccent">@color/black</item>
-        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:navigationBarColor">@color/blueLight</item>
     </style>
+
+
+
+        <style name="SplashTheme" parent="AppTheme">
+            <item name="android:windowBackground">@drawable/splash</item>
+        </style>
+
 
 
     <style name="viewCustom">
@@ -17,6 +25,9 @@
         <item name="android:layout_margin">10dp</item>
 
     </style>
+
+
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

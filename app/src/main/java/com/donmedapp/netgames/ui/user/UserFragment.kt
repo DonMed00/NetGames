@@ -119,7 +119,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         viewmodelMain.mAuth.signOut()
         Snackbar.make(
             lblAccount,
-            getString(R.string.user_logout),
+            getString(R.string.logout_make),
             Snackbar.LENGTH_SHORT
         ).show()
         findNavController().navigate(R.id.navegateLogOut)

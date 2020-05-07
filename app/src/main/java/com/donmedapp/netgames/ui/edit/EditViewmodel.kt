@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
@@ -63,7 +64,7 @@ class EditViewmodel(
                     .document(viewmodelActivity.mAuth.currentUser!!.uid)
                     .set(userGames)
 
-                _message.value = Event("Avatar changed")
+                _message.value = Event(application.getString(R.string.avatar_changed))
             }
 
 

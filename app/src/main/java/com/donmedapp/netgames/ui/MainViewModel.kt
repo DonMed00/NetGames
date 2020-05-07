@@ -88,7 +88,6 @@ class MainViewModel() : ViewModel() {
                 myDB.collection("users")
                     .document(mAuth.currentUser!!.uid)
                     .set(userGames!!)
-                _message.value = Event("Avatar changed")
                 _onBack.value=Event(true)
 
             }

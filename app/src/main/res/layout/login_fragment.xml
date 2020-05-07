@@ -99,7 +99,7 @@
             android:background="@drawable/backgroundgra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/createAct"
+            android:text="@string/createAcccount"
             android:textColor="@color/textColor"
             android:textStyle="bold" />
 

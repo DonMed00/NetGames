@@ -28,4 +28,6 @@
     <dimen name="margintop_lbl_home">10dp</dimen>
     <dimen name="imgUser_width">106dp</dimen>
     <dimen name="imgUser_height">106dp</dimen>
+    <dimen name="user_textsize">20dp</dimen>
+    <dimen name="user_marginstart">10dp</dimen>
 </resources>

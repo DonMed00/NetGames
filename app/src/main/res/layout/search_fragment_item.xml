@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/game_label_background"
                 android:gravity="center"
-                android:text="PC,PS4"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp"
