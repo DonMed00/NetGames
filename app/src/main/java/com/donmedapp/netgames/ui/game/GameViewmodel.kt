@@ -2,18 +2,14 @@ package com.donmedapp.netgames.ui.game
 
 import android.app.Activity
 import android.app.Application
-import android.content.Intent
-import android.graphics.PixelFormat
-import android.net.Uri
-import android.widget.MediaController
 import android.widget.Spinner
-import android.widget.VideoView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.observe
-import com.donmedapp.netgames.*
+import com.donmedapp.netgames.R
+import com.donmedapp.netgames.RawgApi
+import com.donmedapp.netgames.Result
+import com.donmedapp.netgames.Screenshot2
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
@@ -54,8 +50,6 @@ class GameViewmodel(
 
 
     private var _gameId: MutableLiveData<Long> = MutableLiveData(0)
-    val gameId: LiveData<Long>
-        get() = _gameId
 
 
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()

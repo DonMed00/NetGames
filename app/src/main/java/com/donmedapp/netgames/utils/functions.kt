@@ -5,12 +5,8 @@ import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.TextView
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.donmedapp.netgames.extensions.hideSoftKeyboard
 
 
 fun roundedImg(it: Int,resources : Resources): RoundedBitmapDrawable {

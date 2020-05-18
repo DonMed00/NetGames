@@ -7,7 +7,6 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
@@ -15,7 +14,6 @@ import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.register_fragment.*
 
 class RegisterViewmodel(var application: Application, var activity: Activity) : ViewModel() {
 

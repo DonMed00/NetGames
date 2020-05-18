@@ -20,7 +20,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/backgroundgra"
             android:descendantFocusability="blocksDescendants">
 
@@ -42,7 +42,7 @@
                 android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgGameG"
                 app:layout_constraintEnd_toEndOf="@+id/imgGameG"
                 app:layout_constraintStart_toStartOf="@+id/imgGameG" />
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/game_description"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgGameG" />
@@ -85,7 +85,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="56dp"
                 android:layout_marginEnd="10dp"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="56dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/game_platforms"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -240,7 +240,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/game_screenshots"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnBuy" />
@@ -287,7 +287,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/game_video"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lstScreenshots" />

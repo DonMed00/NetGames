@@ -1,25 +1,20 @@
 package com.donmedapp.netgames.ui.game
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.alexvasilkov.gestures.Settings
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result2
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.game_screen_item.*
 
-class GameFragmentAdapter(val c : Activity) :
+class GameFragmentAdapter :
     ListAdapter<Result2, GameFragmentAdapter.ViewHolder>(GameResultDiffCallback) {
     var onItemClickListener: ((Int) -> Unit)? = null
-
-    var currentId: Long = -1
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

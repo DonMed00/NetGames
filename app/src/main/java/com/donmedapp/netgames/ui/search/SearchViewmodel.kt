@@ -1,6 +1,5 @@
 package com.donmedapp.netgames.ui.search
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SearchViewmodel(
-    private val application: Application
-) : ViewModel() {
+class SearchViewmodel : ViewModel() {
 
 
     private val retrofit = Retrofit.Builder().baseUrl("https://api.rawg.io/api/")
@@ -47,11 +44,4 @@ class SearchViewmodel(
 
     }
 
-    private fun getBestGamesOfYear() {
-        GlobalScope.launch {
-            _games.postValue(rawgService.orderByGenres("strategy").results.sortedByDescending { it.rating })
-            //.sortedByDescending { it.rating })
-        }
-
-    }
 }

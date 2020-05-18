@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_my_favorites"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginStart="10dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,17 +37,17 @@
         android:id="@+id/lblAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_my_account"
-        android:textSize="@dimen/user_textsize"
-        android:textColor="@color/textColor"
         android:layout_marginStart="@dimen/user_marginstart"
+        android:text="@string/user_my_account"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/user_textsize"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintVertical_bias="0.015" />
 
     <View
         android:id="@+id/view2"
@@ -61,7 +61,6 @@
     <TextView
         android:textColor="@color/textColor"
         android:layout_marginStart="@dimen/user_marginstart"
-
         android:id="@+id/lblLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

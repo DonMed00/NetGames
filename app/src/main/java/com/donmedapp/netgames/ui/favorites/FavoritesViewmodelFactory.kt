@@ -8,5 +8,5 @@ class FavoritesViewmodelFactory(
     private val application: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        FavoritesViewmodel( application) as T
+        FavoritesViewmodel() as T
 }

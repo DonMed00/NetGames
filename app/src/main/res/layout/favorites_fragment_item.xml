@@ -47,7 +47,7 @@
                 android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgGameF"
                 app:layout_constraintEnd_toEndOf="@+id/imgGameF"
                 app:layout_constraintStart_toStartOf="@+id/imgGameF" />

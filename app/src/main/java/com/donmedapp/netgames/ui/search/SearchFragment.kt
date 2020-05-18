@@ -2,9 +2,6 @@ package com.donmedapp.netgames.ui.search
 
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View.OnTouchListener
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
@@ -93,7 +90,7 @@ class SearchFragment : Fragment(R.layout.search_fragment){
     }
 
     private fun navegateToGame(id: Int) {
-        var gameId = searchAdapter.currentList[id].id
+        val gameId = searchAdapter.currentList[id].id
         findNavController().navigate(
             R.id.navToGame, bundleOf(
                 getString(R.string.ARG_GAME_ID) to gameId
@@ -118,22 +115,6 @@ class SearchFragment : Fragment(R.layout.search_fragment){
 
     }
 
-    private fun search() {
-        txtSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                //searchText(txtSearch.text.toString())
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                searchText(txtSearch.text.toString())
-            }
-        })
-    }
-
 
     private fun searchText(text: String) {
         if (text.isNotEmpty()) {
@@ -146,7 +127,8 @@ class SearchFragment : Fragment(R.layout.search_fragment){
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
             setTitle(R.string.app_name)
-
+            //setDisplayShowTitleEnabled(true)
+           // setLogo(null)
             setDisplayHomeAsUpEnabled(false)
         }
 

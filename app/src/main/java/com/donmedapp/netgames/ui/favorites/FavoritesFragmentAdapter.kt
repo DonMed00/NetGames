@@ -17,8 +17,6 @@ class FavoritesFragmentAdapter :
 
     var onItemClickListener: ((Int) -> Unit)? = null
 
-    var currentPosition: Int = -1
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-366dp"
         android:descendantFocusability="afterDescendants">
 
 
@@ -26,6 +24,7 @@
             style="style/viewCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/email"
@@ -79,16 +78,16 @@
             android:visibility="invisible"/>
 
         <Button
-            android:textColor="@color/textColor"
-
-
             android:id="@+id/btnLogin"
+
+
             style="@style/viewCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.60"
             android:background="@drawable/backgroundgra"
             android:text="@string/login"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
 
@@ -110,7 +109,6 @@
             style="@style/viewCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnLogin"
             android:gravity="center_horizontal"
 
             android:text="@string/forgotPassword"

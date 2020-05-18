@@ -62,28 +62,13 @@ data class Result(
     fun hasPlatform(platform: String) =
         platforms?.mapNotNull { t -> t.platform?.slug }?.find { t -> t.contains(platform) } != null
 
-    fun hasStore(store: String) =
-        stores?.mapNotNull { t -> t.store?.slug }?.find { t -> t.contains(store) } != null
-
     fun hasVideoContent() = clip?.clip != null
     fun hasMetacriticRating() = metacritic?.isNotBlank() ?: false
-
-    fun displayImageMode() {
-        imageVisibility.value = true
-        videoVisibility.value = false
-        playVideoIconVisibility.value = true
-    }
-
-    fun displayVideoMode() {
-        imageVisibility.value = false
-        videoVisibility.value = true
-        playVideoIconVisibility.value = false
-    }
 
     fun toStringPlatforms(): String {
         var platformsFormatted = ""
         if(hasPlatform("pc") ||hasPlatform("linux")||hasPlatform("mac")){
-            platformsFormatted = "PC"
+            platformsFormatted = "PC "
         }
         if(hasPlatform("playstation")||hasPlatform("xbox")||hasPlatform("nitentdo")||hasPlatform("wii")){
             platformsFormatted= platformsFormatted.plus("Console ")
@@ -102,10 +87,10 @@ data class Result(
     }
 
     @IgnoredOnParcel
-    val imageVisibility = MutableLiveData<Boolean>(true)
+    val imageVisibility = MutableLiveData(true)
 
     @IgnoredOnParcel
-    val videoVisibility = MutableLiveData<Boolean>(false)
+    val videoVisibility = MutableLiveData(false)
 
     @IgnoredOnParcel
     val playVideoIconVisibility: MutableLiveData<Boolean> by lazy {
@@ -121,15 +106,6 @@ data class ShortScreenshot(
     @SerializedName("image") val image: String = ""
 ) : Parcelable
 
-
-@Parcelize
-data class Screenshot(
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("image") var image: String? = null,
-    @SerializedName("width") var width: Int? = null,
-    @SerializedName("height") var height: Int? = null,
-    @SerializedName("is_deleted") var isDeleted: Boolean? = null
-) : Parcelable
 
 @Parcelize
 data class Clip(
@@ -190,21 +166,6 @@ data class RawgResponse(
 
 
     var loadStarted: Boolean = false
-) : Parcelable
-
-//game details
-@Parcelize
-data class GameDetailResult(
-    @SerializedName("id") val id: Long = 0,
-    @SerializedName("name") val name: String = "",
-    @SerializedName("slug") val slug: String = "",
-    @SerializedName("background_image") val backgroundImage: String = "",
-    @SerializedName("clip") val clip: Clip? = null,
-    @SerializedName("background_image_additional") val backgroundImageAdditional: String = "",
-    @SerializedName("description") val description: String = "",
-    @SerializedName("metacritic") val metacritic: Long = 0,
-    @SerializedName("saturated_color") val saturatedColor: String = "",
-    @SerializedName("dominant_color") val dominantColor: String = ""
 ) : Parcelable
 
 @Parcelize

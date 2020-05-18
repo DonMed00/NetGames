@@ -8,5 +8,5 @@ class UserViewmodelFactory(
     private val application: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        UserViewmodel( application) as T
+        UserViewmodel() as T
 }

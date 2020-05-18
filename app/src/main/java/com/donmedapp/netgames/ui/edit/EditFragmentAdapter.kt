@@ -1,11 +1,8 @@
 package com.donmedapp.netgames.ui.edit
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +15,6 @@ class EditFragmentAdapter :
     ListAdapter<Int, EditFragmentAdapter.ViewHolder>(IntDiffCallback) {
 
     var onItemClickListener: ((Int) -> Unit)? = null
-
-    var currentPosition: Int = -1
 
     //in the Constructor, pass the context in the parametres
 

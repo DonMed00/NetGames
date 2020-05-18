@@ -1,28 +1,20 @@
 package com.donmedapp.netgames.ui
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.login_fragment.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private val navController: NavController by lazy {
         findNavController(R.id.navHostFragment)
-    }
-
-    private val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this)
     }
 
     var viewmodel: MainViewModel = MainViewModel()
@@ -71,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupAppBar() {
         setSupportActionBar(toolbar)
+        //toolbar.setLogo(R.drawable.icononuevo);
 
     }
 

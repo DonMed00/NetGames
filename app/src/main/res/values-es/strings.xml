@@ -19,13 +19,10 @@
     <string name="user_title">Usuario</string>
     <string name="search_txtSearch">Buscar</string>
     <string name="search_no_games">Sin resultados</string>
-    <string name="ARG_GAME_ID">Game Id</string>
 
 
     <string name="store_choose">Selecciona una tienda</string>
     <string name="no_stores">No exiten tiendas</string>
-    <string name="no_user">NOUSER</string>
-    <string name="no_password">NOPASSWORD</string>
     <string name="favorites_title">Mi lista</string>
     <string name="register_rellene_toast">No puede haber campos vacíos</string>
     <string name="register_email_error">Error al verificar el correo</string>
@@ -73,11 +70,4 @@
     <string name="logout_make">Cierre de sesión correcto</string>
     <string name="avatar_changed">Avatar cambiado</string>
     <string name="nickname_empty">El campo nickname está vacío</string>
-    <string-array name="store_choosed">
-        <item>Steam</item>
-        <item>Xbox Store</item>
-        <item>Playstation Store</item>
-        <item>App Store</item>
-        <item>Google Play</item>
-    </string-array>
 </resources>

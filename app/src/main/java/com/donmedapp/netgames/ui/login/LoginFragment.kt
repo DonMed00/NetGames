@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
@@ -17,7 +16,6 @@ import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.donmedapp.netgames.ui.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -111,6 +109,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(false)
             setTitle(R.string.app_name)
             setDisplayHomeAsUpEnabled(false)
         }

@@ -2,27 +2,19 @@ package com.donmedapp.netgames.ui.user
 
 
 import android.content.SharedPreferences
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.preference.PreferenceManager
-
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.ui.MainViewModel
-import com.donmedapp.netgames.utils.isNetDisponible
 import com.donmedapp.netgames.utils.roundedImg
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.user_fragment.*
@@ -31,10 +23,6 @@ import kotlinx.android.synthetic.main.user_fragment.*
  * A simple [Fragment] subclass.
  */
 class UserFragment : Fragment(R.layout.user_fragment) {
-
-    private val viewModel: UserViewmodel by viewModels {
-        UserViewmodelFactory(activity!!.application)
-    }
 
     private val settings: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(activity)
@@ -93,10 +81,6 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         lblList.setOnClickListener { seeFavourites() }
         lblAccount.setOnClickListener { goAccount() }
         lblLogOut.setOnClickListener { logOut() }
-    }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-       // inflater.inflate(R.menu.menu_settings,menu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

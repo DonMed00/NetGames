@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.MediaController
@@ -34,7 +35,6 @@ import com.google.firebase.firestore.DocumentReference
 import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.game_fragment.*
-import kotlinx.android.synthetic.main.game_fragment.emptyView
 
 
 /**
@@ -59,7 +59,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
+    }
 
+    override fun onDestroy() {
+        Log.d("Error","H asalido")
+        super.onDestroy()
     }
 
 
@@ -205,7 +209,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun setupSpinner(stores: List<StoreObj>) {
-        var list = ArrayList<String>()
+        val list = ArrayList<String>()
         stores.forEach { list.add(it.store!!.name!!) }
         if (list.isEmpty()) {
             list.add(getString(R.string.no_stores))
@@ -226,7 +230,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupVideo(videopath: String) {
         try {
             activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
-            var mediaController = MediaController(this.context)
+            val mediaController = MediaController(this.context)
             mediaController.setAnchorView(video)
             mediaController.setBackgroundResource(R.color.white)
             val videoUri = Uri.parse(videopath)
@@ -262,7 +266,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupAdapter() {
 
-        gameAdapter = GameFragmentAdapter(this.requireActivity()).also {
+        gameAdapter = GameFragmentAdapter().also {
             it.onItemClickListener = {
 
             }

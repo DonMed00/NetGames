@@ -132,7 +132,4 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
         }
     }
 
-    fun deleteAccount(){
-
-    }
 }

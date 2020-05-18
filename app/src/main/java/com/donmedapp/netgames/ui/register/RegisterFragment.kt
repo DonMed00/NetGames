@@ -4,20 +4,12 @@ package com.donmedapp.netgames.ui.register
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
-import com.donmedapp.netgames.data.pojo.UserGame
-import com.donmedapp.netgames.extensions.hideSoftKeyboard
-import com.donmedapp.netgames.extensions.invisibleUnless
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.register_fragment.*
 
 /**

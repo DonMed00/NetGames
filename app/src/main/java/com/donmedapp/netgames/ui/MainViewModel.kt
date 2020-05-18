@@ -1,11 +1,8 @@
 package com.donmedapp.netgames.ui
 
-import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.Game
@@ -13,9 +10,8 @@ import com.donmedapp.netgames.data.pojo.UserGame
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.edit_fragment_item.*
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
 
     val myDB = FirebaseFirestore.getInstance()
     lateinit var gameNew: DocumentReference
@@ -77,7 +73,7 @@ class MainViewModel() : ViewModel() {
         }
     }
 
-    fun setupAvatar() {
+    fun setupAvatar(texto : String) {
         gameNew = myDB.collection("users").document(mAuth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
@@ -87,7 +83,8 @@ class MainViewModel() : ViewModel() {
 
                 myDB.collection("users")
                     .document(mAuth.currentUser!!.uid)
-                    .set(userGames!!)
+                    .set(userGames)
+                _message.value =Event(texto)
                 _onBack.value=Event(true)
 
             }

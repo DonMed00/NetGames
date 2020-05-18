@@ -1,17 +1,13 @@
 package com.donmedapp.netgames.ui.edit
 
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
-
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.avatars
 import com.donmedapp.netgames.base.observeEvent
@@ -26,18 +22,12 @@ import kotlinx.android.synthetic.main.edit_fragment.*
  * A simple [Fragment] subclass.
  */
 class EditFragment : Fragment(R.layout.edit_fragment) {
-    private val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(activity)
-    }
 
     private lateinit var avatarAdapter: EditFragmentAdapter
 
     var viewmodelActivity: MainViewModel = MainViewModel()
 
 
-    private val viewModel: EditViewmodel by viewModels {
-        EditViewmodelFactory(activity!!.application)
-    }
     // private lateinit var mAuth: FirebaseAuth
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -115,7 +105,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
                 viewmodelActivity.setMessage(getString(R.string.nickname_empty))
             }else {
                 viewmodelActivity.setName(txtNick.text.toString())
-                viewmodelActivity.setupAvatar()
+                viewmodelActivity.setupAvatar(getString(R.string.avatar_changed))
 
                 }
         }else{

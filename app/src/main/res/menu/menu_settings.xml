@@ -7,4 +7,10 @@
         android:title="@string/info_title"
         app:showAsAction="ifRoom|withText"/>
 
+    <item
+        android:id="@+id/infoDestination2"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="@string/info_title"
+        app:showAsAction="ifRoom|withText" />
+
 </menu>

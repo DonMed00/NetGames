@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/lblEmail"
-        android:textColor="@color/textColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="84dp"
         android:text="Email"
+        android:textColor="@color/textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

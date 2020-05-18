@@ -19,13 +19,13 @@
     <string name="user_title">User</string>
     <string name="search_txtSearch">Search</string>
     <string name="search_no_games">No results</string>
-    <string name="ARG_GAME_ID">Game Id</string>
+    <string name="ARG_GAME_ID" translatable="false">Game Id</string>
 
 
     <string name="store_choose">Select a store</string>
     <string name="no_stores">No Stores</string>
-    <string name="no_user">NOUSER</string>
-    <string name="no_password">NOPASSWORD</string>
+    <string name="no_user" translatable="false">NOUSER</string>
+    <string name="no_password" translatable="false">NOPASSWORD</string>
     <string name="favorites_title">My list</string>
     <string name="register_rellene_toast">There can be no empty fields</string>
     <string name="register_email_error">Failed to verify email</string>
@@ -61,7 +61,7 @@
     <string name="game_no_screenshots">No screenshots</string>
     <string name="game_video">Video</string>
     <string name="game_no_videos">No videos</string>
-    <string name="user_my_favorites">My favorites</string>
+    <string name="user_my_favorites">My list</string>
     <string name="user_my_account">My Account</string>
     <string name="user_log_out">Log Out</string>
     <string name="home_action">Action</string>
@@ -69,12 +69,13 @@
     <string name="home_sports">Sports</string>
     <string name="home_adventures">Adventures</string>
     <string name="home_simulation">Simulation</string>
-    <string name="home_my_favorites">My favorites</string>
+    <string name="home_my_favorites">My list</string>
     <string name="home_no_favorites">No favorites</string>
     <string name="logout_make">Successful logout</string>
     <string name="avatar_changed">Avatar changed</string>
     <string name="nickname_empty">Nickname is empty</string>
-    <string-array name="store_choosed">
+    <string name="logo" translatable="false">LOGO</string>
+    <string-array translatable="false" name="store_choosed">
         <item>Steam</item>
         <item>Xbox Store</item>
         <item>Playstation Store</item>

@@ -7,18 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
-
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
 /**
@@ -26,10 +24,6 @@ import kotlinx.android.synthetic.main.favorites_fragment.*
  */
 class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
 
-
-    private val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(activity)
-    }
 
     private lateinit var favAdapter: FavoritesFragmentAdapter
 
@@ -87,7 +81,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     }
 
     private fun navegateToGame(id: Int) {
-        var gameId = favAdapter.currentList[id].gameId.toLong()
+        val gameId = favAdapter.currentList[id].gameId.toLong()
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame3, bundleOf(

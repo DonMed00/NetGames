@@ -1,6 +1,5 @@
 package com.donmedapp.netgames.ui.account
 
-import android.graphics.Paint
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -8,7 +7,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.ui.MainViewModel

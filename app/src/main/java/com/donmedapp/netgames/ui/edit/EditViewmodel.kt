@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.ui.MainViewModel
@@ -28,12 +27,6 @@ class EditViewmodel(
         get() = _avatar
 
     private var _avatarName: MutableLiveData<String> = MutableLiveData("")
-    val avatarName: LiveData<String>
-        get() = _avatarName
-
-    fun changeAvatar(avatar: Int) {
-        _avatar.value = avatar
-    }
 
     init {
         initAvatar()
@@ -48,26 +41,4 @@ class EditViewmodel(
         }
     }
 
-    fun setName(text: String) {
-        _avatarName.value = text
-    }
-
-    fun setupAvatar() {
-
-        viewmodelActivity.gameNew.get().addOnSuccessListener { documentSnapshot ->
-            val userGames = documentSnapshot.toObject(UserGame::class.java)
-            if (avatar.value != -1) {
-                userGames!!.avatar = _avatar.value!!
-                userGames.name = _avatarName.value!!
-
-                viewmodelActivity.myDB.collection("users")
-                    .document(viewmodelActivity.mAuth.currentUser!!.uid)
-                    .set(userGames)
-
-                _message.value = Event(application.getString(R.string.avatar_changed))
-            }
-
-
-        }
-    }
 }

@@ -8,5 +8,5 @@ class SearchViewmodelFactory(
     private val application: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        SearchViewmodel( application) as T
+        SearchViewmodel() as T
 }

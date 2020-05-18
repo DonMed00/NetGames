@@ -3,10 +3,6 @@ package com.donmedapp.netgames.ui.home
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -18,17 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
-import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.emptyView
-import kotlinx.android.synthetic.main.search_fragment.*
 
 
 /**
@@ -68,8 +59,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         findNavController().graph.startDestination = R.id.homeDestination
         // viewModel.getGamesByGenre("strategy")
         setupViews()
-
-
         // if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
         //  loginUser()
         //lblPrueba.text = mAuth.currentUser!!.email.toString()
@@ -112,19 +101,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         lblFavs.invisibleUnless(isNetDisponible(context!!))
         lblHomeEmpty.invisibleUnless(isNetDisponible(context!!))
         emptyView.invisibleUnless(!isNetDisponible(context!!))
-    }
-
-    private fun setupFirebaseData() {
-        val myDB = FirebaseFirestore.getInstance()
-        val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-        gameNew.get().addOnSuccessListener { documentSnapshot ->
-            val userGames = documentSnapshot.toObject(UserGame::class.java)
-            if (userGames == null) {
-                myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-                    .set(UserGame())
-            }
-        }
-
     }
 
     private fun setupRecyclerViews() {
@@ -176,7 +152,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun navegateToGame(id: Int, adapter: HomeFragmentAdapter) {
-        var gameId = adapter.currentList[id].id
+        val gameId = adapter.currentList[id].id
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
@@ -186,7 +162,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun navegateToGameFavs(id: Int) {
-        var gameId = myFavsAdapter.currentList[id].gameId
+        val gameId = myFavsAdapter.currentList[id].gameId
         //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
@@ -233,36 +209,12 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            setTitle(R.string.app_name)
+            //setTitle(R.string.app_name)
             setDisplayHomeAsUpEnabled(false)
         }
 
     }
 
-    private fun loginUser() {
-        //Obtenemos usuario y contraseña
-        //Verificamos que los campos no este vacios
-        viewmodelActivity.mAuth.signInWithEmailAndPassword(
-            settings.getString("currentUser", getString(R.string.no_user))!!,
-            settings.getString("currentPassword", getString(R.string.no_password))!!
-        )
-            .addOnCompleteListener(activity!!) { task ->
-                if (task.isSuccessful) {
-                    //Toast.makeText(
-                    //  activity, "Inicio de sesion correcto",
-                    //  Toast.LENGTH_SHORT
-                    // ).show()
-                    // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
-                } else {
-                    // sino le avisamos el usuairo que orcurrio un problema
-                    //mProgressBar.hide()
-                    Toast.makeText(
-                        activity, "Authentication failed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-    }
 }
 
 
