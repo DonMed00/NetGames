@@ -75,7 +75,18 @@
     <string name="avatar_changed">Avatar changed</string>
     <string name="nickname_empty">Nickname is empty</string>
     <string name="logo" translatable="false">LOGO</string>
-    <string-array translatable="false" name="store_choosed">
+    <string name="appversion">App Version: %1$s</string>
+    <string name="assistant_assistantDescription">Assistant</string>
+    <string name="assistant_btnFinish">Start</string>
+    <string name="assistant_title">Assistant</string>
+
+    <string name="page1">Welcome to NetGames, swipe to get to know the app a little better.</string>
+    <string name="page2">Create an account and log in to get all your favorite data and games.</string>
+    <string name="page3">From the main view you can interact with the best games of each genre ordered by popularity.</string>
+    <string name="page4">Search all your favorite games in the app to know all their information.</string>
+    <string name="page5">Change your avatar, nick or any account information from your profile.</string>
+    <string name="page6">We hope it has helped you and you have a rewarding experience within the app.</string>
+    <string-array name="store_choosed" translatable="false">
         <item>Steam</item>
         <item>Xbox Store</item>
         <item>Playstation Store</item>

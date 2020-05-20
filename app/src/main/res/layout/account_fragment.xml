@@ -34,14 +34,12 @@
 
     <EditText
         android:id="@+id/txtEmail"
-        android:textColor="@color/textColor"
-
-        android:layout_width="255dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
+        android:ems="12"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/lblEmail"
@@ -50,12 +48,10 @@
     <EditText
         android:id="@+id/txtPassword"
         android:textColor="@color/textColor"
-
-        android:layout_width="255dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
+        android:ems="12"
         android:inputType="textPassword"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,6 +84,18 @@
         app:layout_constraintStart_toEndOf="@+id/txtPassword"
         app:layout_constraintTop_toTopOf="@+id/txtPassword"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/lblVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

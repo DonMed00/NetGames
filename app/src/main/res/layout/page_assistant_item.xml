@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="@dimen/assistant_imgIcon_size"
+        android:layout_height="@dimen/assistant_imgIcon_size"
+        android:layout_marginTop="144dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconotoolbar" />
+
+    <TextView
+        android:id="@+id/lblContent"
+        android:layout_width="305dp"
+        android:layout_height="246dp"
+        android:layout_marginStart="52dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:text="@string/assistant_assistantDescription"
+        android:textSize="@dimen/main_textSize_3x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="105dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/assistant_btnFinish"
+        android:background="@android:color/transparent"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

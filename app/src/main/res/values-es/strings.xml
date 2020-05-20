@@ -70,4 +70,17 @@
     <string name="logout_make">Cierre de sesión correcto</string>
     <string name="avatar_changed">Avatar cambiado</string>
     <string name="nickname_empty">El campo nickname está vacío</string>
+    <string name="appversion">Versión de la app: %1$s</string>
+
+    <string name="assistant_assistantDescription">Asistente</string>
+    <string name="assistant_btnFinish">Comenzar</string>
+    <string name="assistant_title">Asistente</string>
+
+    <string name="page1">Bienvenido a NetGames, desliza para conocer un poco mejor la app.</string>
+    <string name="page2">Crea una cuenta e inicia sesión para obtener todos tus datos y juegos favoritos.</string>
+    <string name="page3">Desde la vista principal podrá interactuar con los mejores juegos de cada género ordenado por popularidad.</string>
+    <string name="page4">Busque todos sus juegos favoritos en la app para conocer toda su información.</string>
+    <string name="page5">Cambie su avatar, nick o cualquier dato de su cuenta desde su perfil.</string>
+    <string name="page6">Esperamos que te haya servido de ayuda y disfrutes de una gratificante experiencia dentro de la app.</string>
+
 </resources>

@@ -126,9 +126,9 @@ class SearchFragment : Fragment(R.layout.search_fragment){
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(false)
+
             setTitle(R.string.app_name)
-            //setDisplayShowTitleEnabled(true)
-           // setLogo(null)
             setDisplayHomeAsUpEnabled(false)
         }
 

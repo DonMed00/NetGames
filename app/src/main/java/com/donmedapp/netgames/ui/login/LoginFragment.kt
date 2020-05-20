@@ -40,11 +40,24 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
 
     private fun setupViews() {
+        observeFirstInstall()
         setupAppBar()
         setHasOptionsMenu(true)
         setupBtns()
         observeMessage()
         setupOnEditorAction()
+    }
+
+    private fun observeFirstInstall() {
+
+        val firstTime = settings.getBoolean("firstTime", true)
+        if (firstTime) {
+            findNavController().navigate(R.id.navigateToAssistant)
+        }
+        settings.edit {
+            putBoolean("firstTime", false)
+        }
+
     }
 
     private fun setupOnEditorAction() {

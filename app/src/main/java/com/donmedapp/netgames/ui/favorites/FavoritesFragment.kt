@@ -1,7 +1,6 @@
 package com.donmedapp.netgames.ui.favorites
 
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.data.pojo.Game
@@ -111,6 +109,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(false)
             setTitle(R.string.favorites_title)
             setDisplayHomeAsUpEnabled(true)
         }

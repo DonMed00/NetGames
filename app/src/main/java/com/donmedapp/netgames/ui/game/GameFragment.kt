@@ -174,7 +174,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             if (it.hasVideoContent()) {
                 setupVideo(it.clip!!.clip)
             }
-            lblMetacritic.invisibleUnless(it.hasMetacriticRating())
+            lblMetacritic.invisibleUnless(false)
             if (it.hasMetacriticRating()) {
                 lblMetacritic.text = (it.metacritic!!.toFloat() / 10).toString()
             }
@@ -246,8 +246,10 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
     private fun setupAppBar() {
 
+
         viewmodel.game.observe(this) {
             (requireActivity() as AppCompatActivity).supportActionBar?.run {
+                setDisplayShowTitleEnabled(true)
                 title = it.name
                 setDisplayHomeAsUpEnabled(true)
             }

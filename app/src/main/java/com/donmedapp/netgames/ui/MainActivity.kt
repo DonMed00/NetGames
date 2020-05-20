@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginDestination -> hideBottomNav()
-                R.id.gameDestination -> hideBottomNav()
+                R.id.gameDestination -> hideViews()
+                R.id.assistantFragment -> hideBottomNav()
                 R.id.favoritesDestination -> hideBottomNav()
                 R.id.registerDestination -> hideBottomNav()
                 R.id.forgotPasswordDestination -> hideBottomNav()
@@ -53,10 +54,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomNav() {
         bottomNavigationView.visibility = View.VISIBLE
+        showImgToolbar()
+    }
 
+    private fun showImgToolbar() {
+        imgToolbar.visibility=View.VISIBLE
+    }
+    private fun hideImgToolbar() {
+        imgToolbar.visibility=View.GONE
+    }
+    private fun hideViews() {
+        hideBottomNav()
+        hideImgToolbar()
     }
 
     private fun hideBottomNav() {
+        showImgToolbar()
         bottomNavigationView.visibility = View.GONE
 
     }

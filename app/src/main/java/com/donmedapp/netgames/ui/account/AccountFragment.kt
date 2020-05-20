@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.donmedapp.netgames.BuildConfig
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.ui.MainViewModel
@@ -39,6 +40,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
         observeMessage()
         setupOnEditorAction(txtEmail)
         setupOnEditorAction(txtPassword)
+        lblVersion.text=getString(R.string.appversion,BuildConfig.VERSION_NAME)
         txtEmail.setText(viewmodelActivity.mAuth.currentUser!!.email)
         txtPassword.setText(
             viewmodel.settings.getString(
