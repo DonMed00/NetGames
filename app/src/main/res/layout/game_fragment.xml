@@ -128,63 +128,45 @@
                 android:id="@+id/imgPlatformsH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_windows"
+                android:src="@drawable/ic_ordenador"
+                app:tint="@color/white"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPlatforms" />
 
             <ImageView
                 android:id="@+id/imgPs4"
+                app:tint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:src="@drawable/ic_ps4"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_consola"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/imgPlatformsH"
                 app:layout_constraintStart_toEndOf="@+id/imgPlatformsH"
                 app:layout_constraintTop_toTopOf="@+id/imgPlatformsH" />
 
             <ImageView
-                android:id="@+id/imgXbox"
+                android:id="@+id/imgMobile"
+                app:tint="@color/white"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:src="@drawable/ic_xbox"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_mobile"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/imgPs4"
                 app:layout_constraintStart_toEndOf="@+id/imgPs4"
                 app:layout_constraintTop_toTopOf="@+id/imgPs4" />
 
-
-            <ImageView
-                android:id="@+id/imgNintendo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:src="@drawable/ic_gameboy"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/imgXbox"
-                app:layout_constraintStart_toEndOf="@+id/imgXbox"
-                app:layout_constraintTop_toTopOf="@+id/imgXbox" />
-
-            <ImageView
-                android:id="@+id/imgMobile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:src="@drawable/ic_mobile"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/imgNintendo"
-                app:layout_constraintStart_toEndOf="@+id/imgNintendo"
-                app:layout_constraintTop_toTopOf="@+id/imgNintendo" />
-
             <ImageView
                 android:id="@+id/imgWii"
+                app:tint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="4dp"
                 android:src="@drawable/ic_wii"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/imgMobile"
@@ -324,6 +306,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+
+        android:textColor="@color/textColor"
+        android:drawableTint="@color/white"
         android:drawableTop="@drawable/ic_games_black_24dp"
         android:drawablePadding="@dimen/main_margin_1x"
         android:text="@string/game_no_game"

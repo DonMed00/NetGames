@@ -25,6 +25,9 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
     val message: LiveData<Event<String>> get() = _message
 
+    private val _messageT: MutableLiveData<Event<String>> = MutableLiveData()
+    val messageT: LiveData<Event<String>> get() = _messageT
+
     var viewmodelActivity: MainViewModel = MainViewModel()
 
     fun updatePassword(view: View, password: String) {
@@ -129,6 +132,28 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
         } else {
             _message.value =
                 Event(application.getString(R.string.register_rellene_toast))
+        }
+    }
+
+    fun seeLicenses() {
+        val firstClicked = settings.getBoolean("firstClicked", true)
+        val countTimes = settings.getInt("countTimes", 5)
+        if(firstClicked){
+
+            if(countTimes>0){
+                _messageT.value=Event(activity.getString(R.string.licenses_toast,countTimes.toString()))
+                settings.edit {
+                    putInt("countTimes", countTimes-1)
+                }
+            }else{
+                //_messageT.value=Event("Licencias abiertas")
+                settings.edit {
+                    putBoolean("firstClicked", false)
+                }
+            }
+        }else{
+            //_messageT.value=Event("Licencias abiertas jejeje")
+
         }
     }
 

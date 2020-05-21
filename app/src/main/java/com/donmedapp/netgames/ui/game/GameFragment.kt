@@ -198,12 +198,12 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun setupPlatforms(it: Result) {
-        imgPs4.invisibleUnless(it.hasPlatform("playstation"))
-        imgPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux"))
-        imgXbox.invisibleUnless(it.hasPlatform("xbox"))
-        imgNintendo.invisibleUnless(
+        imgPs4.invisibleUnless(it.hasPlatform("playstation") || it.hasPlatform("xbox")  ||it.hasPlatform("nintendo"))
+        imgPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux") || it.hasPlatform("mac"))
+        //imgXbox.invisibleUnless(it.hasPlatform("xbox"))
+       /* imgNintendo.invisibleUnless(
             it.hasPlatform("nintendo")
-        )
+        )*/
         imgMobile.invisibleUnless(it.hasPlatform("ios") || it.hasPlatform("Android"))
         imgWii.invisibleUnless(it.hasPlatform("wii"))
     }

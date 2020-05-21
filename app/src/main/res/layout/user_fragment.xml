@@ -103,10 +103,9 @@
         android:id="@+id/imgEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:src="@android:drawable/ic_menu_edit"
-        app:layout_constraintBottom_toBottomOf="@+id/lblName"
-        app:layout_constraintStart_toEndOf="@+id/lblName"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPerfil"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
         app:layout_constraintTop_toTopOf="@+id/lblName"
         app:layout_constraintVertical_bias="1.0" />
 

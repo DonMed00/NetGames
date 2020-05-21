@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
@@ -43,6 +42,12 @@ class UserFragment : Fragment(R.layout.user_fragment) {
         setHasOptionsMenu(true)
         setupLblOptions()
         observeLiveData()
+        setupNavigationToEdit()
+    }
+
+    private fun setupNavigationToEdit() {
+        lblName.setOnClickListener { goToEdit() }
+        imgPerfil.setOnClickListener { goToEdit() }
         imgEdit.setOnClickListener { goToEdit() }
     }
 

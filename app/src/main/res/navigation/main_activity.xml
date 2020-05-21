@@ -105,5 +105,9 @@
         android:name="com.donmedapp.netgames.ui.assistant.AssistantFragment"
         android:label="@string/assistant_title"
         tools:layout="@layout/fragment_assistant"/>
+    <dialog
+        android:id="@+id/infoDialog"
+        android:name="com.donmedapp.netgames.ui.dialog.InfoDialog"
+        android:label="InfoDialog" />
 
 </navigation>

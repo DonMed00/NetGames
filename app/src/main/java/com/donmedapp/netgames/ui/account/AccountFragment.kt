@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.donmedapp.netgames.BuildConfig
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
@@ -40,7 +42,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
         observeMessage()
         setupOnEditorAction(txtEmail)
         setupOnEditorAction(txtPassword)
-        lblVersion.text=getString(R.string.appversion,BuildConfig.VERSION_NAME)
+        lblVersion.text = getString(R.string.appversion, BuildConfig.VERSION_NAME)
         txtEmail.setText(viewmodelActivity.mAuth.currentUser!!.email)
         txtPassword.setText(
             viewmodel.settings.getString(
@@ -48,6 +50,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                 getString(R.string.no_password)
             )
         )
+        lblVersion.setOnClickListener { seeLicenses() }
         imgEdit.setOnClickListener { viewmodel.updateEmail(txtEmail, txtEmail.text.toString()) }
         imgEdit2.setOnClickListener {
             viewmodel.updatePassword(
@@ -55,6 +58,24 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                 txtPassword.text.toString()
             )
         }
+    }
+
+
+    fun seeLicenses() {
+        val firstClicked = viewmodel.settings.getBoolean("firstClicked", true)
+        val countTimes = viewmodel.settings.getInt("countTimes", 5)
+        if (firstClicked) {
+            if (countTimes == 0) {
+                findNavController().navigate(R.id.infoDialog)
+
+            }
+        } else {
+
+            findNavController().navigate(R.id.infoDialog)
+
+        }
+        viewmodel.seeLicenses()
+
     }
 
     private fun setupOnEditorAction(editText: EditText) {
@@ -78,6 +99,13 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
                 txtEmail,
                 it,
                 Snackbar.LENGTH_SHORT
+            ).show()
+        }
+        viewmodel.messageT.observeEvent(this) {
+            Toast.makeText(
+                activity,
+                it,
+                Toast.LENGTH_LONG
             ).show()
         }
     }

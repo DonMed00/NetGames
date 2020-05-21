@@ -83,4 +83,35 @@
     <string name="page5">Cambie su avatar, nick o cualquier dato de su cuenta desde su perfil.</string>
     <string name="page6">Esperamos que te haya servido de ayuda y disfrutes de una gratificante experiencia dentro de la app.</string>
 
+
+    <string name="licenses_toast">%1$s pasos más para saber más sobre la app.</string>
+    <string name="info_dialog_title">Información sobre la app</string>
+
+    <string name="nameapp">Nombre de la app: %1$s\n</string>
+    <string name="versionapp">Versión de la app: %1$s\n</string>
+    <string name="version_name">Nombre de la versión: %1$s\n</string>
+    <string name="build_version">Versión de compilación: %1$s\n\n</string>
+
+    <string name="licenses">Bibliotecas usadas:\n\n
+-Retrofit\n
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+\n\n
+-Google Gson\n
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+\n\n
+-LikeButton\n
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+\n\n
+Gracias por usar la aplicación.</string>
+    <string name="info_dialog_ok">Aceptar</string>
+
 </resources>

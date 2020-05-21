@@ -86,6 +86,38 @@
     <string name="page4">Search all your favorite games in the app to know all their information.</string>
     <string name="page5">Change your avatar, nick or any account information from your profile.</string>
     <string name="page6">We hope it has helped you and you have a rewarding experience within the app.</string>
+    <string name="info_dialog_title">App Info</string>
+    <string name="nameapp">App name: %1$s\n</string>
+    <string name="versionapp">App version: %1$s\n</string>
+    <string name="version_name">Version name: %1$s\n</string>
+
+    <string name="build_version">Build version: %1$s\n\n</string>
+
+
+    <string name="licenses">Used libraries:\n\n
+    -Retrofit\n
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    \n\n
+    -Google Gson\n
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    \n\n
+    -LikeButton\n
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    \n\n
+    Thanks for using the app.</string>
+
+
+    <string name="info_dialog_ok">Accept</string>
+    <string name="licenses_toast">%1$s more steps to know more about the app.</string>
     <string-array name="store_choosed" translatable="false">
         <item>Steam</item>
         <item>Xbox Store</item>
@@ -94,3 +126,8 @@
         <item>Google Play</item>
     </string-array>
 </resources>
+
+
+
+
+
