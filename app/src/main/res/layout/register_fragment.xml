@@ -25,7 +25,6 @@
         android:id="@+id/txtPassword"
         style="@style/viewCustom"
         android:hint="@string/password"
-
         android:textColor="@color/textColor"
         android:textColorHint="@color/grey"
         android:inputType="textPassword"

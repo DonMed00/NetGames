@@ -5,19 +5,27 @@
     android:id="@+id/clRoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
-
+    android:layout_margin="10dp">
 
 
         <ImageView
             android:id="@+id/imgPerfilEdit"
-            android:layout_marginTop="60dp"
             android:layout_width="@dimen/imgUser_width"
             android:layout_height="@dimen/imgUser_height"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imgCheck"
+            android:layout_width="33dp"
+            android:layout_height="31dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check_black_24dp"
+            app:tint="@color/green" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

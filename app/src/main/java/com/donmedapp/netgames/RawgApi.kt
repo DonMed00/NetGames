@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 
 interface RawgApi {
-    @Headers("User-Agent: com.theobviousexit.rawg")
+    @Headers("User-Agent: com.donmedapp.netgames")
     @GET("games?")
     suspend fun getGames(
         @Query("search") name: String,
@@ -21,12 +21,12 @@ interface RawgApi {
         @Query("page_size") page_size: Int
     ): RawgResponse
 
-    @Headers("User-Agent: com.theobviousexit.rawg")
+    @Headers("User-Agent: com.donmedapp.netgames")
     @GET("games")
     suspend fun orderByGenres(@Query("genres") name: String): RawgResponse
 
 
-    @Headers("User-Agent: com.theobviousexit.rawg")
+    @Headers("User-Agent: com.donmedapp.netgames")
     @GET("games/{gameId}")
     suspend fun getGame(@Path("gameId") gameId: Long): Result
 
@@ -70,7 +70,7 @@ data class Result(
         if(hasPlatform("pc") ||hasPlatform("linux")||hasPlatform("mac")){
             platformsFormatted = "PC "
         }
-        if(hasPlatform("playstation")||hasPlatform("xbox")||hasPlatform("nitentdo")||hasPlatform("wii")){
+        if(hasPlatform("playstation")||hasPlatform("xbox")||hasPlatform("nintendo")||hasPlatform("wii")){
             platformsFormatted= platformsFormatted.plus("Console ")
         }
         if(hasPlatform("ios")||hasPlatform("android")){

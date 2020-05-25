@@ -53,6 +53,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
         viewmodelActivity.avatar.observe(this) {
             if (it != -1) {
                 imgActualAvatar.setImageDrawable(roundedImg(it,resources))
+                avatarAdapter.currentPosition= avatars.indexOf(it)
 
             }
         }
@@ -86,7 +87,9 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
 
     private fun setupAdapter() {
         avatarAdapter = EditFragmentAdapter().also {
-            it.onItemClickListener = { position -> selectCurrentAvatar(position) }
+            it.onItemClickListener = { position -> selectCurrentAvatar(position)
+                it.currentPosition = position
+                it.notifyDataSetChanged()}
 
         }
 

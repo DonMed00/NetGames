@@ -48,6 +48,7 @@
             android:textColor="@color/textColor"
             android:textColorHint="@color/grey"
             style="@style/viewCustom"
+            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -68,6 +69,7 @@
                 android:imeOptions="actionDone" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <ProgressBar
             android:id="@+id/progressBar"
