@@ -18,6 +18,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
-        
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

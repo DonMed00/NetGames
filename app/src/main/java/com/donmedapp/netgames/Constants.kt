@@ -12,6 +12,7 @@ val avatars = listOf(
     R.drawable.gtasa,
     R.drawable.goku,
     R.drawable.samus,
+    R.drawable.claire,
     R.drawable.crash,
     R.drawable.tekken,
     R.drawable.spyro,
