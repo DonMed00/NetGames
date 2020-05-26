@@ -24,10 +24,10 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
 
 
     private val viewmodel: AccountViewmodel by viewModels {
-        AccountViewmodelFactory(activity!!.application, activity!!)
+        AccountViewmodelFactory(requireActivity().application, requireActivity())
     }
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -64,15 +64,8 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
     private fun seeLicenses() {
         val firstClicked = viewmodel.settings.getBoolean("firstClicked", true)
         val countTimes = viewmodel.settings.getInt("countTimes", 5)
-        if (firstClicked) {
-            if (countTimes == 0) {
-                findNavController().navigate(R.id.infoDialog)
-
-            }
-        } else {
-
+        if (!firstClicked || countTimes == 0) {
             findNavController().navigate(R.id.infoDialog)
-
         }
         viewmodel.seeLicenses()
 

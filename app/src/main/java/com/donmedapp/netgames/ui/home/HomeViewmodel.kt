@@ -22,7 +22,7 @@ class HomeViewmodel : ViewModel() {
         .build()
 
     private val myDB = FirebaseFirestore.getInstance()
-    var viewmodelActivity: MainViewModel = MainViewModel()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
     private val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
 
@@ -76,7 +76,6 @@ class HomeViewmodel : ViewModel() {
 
         GlobalScope.launch {
             list.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
-            //.sortedByDescending { it.rating })
         }
 
     }

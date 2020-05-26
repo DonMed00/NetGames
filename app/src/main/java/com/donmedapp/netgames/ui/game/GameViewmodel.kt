@@ -34,8 +34,8 @@ class GameViewmodel(
 
     private val rawgService = retrofit.create(RawgApi::class.java)
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
-    val myDB = FirebaseFirestore.getInstance()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
+    private val myDB = FirebaseFirestore.getInstance()
     val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
 
 
@@ -47,9 +47,6 @@ class GameViewmodel(
     private var _screenGame: MutableLiveData<Screenshot2> = MutableLiveData()
     val screenGame: LiveData<Screenshot2>
         get() = _screenGame
-
-
-    private var _gameId: MutableLiveData<Long> = MutableLiveData(0)
 
 
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
@@ -85,11 +82,10 @@ class GameViewmodel(
                         )
                     )
                 }
-                //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
                 myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
                     .set(userGames!!)
             }
-            _message.value = Event(application.getString(R.string.game_gameadded))
+            _message.value = Event(application.getString(R.string.game_gameadded,game.value!!.name))
 
         } else {
             _message.value = Event(application.getString(R.string.no_conection_detected))
@@ -111,11 +107,10 @@ class GameViewmodel(
                         )
                     )
                 }
-                //val userG = UserGame(userGames!!.games,viewmodelActivity.mAuth.currentUser!!.uid)
                 myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
                     .set(userGames!!)
             }
-            _message.value = Event(application.getString(R.string.game_gameremoved))
+            _message.value = Event(application.getString(R.string.game_gameremoved,game.value!!.name))
 
         } else {
             _message.value = Event(application.getString(R.string.no_conection_detected))

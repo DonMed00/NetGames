@@ -1,6 +1,5 @@
 package com.donmedapp.netgames.ui.favorites
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.donmedapp.netgames.data.pojo.Game
@@ -20,8 +19,6 @@ class FavoritesViewmodel : ViewModel() {
     fun setupData() {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             _games.value = documentSnapshot.toObject(UserGame::class.java)!!.games
-
-
          }
     }
 

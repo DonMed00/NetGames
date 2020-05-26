@@ -28,7 +28,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
     }
 
 
-    var viewmodelMain: MainViewModel = MainViewModel()
+    private var viewmodelMain: MainViewModel = MainViewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -58,14 +58,10 @@ class UserFragment : Fragment(R.layout.user_fragment) {
     }
 
     private fun observeLiveData() {
-        //if(!viewmodelMain.mAuth.currentUser!!.isEmailVerified){
-        //    Snackbar.make(imgPerfil,"Verifica",Snackbar.LENGTH_SHORT).show()
-        //}
-        viewmodelMain.avatar.observe(this){
-            //imgPerfil.setImageResource(it)
+        viewmodelMain.avatar.observe(viewLifecycleOwner){
             imgPerfil.setImageDrawable(roundedImg(it,resources))
         }
-        viewmodelMain.avatarName.observe(this){
+        viewmodelMain.avatarName.observe(viewLifecycleOwner){
             if(it==""){
                 lblName.text="Nickname"
 
@@ -75,9 +71,6 @@ class UserFragment : Fragment(R.layout.user_fragment) {
             }
         }
     }
-
-
-
     private fun goToEdit() {
         findNavController().navigate(R.id.navToEdit)
     }

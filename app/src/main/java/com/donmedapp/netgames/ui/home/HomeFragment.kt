@@ -1,7 +1,6 @@
 package com.donmedapp.netgames.ui.home
 
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
@@ -28,10 +26,6 @@ import kotlinx.android.synthetic.main.home_fragment.*
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
 
-    private val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(activity)
-    }
-
     private var actionAdapter = HomeFragmentAdapter()
 
     private var strategyAdapter = HomeFragmentAdapter()
@@ -45,29 +39,17 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var myFavsAdapter = FavoritesFragmentAdapter()
 
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
 
     private val viewModel: HomeViewmodel by viewModels {
-        HomeViewmodelFactory(activity!!.application)
+        HomeViewmodelFactory()
     }
-    // private lateinit var mAuth: FirebaseAuth
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //viewModel.setupData()
         findNavController().graph.startDestination = R.id.homeDestination
-        // viewModel.getGamesByGenre("strategy")
         setupViews()
-        // if (settings.getString("currentUser", getString(R.string.no_user)) != getString(R.string.no_user)) {
-        //  loginUser()
-        //lblPrueba.text = mAuth.currentUser!!.email.toString()
 
-        // Toast.makeText(activity, "No hay usuarios", Toast.LENGTH_SHORT).show()
-
-        // } else {
-        //  findNavController().navigate(R.id.loginDestination)
-        // }
     }
 
 
@@ -75,7 +57,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupAppBar()
         setHasOptionsMenu(true)
         setLblVisibility()
-        if(isNetDisponible(context!!)){
+        if(isNetDisponible(requireContext())){
 
             viewModel.setupFirebaseData()
             setupAdapters()
@@ -93,14 +75,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setLblVisibility() {
-        lblAction.invisibleUnless(isNetDisponible(context!!))
-        lblStrategy.invisibleUnless(isNetDisponible(context!!))
-        lblSports.invisibleUnless(isNetDisponible(context!!))
-        lblAdventure.invisibleUnless(isNetDisponible(context!!))
-        lblSimulation.invisibleUnless(isNetDisponible(context!!))
-        lblFavs.invisibleUnless(isNetDisponible(context!!))
-        lblHomeEmpty.invisibleUnless(isNetDisponible(context!!))
-        emptyView.invisibleUnless(!isNetDisponible(context!!))
+        lblAction.invisibleUnless(isNetDisponible(requireContext()))
+        lblStrategy.invisibleUnless(isNetDisponible(requireContext()))
+        lblSports.invisibleUnless(isNetDisponible(requireContext()))
+        lblAdventure.invisibleUnless(isNetDisponible(requireContext()))
+        lblSimulation.invisibleUnless(isNetDisponible(requireContext()))
+        lblFavs.invisibleUnless(isNetDisponible(requireContext()))
+        lblHomeEmpty.invisibleUnless(isNetDisponible(requireContext()))
+        emptyView.invisibleUnless(!isNetDisponible(requireContext()))
     }
 
     private fun setupRecyclerViews() {
@@ -153,7 +135,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun navegateToGame(id: Int, adapter: HomeFragmentAdapter) {
         val gameId = adapter.currentList[id].id
-        //Thread.sleep(500)
         findNavController().navigate(
             R.id.navToGame2, bundleOf(
                 getString(R.string.ARG_GAME_ID) to gameId
@@ -172,25 +153,25 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun observeLiveData() {
-        viewModel.gamesAction.observe(this) {
+        viewModel.gamesAction.observe(viewLifecycleOwner) {
             showGames(lstAction, actionAdapter, it)
         }
-        viewModel.gamesStrategy.observe(this) {
+        viewModel.gamesStrategy.observe(viewLifecycleOwner) {
             showGames(lstStrategy, strategyAdapter, it)
         }
 
-        viewModel.gamesSports.observe(this) {
+        viewModel.gamesSports.observe(viewLifecycleOwner) {
             showGames(lstSports, sportsAdapter, it)
         }
-        viewModel.gamesAdventure.observe(this) {
+        viewModel.gamesAdventure.observe(viewLifecycleOwner) {
             showGames(lstAdventure, adventureAdapter, it)
         }
 
-        viewModel.gamesSimulation.observe(this) {
+        viewModel.gamesSimulation.observe(viewLifecycleOwner) {
             showGames(lstSimulation, simulationAdapter, it)
         }
 
-        viewmodelActivity.gamesFav.observe(this) {
+        viewmodelActivity.gamesFav.observe(viewLifecycleOwner) {
             lstFavs.post {
                 myFavsAdapter.submitList(it)
             }
@@ -210,7 +191,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
             setDisplayShowTitleEnabled(false)
-            //setTitle(R.string.app_name)
             setDisplayHomeAsUpEnabled(false)
         }
 

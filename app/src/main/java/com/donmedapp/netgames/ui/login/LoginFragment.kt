@@ -96,7 +96,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
             settings.getString("currentPassword", getString(R.string.no_password))!!
         )
 
-            .addOnCompleteListener(activity!!) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                    // viewmodel.setMessage(getString(R.string.login_session_init_correct))
                     findNavController().navigate(R.id.navigateToHome)
@@ -163,7 +163,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
         viewmodel.mAuth.signInWithEmailAndPassword(
             txtEmail.text.toString(), txtPassword.text.toString()
         )
-            .addOnCompleteListener(activity!!) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     //viewmodel.setMessage(getString(R.string.login_session_init_correct))
                     goPrincipal()

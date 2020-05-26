@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.search_fragment.*
 class SearchFragment : Fragment(R.layout.search_fragment){
 
     private val viewModel: SearchViewmodel by viewModels {
-        SearchViewmodelFactory(activity!!.application)
+        SearchViewmodelFactory()
     }
 
     private var searchAdapter = SearchFragmentAdapter()
@@ -42,8 +42,7 @@ class SearchFragment : Fragment(R.layout.search_fragment){
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
-        //search()
-        if (isNetDisponible(context!!)) {
+        if (isNetDisponible(requireContext())) {
             setupAdapter()
             setupRecyclerView()
             observeLiveData()
@@ -99,7 +98,7 @@ class SearchFragment : Fragment(R.layout.search_fragment){
     }
 
     private fun observeLiveData() {
-        viewModel.games.observe(this) {
+        viewModel.games.observe(viewLifecycleOwner) {
             showGames(it)
         }
 
@@ -110,7 +109,6 @@ class SearchFragment : Fragment(R.layout.search_fragment){
             searchAdapter.submitList(results)
             emptyView.invisibleUnless(results.isEmpty())
         }
-        //lstSearch.smoothScrollToPosition(0)
 
 
     }

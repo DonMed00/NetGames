@@ -2,16 +2,12 @@
     <string name="app_name">NetGames</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgotPassword">Forget your password?</string>
-    <string name="firstName">Name</string>
-    <string name="lastName">Apellido</string>
     <string name="login">Login</string>
     <string name="createAcccount">Create account</string>
-    <string name="principal_title">Principal</string>
     <string name="send_password_title">Reset Password</string>
     <string name="register_title">Register</string>
     <string name="home_title">Home</string>
@@ -28,10 +24,8 @@
     <string name="no_password" translatable="false">NOPASSWORD</string>
     <string name="favorites_title">My list</string>
     <string name="register_rellene_toast">There can be no empty fields</string>
-    <string name="register_email_error">Failed to verify email</string>
     <string name="register_confirm_account">Email registered correctly. Check your inbox and verify account.</string>
     <string name="forgot_email_enviado">Password recovery email sent</string>
-    <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
     <string name="account_title">My account</string>
     <string name="edit_title">Edit profile</string>
     <string name="favs_no_games">No favorites yet</string>
@@ -39,19 +33,15 @@
     <string name="account_password_changed">Password changed correctly</string>
     <string name="account_email_changed">Email changed correctly</string>
     <string name="forgot_rellenar_campos">The email field can´t be empty</string>
-    <string name="game_gameadded">Game added to my list</string>
-    <string name="game_gameremoved">Game removed to my list</string>
+    <string name="game_gameadded">%1$s added to the list</string>
+    <string name="game_gameremoved">%1$s removed from the list</string>
     <string name="game_noshops">There aren´t stores</string>
-    <string name="login_session_init_correct">Successful login</string>
-    <string name="user_logout">Log out</string>
-    <string name="connect_to_internet">No internet conection</string>
-    <string name="no_conection_detected">No internet conection</string>
+    <string name="no_conection_detected">No internet connection</string>
     <string name="search_no_games2">No games</string>
     <string name="account_password_different">The password entered is the same</string>
     <string name="account_email_different">The email entered is the same</string>
     <string name="game_no_game">No game info</string>
 
-    <string name="info_title">Info</string>
     <string name="send_password">Send Password</string>
     <string name="game_description">Description</string>
     <string name="game_platforms">Platforms</string>
@@ -121,6 +111,7 @@
 
     <string name="info_dialog_ok">Accept</string>
     <string name="licenses_toast">%1$s more steps to know more about the app.</string>
+    <string name="no_description">No description</string>
     <string-array name="store_choosed" translatable="false">
         <item>Steam</item>
         <item>Xbox Store</item>

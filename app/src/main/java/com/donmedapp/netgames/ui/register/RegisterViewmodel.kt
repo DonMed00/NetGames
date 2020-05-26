@@ -2,12 +2,10 @@ package com.donmedapp.netgames.ui.register
 
 import android.app.Activity
 import android.app.Application
-import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.data.pojo.UserGame
@@ -16,10 +14,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterViewmodel(var application: Application, var activity: Activity) : ViewModel() {
-
-    val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(activity)
-    }
 
 
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
@@ -57,7 +51,7 @@ class RegisterViewmodel(var application: Application, var activity: Activity) : 
         }
     }
 
-    fun setupFirebaseData(nickname: String) {
+    private fun setupFirebaseData(nickname: String) {
         val myDB = FirebaseFirestore.getInstance()
         val gameNew = myDB.collection("users").document(auth.currentUser!!.uid)
         gameNew.get().addOnSuccessListener {
@@ -73,7 +67,7 @@ class RegisterViewmodel(var application: Application, var activity: Activity) : 
 
     }
 
-    fun verifyEmail() {
+    private fun verifyEmail() {
         auth.currentUser!!.sendEmailVerification()
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {

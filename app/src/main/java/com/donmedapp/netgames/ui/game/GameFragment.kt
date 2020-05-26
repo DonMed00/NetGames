@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.MediaController
@@ -28,7 +27,6 @@ import com.donmedapp.netgames.base.observeEvent
 import com.donmedapp.netgames.data.pojo.Game
 import com.donmedapp.netgames.data.pojo.UserGame
 import com.donmedapp.netgames.extensions.invisibleUnless
-import com.donmedapp.netgames.ui.MainViewModel
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
@@ -47,32 +45,22 @@ class GameFragment : Fragment(R.layout.game_fragment) {
 
 
     private val viewmodel: GameViewmodel by viewModels {
-        GameViewmodelFactory(activity!!, activity!!.application)
+        GameViewmodelFactory(requireActivity(), requireActivity().application)
     }
-
-    var viewmodelActivity: MainViewModel = MainViewModel()
-
     private val gameId: Long by lazy {
-        arguments!!.getLong(getString(R.string.ARG_GAME_ID))
+        requireArguments().getLong(getString(R.string.ARG_GAME_ID))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
     }
-
-    override fun onDestroy() {
-        Log.d("Error","H asalido")
-        super.onDestroy()
-    }
-
-
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
         setLblVisibility()
         observeMessage()
-        if (isNetDisponible(context!!)) {
+        if (isNetDisponible(requireContext())) {
             viewmodel.getGame(gameId)
             viewmodel.getScreenGame(gameId)
             setupAdapter()
@@ -100,18 +88,18 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun setLblVisibility() {
-        imgGameG.invisibleUnless(isNetDisponible(context!!))
-        lblName.invisibleUnless(isNetDisponible(context!!))
-        lblDescription.invisibleUnless(isNetDisponible(context!!))
-        lblPlatforms.invisibleUnless(isNetDisponible(context!!))
-        spinner1.invisibleUnless(isNetDisponible(context!!))
-        btnBuy.invisibleUnless(isNetDisponible(context!!))
-        lblScreenshots.invisibleUnless(isNetDisponible(context!!))
-        lstScreenshots.invisibleUnless(isNetDisponible(context!!))
-        lblScreenshots2.invisibleUnless(isNetDisponible(context!!))
-        lblVideo.invisibleUnless(isNetDisponible(context!!))
-        lblVideo2.invisibleUnless(isNetDisponible(context!!))
-        emptyView.invisibleUnless(!isNetDisponible(context!!))
+        imgGameG.invisibleUnless(isNetDisponible(requireContext()))
+        lblName.invisibleUnless(isNetDisponible(requireContext()))
+        lblDescription.invisibleUnless(isNetDisponible(requireContext()))
+        lblPlatforms.invisibleUnless(isNetDisponible(requireContext()))
+        spinner1.invisibleUnless(isNetDisponible(requireContext()))
+        btnBuy.invisibleUnless(isNetDisponible(requireContext()))
+        lblScreenshots.invisibleUnless(isNetDisponible(requireContext()))
+        lstScreenshots.invisibleUnless(isNetDisponible(requireContext()))
+        lblScreenshots2.invisibleUnless(isNetDisponible(requireContext()))
+        lblVideo.invisibleUnless(isNetDisponible(requireContext()))
+        lblVideo2.invisibleUnless(isNetDisponible(requireContext()))
+        emptyView.invisibleUnless(!isNetDisponible(requireContext()))
 
 
     }
@@ -138,7 +126,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
             lateinit var game: Game
-            viewmodel.game.observe(this) {
+            viewmodel.game.observe(viewLifecycleOwner) {
                 game = Game(
                     it.id.toString(),
                     it.name,
@@ -154,7 +142,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     }
 
     private fun observeLiveData() {
-        viewmodel.game.observe(this) {
+        viewmodel.game.observe(viewLifecycleOwner) {
             lblName.text = it.name
             if (!it.backgroundImage.isNullOrBlank()) {
                 imgGameG.load(it.backgroundImage)
@@ -178,11 +166,11 @@ class GameFragment : Fragment(R.layout.game_fragment) {
             if (it.hasMetacriticRating()) {
                 lblMetacritic.text = (it.metacritic!!.toFloat() / 10).toString()
             }
-            if (!it.description.isNullOrBlank()) {
+            if (!it.description.isBlank()) {
                 lblDescription2.text =
                     HtmlCompat.fromHtml(it.description, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
             } else {
-                lblDescription2.text = "No description"
+                lblDescription2.text = getString(R.string.no_description)
             }
             if (it.platforms != null) {
                 setupPlatforms(it)
@@ -191,7 +179,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
                 setupSpinner(it.stores)
             }
         }
-        viewmodel.screenGame.observe(this) {
+        viewmodel.screenGame.observe(viewLifecycleOwner) {
             showScreens(it.results)
         }
 
@@ -200,10 +188,6 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupPlatforms(it: Result) {
         imgPs4.invisibleUnless(it.hasPlatform("playstation") || it.hasPlatform("xbox")  ||it.hasPlatform("nintendo"))
         imgPlatformsH.invisibleUnless(it.hasPlatform("pc") || it.hasPlatform("linux") || it.hasPlatform("mac"))
-        //imgXbox.invisibleUnless(it.hasPlatform("xbox"))
-       /* imgNintendo.invisibleUnless(
-            it.hasPlatform("nintendo")
-        )*/
         imgMobile.invisibleUnless(it.hasPlatform("ios") || it.hasPlatform("Android"))
         imgWii.invisibleUnless(it.hasPlatform("wii"))
     }
@@ -214,7 +198,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
         if (list.isEmpty()) {
             list.add(getString(R.string.no_stores))
         }
-        val adapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, list)
+        val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, list)
         spinner1.adapter = adapter
     }
 
@@ -229,7 +213,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     @SuppressLint("ResourceAsColor")
     private fun setupVideo(videopath: String) {
         try {
-            activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
+            requireActivity().window.setFormat(PixelFormat.TRANSLUCENT)
             val mediaController = MediaController(this.context)
             mediaController.setAnchorView(video)
             mediaController.setBackgroundResource(R.color.white)
@@ -247,7 +231,7 @@ class GameFragment : Fragment(R.layout.game_fragment) {
     private fun setupAppBar() {
 
 
-        viewmodel.game.observe(this) {
+        viewmodel.game.observe(viewLifecycleOwner) {
             (requireActivity() as AppCompatActivity).supportActionBar?.run {
                 setDisplayShowTitleEnabled(true)
                 title = it.name

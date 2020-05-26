@@ -1,10 +1,8 @@
 package com.donmedapp.netgames
 
 import android.os.Parcelable
-import androidx.lifecycle.MutableLiveData
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -34,13 +32,9 @@ interface RawgApi {
     @GET("games/{gameId}/screenshots")
     suspend fun getScreenshotsOfGame(@Path("gameId") gameId: Long): Screenshot2
 
-    //https://api.rawg.io/api/games?last_30_days
-    //https://api.rawg.io/api/games?this_week
-
-
 }
 
-//games search
+
 @Parcelize
 data class Result(
     @SerializedName("id") val id: Long = 0,
@@ -86,18 +80,6 @@ data class Result(
 
     }
 
-    @IgnoredOnParcel
-    val imageVisibility = MutableLiveData(true)
-
-    @IgnoredOnParcel
-    val videoVisibility = MutableLiveData(false)
-
-    @IgnoredOnParcel
-    val playVideoIconVisibility: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>(
-            hasVideoContent()
-        )
-    }
 }
 
 @Parcelize

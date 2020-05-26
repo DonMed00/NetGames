@@ -40,15 +40,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.forgotPasswordDestination -> hideViews()
                 R.id.accountDestination -> hideViews()
                 R.id.editDestination -> hideViews()
+                R.id.infoDialog -> hideViews()
 
                 else -> showBottomNav()
             }
         }
 
         bottomNavigationView.setOnNavigationItemReselectedListener { }
-       // bottomNavigationView.itemIconTintList = null
-
-
     }
 
 
@@ -76,8 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupAppBar() {
         setSupportActionBar(toolbar)
-        //toolbar.setLogo(R.drawable.icononuevo);
-
     }
 
 

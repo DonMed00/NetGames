@@ -25,10 +25,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
 
     private lateinit var avatarAdapter: EditFragmentAdapter
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
-
-
-    // private lateinit var mAuth: FirebaseAuth
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -50,14 +47,14 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
     }
 
     private fun observeLiveData() {
-        viewmodelActivity.avatar.observe(this) {
+        viewmodelActivity.avatar.observe(viewLifecycleOwner) {
             if (it != -1) {
                 imgActualAvatar.setImageDrawable(roundedImg(it,resources))
                 avatarAdapter.currentPosition= avatars.indexOf(it)
 
             }
         }
-        viewmodelActivity.avatarName.observe(this) {
+        viewmodelActivity.avatarName.observe(viewLifecycleOwner) {
             if (it != "") {
                 txtNick.setText(it)
             }
@@ -70,7 +67,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
         }
         viewmodelActivity.onBack.observeEvent(this) {
             if (it) {
-                activity!!.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
     }
@@ -103,7 +100,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
     private fun saveAvatar() {
         txtNick.clearFocus()
         txtNick.hideSoftKeyboard()
-        if(isNetDisponible(context!!)){
+        if(isNetDisponible(requireContext())){
             if(txtNick.text.toString().isEmpty()){
                 viewmodelActivity.setMessage(getString(R.string.nickname_empty))
             }else {

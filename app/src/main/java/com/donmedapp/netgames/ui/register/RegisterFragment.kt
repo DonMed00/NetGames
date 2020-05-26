@@ -19,7 +19,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
 
     private val viewmodel: RegisterViewmodel by viewModels {
-        RegisterViewmodelFactory(activity!!.application, activity!!)
+        RegisterViewmodelFactory(requireActivity().application, requireActivity())
     }
 
 
@@ -61,7 +61,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
         }
         viewmodel.onBack.observeEvent(this) {
             if (it) {
-                activity!!.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
 

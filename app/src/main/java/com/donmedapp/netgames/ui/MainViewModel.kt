@@ -13,8 +13,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class MainViewModel : ViewModel() {
 
-    val myDB = FirebaseFirestore.getInstance()
-    lateinit var gameNew: DocumentReference
+    private val myDB = FirebaseFirestore.getInstance()
+    private lateinit var gameNew: DocumentReference
     var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
 
@@ -37,10 +37,6 @@ class MainViewModel : ViewModel() {
 
     private val _onBack: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val onBack: LiveData<Event<Boolean>> get() = _onBack
-
-    //var activity = MainActivity()
-
-
 
 
     fun setMessage(text: String) {

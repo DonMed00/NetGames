@@ -2,22 +2,16 @@ package com.donmedapp.netgames.ui.forgotPassword
 
 import android.app.Activity
 import android.app.Application
-import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.preference.PreferenceManager
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.Event
 import com.donmedapp.netgames.extensions.hideSoftKeyboard
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordViewmodel(var application: Application, var activity: Activity) : ViewModel() {
-
-    val settings: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(activity)
-    }
 
 
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()

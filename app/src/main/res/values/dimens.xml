@@ -4,23 +4,10 @@
 
     <dimen name="assistant_imgIcon_size">128dp</dimen>
 
-    <dimen name="main_margin_half">4dp</dimen>
     <dimen name="main_margin_1x">8dp</dimen>
     <dimen name="main_margin_2x">16dp</dimen>
-    <dimen name="main_margin_3x">24dp</dimen>
-    <dimen name="main_margin_4x">32dp</dimen>
-    <dimen name="main_card_elevation">4dp</dimen>
     <dimen name="main_card_cornerRadius">4dp</dimen>
-    <dimen name="main_textSize_1x">16sp</dimen>
-    <dimen name="main_textSize_2x">20sp</dimen>
     <dimen name="main_textSize_3x" tools:ignore="UnusedResources">24sp</dimen>
-    <dimen name="main_textSize_4x">28sp</dimen>
-    <dimen name="main_textSize_5x">40sp</dimen>
-    <dimen name="main_textSize_6x">50sp</dimen>
-    <dimen name="main_textSize_7x">76sp</dimen>
-    <dimen name="dial_item_imgAvatar_size">32dp</dimen>
-    <dimen name="recent_item_imgAvatar_size">42dp</dimen>
-    <dimen name="contact_item_imgAvatar_size">42dp</dimen>
     <dimen name="cardview_width">164dp</dimen>
     <dimen name="cardview_height">215dp</dimen>
     <dimen name="cardview_title_size">18sp</dimen>
@@ -28,6 +15,6 @@
     <dimen name="margintop_lbl_home">10dp</dimen>
     <dimen name="imgUser_width">106dp</dimen>
     <dimen name="imgUser_height">106dp</dimen>
-    <dimen name="user_textsize">20dp</dimen>
+    <dimen name="user_textsize">20sp</dimen>
     <dimen name="user_marginstart">10dp</dimen>
 </resources>

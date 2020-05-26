@@ -3,13 +3,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clRoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_viewResult"
         android:layout_width="@dimen/cardview_width"
         android:layout_height="@dimen/cardview_height"
         app:cardCornerRadius="@dimen/main_card_cornerRadius"
@@ -66,9 +64,7 @@
                 android:background="@color/game_label_background"
                 android:gravity="center"
                 android:textColor="@color/textColor"
-
                 android:textAlignment="center"
-                android:text="PC,PS4"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

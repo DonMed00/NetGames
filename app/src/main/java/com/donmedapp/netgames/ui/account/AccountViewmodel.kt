@@ -28,7 +28,7 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
     private val _messageT: MutableLiveData<Event<String>> = MutableLiveData()
     val messageT: LiveData<Event<String>> get() = _messageT
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
     fun updatePassword(view: View, password: String) {
         view.hideSoftKeyboard()
@@ -146,14 +146,10 @@ class AccountViewmodel(var application: Application,var activity: Activity) : Vi
                     putInt("countTimes", countTimes-1)
                 }
             }else{
-                //_messageT.value=Event("Licencias abiertas")
                 settings.edit {
                     putBoolean("firstClicked", false)
                 }
             }
-        }else{
-            //_messageT.value=Event("Licencias abiertas jejeje")
-
         }
     }
 

@@ -19,9 +19,8 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
 
 
     private val viewmodel: ForgotPasswordViewmodel by viewModels {
-        ForgotPasswordViewmodelFactory(activity!!.application, activity!!)
+        ForgotPasswordViewmodelFactory(requireActivity().application, requireActivity())
     }
-    //Firebase references
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -58,7 +57,7 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
         }
         viewmodel.onBack.observeEvent(this) {
             if (it) {
-                activity!!.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
     }

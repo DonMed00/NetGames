@@ -24,7 +24,20 @@ class SearchViewmodel : ViewModel() {
     private var _games: MutableLiveData<List<Result>> = MutableLiveData()
     val games: LiveData<List<Result>>
         get() = _games
-    private val listOfWordsOfQuery : List<String> = listOf("fifa","call of duty","counter strike","gta","f1","fortnite","ufc","wwe","battlefield")
+    private val listOfWordsOfQuery: List<String> = listOf(
+        "fifa",
+        "call of duty",
+        "counter strike",
+        "gta",
+        "f1",
+        "fortnite",
+        "ufc",
+        "wwe",
+        "battlefield",
+        "dragon ball",
+        "street",
+        "uncharted"
+    )
 
     init {
         setupInitSearch(listOfWordsOfQuery)
@@ -36,10 +49,13 @@ class SearchViewmodel : ViewModel() {
 
 
     fun search(text: String) {
-        // _games.value = listOf()
         GlobalScope.launch {
-            _games.postValue(rawgService.getGames(text, 1, 50).results.sortedByDescending { it.rating })
-            //.sortedByDescending { it.rating })
+            _games.postValue(
+                rawgService.getGames(
+                    text,
+                    1,
+                    50
+                ).results.sortedByDescending { it.rating })
         }
 
     }

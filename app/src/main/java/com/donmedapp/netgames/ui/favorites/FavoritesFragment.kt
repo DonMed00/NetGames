@@ -25,13 +25,12 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
 
     private lateinit var favAdapter: FavoritesFragmentAdapter
 
-    var viewmodelActivity: MainViewModel = MainViewModel()
+    private var viewmodelActivity: MainViewModel = MainViewModel()
 
 
     private val viewModel: FavoritesViewmodel by viewModels {
-        FavoritesViewmodelFactory(activity!!.application)
+        FavoritesViewmodelFactory()
     }
-    // private lateinit var mAuth: FirebaseAuth
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -44,7 +43,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     private fun setupViews() {
         setupAppBar()
         setHasOptionsMenu(true)
-        if(isNetDisponible(context!!)){
+        if(isNetDisponible(requireContext())){
             setupAdapter()
             setupRecyclerView()
             viewmodelActivity.setupData()
@@ -91,7 +90,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
     private fun observeLiveData() {
        // Thread.sleep(5000)
 
-        viewmodelActivity.gamesFav.observe(this) {
+        viewmodelActivity.gamesFav.observe(viewLifecycleOwner) {
             showGames(it)
         }
 
