@@ -33,7 +33,7 @@
     <string name="forgot_email_enviado">Password recovery email sent</string>
     <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
     <string name="account_title">My account</string>
-    <string name="edit_title">Edit</string>
+    <string name="edit_title">Edit profile</string>
     <string name="favs_no_games">No favorites yet</string>
     <string name="nickname">Nickname</string>
     <string name="account_password_changed">Password changed correctly</string>

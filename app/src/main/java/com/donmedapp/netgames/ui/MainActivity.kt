@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.loginDestination -> hideBottomNav()
                 R.id.gameDestination -> hideViews()
-                R.id.assistantFragment -> hideBottomNav()
-                R.id.favoritesDestination -> hideBottomNav()
-                R.id.registerDestination -> hideBottomNav()
-                R.id.forgotPasswordDestination -> hideBottomNav()
-                R.id.accountDestination -> hideBottomNav()
-                R.id.editDestination -> hideBottomNav()
+                R.id.assistantFragment -> hideViews()
+                R.id.favoritesDestination -> hideViews()
+                R.id.registerDestination -> hideViews()
+                R.id.forgotPasswordDestination -> hideViews()
+                R.id.accountDestination -> hideViews()
+                R.id.editDestination -> hideViews()
 
                 else -> showBottomNav()
             }

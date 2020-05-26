@@ -117,7 +117,7 @@ class UserFragment : Fragment(R.layout.user_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            title = getString(R.string.user_title)
+            setDisplayShowTitleEnabled(false)
             setDisplayHomeAsUpEnabled(false)
         }
 

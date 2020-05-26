@@ -70,6 +70,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(true)
             setTitle(R.string.register_title)
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)

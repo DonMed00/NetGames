@@ -18,14 +18,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
-
-        <ImageView
-            android:id="@+id/imgCheck"
-            android:layout_width="33dp"
-            android:layout_height="31dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_check_black_24dp"
-            app:tint="@color/green" />
+        
 
 </androidx.constraintlayout.widget.ConstraintLayout>

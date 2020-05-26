@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.donmedapp.netgames.R
-import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.utils.roundedImg
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.edit_fragment_item.*
@@ -45,15 +44,6 @@ class EditFragmentAdapter :
 
         fun bind(img: Int) {
             imgPerfilEdit.setImageDrawable(roundedImg(img,imgPerfilEdit.context.resources))
-            if (currentPosition == absoluteAdapterPosition) {
-               imgPerfilEdit.setBackgroundResource(R.color.blueLight2)
-
-                imgCheck.invisibleUnless(false)
-            } else {
-                imgPerfilEdit.background=null
-                imgCheck.invisibleUnless(false)
-
-            }
         }
 
     }

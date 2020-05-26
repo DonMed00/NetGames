@@ -1,6 +1,7 @@
 package com.donmedapp.netgames.ui.assistant
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.data.entity.Page
@@ -78,7 +79,9 @@ class AssistantFragment : Fragment(R.layout.fragment_assistant) {
             )
         )
 
-        assistantAdapter = AssistantFragmentAdapter(pageList).also { it.onItemClickListener = { activity?.onBackPressed()}}
+        assistantAdapter = AssistantFragmentAdapter(pageList).also {
+            it.onItemClickListener = { activity?.onBackPressed() }
+        }
     }
 
 
@@ -91,7 +94,10 @@ class AssistantFragment : Fragment(R.layout.fragment_assistant) {
 
 
     private fun setupAppBar() {
-
+        (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(true)
+            title = getString(R.string.app_name)
+        }
 
     }
 }

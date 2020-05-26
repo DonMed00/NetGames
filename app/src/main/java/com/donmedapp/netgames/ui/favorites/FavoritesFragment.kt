@@ -109,7 +109,7 @@ class FavoritesFragment : Fragment(R.layout.favorites_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
-            setDisplayShowTitleEnabled(false)
+            setDisplayShowTitleEnabled(true)
             setTitle(R.string.favorites_title)
             setDisplayHomeAsUpEnabled(true)
         }

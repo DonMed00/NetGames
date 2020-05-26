@@ -61,7 +61,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
     }
 
 
-    fun seeLicenses() {
+    private fun seeLicenses() {
         val firstClicked = viewmodel.settings.getBoolean("firstClicked", true)
         val countTimes = viewmodel.settings.getInt("countTimes", 5)
         if (firstClicked) {
@@ -110,91 +110,9 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
         }
     }
 
-    /* private fun updatePassword() {
-         txtEmail.hideSoftKeyboard()
-         txtEmail.hideSoftKeyboard()
-         val user = viewmodelActivity.mAuth.currentUser
-         // Get auth credentials from the user for re-authentication
-         // Get auth credentials from the user for re-authentication
-         val credential = EmailAuthProvider
-             .getCredential(
-                 settings.getString("currentUser", getString(R.string.no_user))!!,
-                 settings.getString("currentPassword", getString(R.string.no_password))!!
-             ) // Current Login Credentials \\
-
-         // Prompt the user to re-provide their sign-in credentials
-         // Prompt the user to re-provide their sign-in credentials
-         user!!.reauthenticate(credential)
-             .addOnCompleteListener {
-                 val user = viewmodelActivity.mAuth.currentUser
-                 user!!.updatePassword(txtPassword.text.toString())
-                     .addOnCompleteListener { task ->
-                         if (task.isSuccessful) {
-                             settings.edit {
-                                 putString("currentPassword", txtPassword.text.toString())
-                             }
-                             Snackbar.make(
-                                 txtPassword,
-                                 getString(R.string.account_password_changed),
-                                 Snackbar.LENGTH_SHORT
-                             ).show()
-                         } else {
-                             Snackbar.make(
-                                 txtPassword,
-                                 task.exception!!.message!!,
-                                 Snackbar.LENGTH_SHORT
-                             ).show()
-
-                         }
-                     }
-             }
-     }*/
-
-    /*private fun updateEmail() {
-        txtEmail.hideSoftKeyboard()
-        val user = viewmodelActivity.mAuth.currentUser
-        // Get auth credentials from the user for re-authentication
-        // Get auth credentials from the user for re-authentication
-        val credential = EmailAuthProvider
-            .getCredential(
-                settings.getString("currentUser", getString(R.string.no_user))!!,
-                settings.getString("currentPassword", getString(R.string.no_password))!!
-            ) // Current Login Credentials \\
-
-        // Prompt the user to re-provide their sign-in credentials
-        // Prompt the user to re-provide their sign-in credentials
-        user!!.reauthenticate(credential)
-            .addOnCompleteListener {
-                //Now change your email address \\
-                //----------------Code for Changing Email Address----------\\
-                val user = viewmodelActivity.mAuth.currentUser
-                user!!.updateEmail(txtEmail.text.toString())
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            settings.edit {
-                                putString("currentUser", txtEmail.text.toString())
-                            }
-                            Snackbar.make(
-                                txtPassword,
-                                getString(R.string.account_email_changed),
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-
-                        } else {
-                            Snackbar.make(
-                                txtPassword,
-                                task.exception!!.message!!,
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-
-                        }
-                    }
-            }
-    }*/
-
-
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(true)
             setTitle(R.string.account_title)
             setDisplayHomeAsUpEnabled(true)
         }

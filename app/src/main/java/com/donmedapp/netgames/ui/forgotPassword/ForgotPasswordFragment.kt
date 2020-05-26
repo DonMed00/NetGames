@@ -4,10 +4,9 @@ package com.donmedapp.netgames.ui.forgotPassword
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-
 import com.donmedapp.netgames.R
 import com.donmedapp.netgames.base.observeEvent
 import com.google.android.material.snackbar.Snackbar
@@ -70,6 +69,7 @@ class ForgotPasswordFragment : Fragment(R.layout.forgot_password_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(true)
             setTitle(R.string.send_password_title)
             setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)

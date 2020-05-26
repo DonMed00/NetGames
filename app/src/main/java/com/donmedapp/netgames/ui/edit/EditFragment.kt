@@ -125,6 +125,7 @@ class EditFragment : Fragment(R.layout.edit_fragment) {
 
     private fun setupAppBar() {
         (requireActivity() as AppCompatActivity).supportActionBar?.run {
+            setDisplayShowTitleEnabled(true)
             setTitle(R.string.edit_title)
             setDisplayHomeAsUpEnabled(true)
         }

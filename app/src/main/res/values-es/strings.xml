@@ -30,7 +30,7 @@
     <string name="forgot_email_enviado">Correo de recuperación de contraseña enviado</string>
     <string name="password_send_confirmation">An email has been sent to your email with the password change.</string>
     <string name="account_title">Mi cuenta</string>
-    <string name="edit_title">Editar</string>
+    <string name="edit_title">Editar perfil</string>
     <string name="favs_no_games">No hay juegos favoritos aún</string>
     <string name="nickname">Nickname</string>
     <string name="account_password_changed">Contraseña cambiada correctamente</string>
