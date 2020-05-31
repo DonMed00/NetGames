@@ -32,7 +32,7 @@
     <string name="nickname">Nickname</string>
     <string name="account_password_changed">Password changed correctly</string>
     <string name="account_email_changed">Email changed correctly</string>
-    <string name="forgot_rellenar_campos">The email field can´t be empty</string>
+    <string name="forgot_rellenar_campos">There are empty fields</string>
     <string name="game_gameadded">%1$s added to the list</string>
     <string name="game_gameremoved">%1$s removed from the list</string>
     <string name="game_noshops">There aren´t stores</string>

@@ -29,7 +29,7 @@
     <string name="nickname">Nickname</string>
     <string name="account_password_changed">Contraseña cambiada correctamente</string>
     <string name="account_email_changed">Correo cambiado correctamente</string>
-    <string name="forgot_rellenar_campos">El campo del correo no puede estar vacío</string>
+    <string name="forgot_rellenar_campos">Hay campos vacíos</string>
     <string name="game_gameadded">%1$s añadido a la lista</string>
     <string name="game_gameremoved">%1$s eliminado de la lista</string>
     <string name="game_noshops">No existen tiendas</string>
