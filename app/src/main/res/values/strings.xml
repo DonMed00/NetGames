@@ -79,7 +79,7 @@
     <string name="info_dialog_title">App Info</string>
     <string name="nameapp">App name: %1$s\n</string>
     <string name="versionapp">App version: %1$s\n</string>
-    <string name="version_name">Version name: %1$s\n</string>
+    <string name="version_name">Version name: %1$s\n\n</string>
 
     <string name="build_version">Build version: %1$s\n\n</string>
 

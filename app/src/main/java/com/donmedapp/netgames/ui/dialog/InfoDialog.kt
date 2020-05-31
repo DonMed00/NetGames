@@ -27,7 +27,7 @@ class InfoDialog : DialogFragment() {
                 ) + getString(
                     R.string.version_name,
                     BuildConfig.VERSION_NAME
-                ) + getString(R.string.build_version, BuildConfig.BUILD_TYPE) +
+                )  +
                         getString(
                             R.string.licenses
                         )

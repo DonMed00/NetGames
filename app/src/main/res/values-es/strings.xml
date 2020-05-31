@@ -55,7 +55,7 @@
     <string name="home_sports">Deportes</string>
     <string name="home_adventures">Aventuras</string>
     <string name="home_simulation">Simulación</string>
-    <string name="home_my_favorites">My lista</string>
+    <string name="home_my_favorites">Mi lista</string>
     <string name="home_no_favorites">No hay juegos en tu lista aún</string>
     <string name="logout_make">Cierre de sesión correcto</string>
     <string name="avatar_changed">Avatar cambiado</string>
@@ -79,7 +79,7 @@
 
     <string name="nameapp">Nombre de la app: %1$s\n</string>
     <string name="versionapp">Versión de la app: %1$s\n</string>
-    <string name="version_name">Nombre de la versión: %1$s\n</string>
+    <string name="version_name">Nombre de la versión: %1$s\n\n</string>
     <string name="build_version">Versión de compilación: %1$s\n\n</string>
 
     <string name="licenses">Bibliotecas usadas:\n\n
