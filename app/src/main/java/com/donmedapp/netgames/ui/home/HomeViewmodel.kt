@@ -24,9 +24,8 @@ class HomeViewmodel : ViewModel() {
     private val myDB = FirebaseFirestore.getInstance()
     private var viewmodelActivity: MainViewModel = MainViewModel()
 
-    private val gameNew = myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
-
-
+    private val gameNew =
+        myDB.collection("users").document(viewmodelActivity.mAuth.currentUser!!.uid)
 
 
     private val rawgService = retrofit.create(RawgApi::class.java)
@@ -54,25 +53,35 @@ class HomeViewmodel : ViewModel() {
     val gamesSimulation: LiveData<List<Result>>
         get() = _gamesSimulation
 
+    private var _gamesPuzzle: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesPuzzle: LiveData<List<Result>>
+        get() = _gamesPuzzle
+
+    private var _gamesArcade: MutableLiveData<List<Result>> = MutableLiveData()
+    val gamesArcade: LiveData<List<Result>>
+        get() = _gamesArcade
+
     private val _message: MutableLiveData<Event<String>> = MutableLiveData()
     val message: LiveData<Event<String>> get() = _message
 
     init {
-        getGamesByGenre(_gamesAction,"action")
+        getGamesByGenre(_gamesAction, "action")
 
-        getGamesByGenre(_gamesStrategy,"strategy")
+        getGamesByGenre(_gamesStrategy, "strategy")
 
-        getGamesByGenre(_gamesSports,"sports")
+        getGamesByGenre(_gamesSports, "sports")
 
-        getGamesByGenre(_gamesAdventure,"adventure")
+        getGamesByGenre(_gamesAdventure, "adventure")
 
-        getGamesByGenre(_gamesSimulation,"simulation")
+        getGamesByGenre(_gamesSimulation, "simulation")
 
-        //setupData()
+        getGamesByGenre(_gamesPuzzle, "puzzle")
 
+        getGamesByGenre(_gamesArcade, "arcade")
 
     }
-     private fun getGamesByGenre(list : MutableLiveData<List<Result>>, filter: String) {
+
+    private fun getGamesByGenre(list: MutableLiveData<List<Result>>, filter: String) {
 
         GlobalScope.launch {
             list.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
@@ -81,7 +90,7 @@ class HomeViewmodel : ViewModel() {
     }
 
 
-    fun setupFirebaseData(){
+    fun setupFirebaseData() {
         gameNew.get().addOnSuccessListener { documentSnapshot ->
             val userGames = documentSnapshot.toObject(UserGame::class.java)
             if (userGames == null) {

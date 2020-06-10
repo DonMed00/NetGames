@@ -14,7 +14,6 @@ import com.donmedapp.netgames.R
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.extensions.invisibleUnless
 import com.donmedapp.netgames.ui.MainViewModel
-import com.donmedapp.netgames.ui.favorites.FavoritesFragmentAdapter
 import com.donmedapp.netgames.utils.isNetDisponible
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -36,7 +35,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private var simulationAdapter = HomeFragmentAdapter()
 
-    private var myFavsAdapter = FavoritesFragmentAdapter()
+    private var puzzleAdapter = HomeFragmentAdapter()
+
+    private var arcadeAdapter = HomeFragmentAdapter()
 
 
     private var viewmodelActivity: MainViewModel = MainViewModel()
@@ -45,6 +46,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private val viewModel: HomeViewmodel by viewModels {
         HomeViewmodelFactory()
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         findNavController().graph.startDestination = R.id.homeDestination
@@ -57,14 +59,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupAppBar()
         setHasOptionsMenu(true)
         setLblVisibility()
-        if(isNetDisponible(requireContext())){
+        if (isNetDisponible(requireContext())) {
 
             viewModel.setupFirebaseData()
             setupAdapters()
             setupRecyclerViews()
             observeLiveData()
             viewmodelActivity.setupData()
-        }else {
+        } else {
             Snackbar.make(
                 lstAction,
                 getString(R.string.no_conection_detected),
@@ -80,8 +82,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         lblSports.invisibleUnless(isNetDisponible(requireContext()))
         lblAdventure.invisibleUnless(isNetDisponible(requireContext()))
         lblSimulation.invisibleUnless(isNetDisponible(requireContext()))
-        lblFavs.invisibleUnless(isNetDisponible(requireContext()))
-        lblHomeEmpty.invisibleUnless(isNetDisponible(requireContext()))
+        lblPuzzle.invisibleUnless(isNetDisponible(requireContext()))
+        lblArcade.invisibleUnless(isNetDisponible(requireContext()))
+
+
         emptyView.invisibleUnless(!isNetDisponible(requireContext()))
     }
 
@@ -91,12 +95,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupRecycler(lstSports, sportsAdapter)
         setupRecycler(lstAdventure, adventureAdapter)
         setupRecycler(lstSimulation, simulationAdapter)
-        lstFavs.run {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-            adapter = myFavsAdapter
+        setupRecycler(lstPuzzle, puzzleAdapter)
+        setupRecycler(lstArcade, arcadeAdapter)
 
-        }
+
     }
 
     private fun setupRecycler(lst: RecyclerView, adapterH: HomeFragmentAdapter) {
@@ -110,18 +112,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun setupAdapters() {
 
-        myFavsAdapter = FavoritesFragmentAdapter().also {
-            it.onItemClickListener = { navegateToGameFavs(it) }
-
-
-            setupAdapter(actionAdapter)
-            setupAdapter(strategyAdapter)
-            setupAdapter(sportsAdapter)
-            setupAdapter(adventureAdapter)
-            setupAdapter(simulationAdapter)
-
-
-        }
+        setupAdapter(actionAdapter)
+        setupAdapter(strategyAdapter)
+        setupAdapter(sportsAdapter)
+        setupAdapter(adventureAdapter)
+        setupAdapter(simulationAdapter)
+        setupAdapter(puzzleAdapter)
+        setupAdapter(arcadeAdapter)
 
 
     }
@@ -142,15 +139,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         )
     }
 
-    private fun navegateToGameFavs(id: Int) {
-        val gameId = myFavsAdapter.currentList[id].gameId
-        //Thread.sleep(500)
-        findNavController().navigate(
-            R.id.navToGame2, bundleOf(
-                getString(R.string.ARG_GAME_ID) to gameId.toLong()
-            )
-        )
-    }
 
     private fun observeLiveData() {
         viewModel.gamesAction.observe(viewLifecycleOwner) {
@@ -170,13 +158,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModel.gamesSimulation.observe(viewLifecycleOwner) {
             showGames(lstSimulation, simulationAdapter, it)
         }
-
-        viewmodelActivity.gamesFav.observe(viewLifecycleOwner) {
-            lstFavs.post {
-                myFavsAdapter.submitList(it)
-            }
-            lblHomeEmpty.invisibleUnless(it.isEmpty())
+        viewModel.gamesPuzzle.observe(viewLifecycleOwner) {
+            showGames(lstPuzzle, puzzleAdapter, it)
         }
+        viewModel.gamesArcade.observe(viewLifecycleOwner) {
+            showGames(lstArcade, arcadeAdapter, it)
+        }
+
 
     }
 
@@ -185,7 +173,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             adapter.submitList(results)
         }
     }
-
 
 
     private fun setupAppBar() {

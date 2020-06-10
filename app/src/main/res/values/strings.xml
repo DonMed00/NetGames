@@ -112,6 +112,8 @@
     <string name="info_dialog_ok">Accept</string>
     <string name="licenses_toast">%1$s more steps to know more about the app.</string>
     <string name="no_description">No description</string>
+    <string name="home_puzzle">Puzzle</string>
+    <string name="home_arcade">Arcade</string>
     <string-array name="store_choosed" translatable="false">
         <item>Steam</item>
         <item>Xbox Store</item>

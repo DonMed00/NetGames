@@ -107,5 +107,7 @@ Puede acceder a ella desde aquí   https://rawg.io/apidocs\n\n
 Gracias por usar la aplicación.</string>
     <string name="info_dialog_ok">Aceptar</string>
     <string name="no_description">No hay descripción</string>
+    <string name="home_puzzle">Puzzle</string>
+    <string name="home_arcade">Arcade</string>
 
 </resources>

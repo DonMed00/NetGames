@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/main_margin_1x"
-    android:background="@drawable/backgroundgra">
+    android:background="@drawable/backgroundgra"
+    android:padding="@dimen/main_margin_1x">
 
 
     <TextView
         android:id="@+id/emptyView"
 
-        android:textColor="@color/textColor"
-        android:drawableTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawableTop="@drawable/ic_games_black_24dp"
         android:drawablePadding="@dimen/main_margin_1x"
+        android:drawableTint="@color/white"
         android:text="@string/search_no_games2"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,162 +40,171 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lblAction"
-            android:textColor="@color/textColor"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_action"
-            android:layout_marginStart="@dimen/marginstart_lbl_home"
-            android:layout_marginTop="@dimen/margintop_lbl_home"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lstAction"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cardview_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblAction" />
-
-        <TextView
-            android:textColor="@color/textColor"
-
-            android:id="@+id/lblStrategy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_strategy"
-            android:layout_marginStart="@dimen/marginstart_lbl_home"
-            android:layout_marginTop="@dimen/margintop_lbl_home"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lstAction" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lstStrategy"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cardview_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblStrategy" />
-
             <TextView
-                android:textColor="@color/textColor"
-
-                android:id="@+id/lblSports"
+                android:id="@+id/lblAction"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="@string/home_sports"
                 android:layout_marginStart="@dimen/marginstart_lbl_home"
                 android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_action"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstAction"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblAction" />
+
+            <TextView
+                android:id="@+id/lblAdventure"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_adventures"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lstAction" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstAdventure"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblAdventure" />
+
+            <TextView
+                android:id="@+id/lblArcade"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_arcade"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lstAdventure" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstArcade"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblArcade" />
+
+            <TextView
+                android:id="@+id/lblSports"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_sports"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lstAdventure" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstSports"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblSports" />
+
+
+            <TextView
+                android:id="@+id/lblStrategy"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_strategy"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lstSports" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstStrategy"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblStrategy" />
+
+
+            <TextView
+                android:id="@+id/lblPuzzle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_puzzle"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lstSports" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstPuzzle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPuzzle" />
+
+
+
+
+            <TextView
+                android:id="@+id/lblSimulation"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_lbl_home"
+                android:layout_marginTop="@dimen/margintop_lbl_home"
+                android:text="@string/home_simulation"
+                android:textColor="@color/textColor"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lstStrategy" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lstSports"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/cardview_height"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblSports" />
-
-            <TextView
-                android:textColor="@color/textColor"
-
-                android:id="@+id/lblAdventure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_adventures"
-            android:layout_marginStart="@dimen/marginstart_lbl_home"
-            android:layout_marginTop="@dimen/margintop_lbl_home"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lstSports" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lstAdventure"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/cardview_height"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblAdventure" />
-
-            <TextView
-                android:textColor="@color/textColor"
-
-                android:id="@+id/lblSimulation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_simulation"
-            android:layout_marginStart="@dimen/marginstart_lbl_home"
-            android:layout_marginTop="@dimen/margintop_lbl_home"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lstAdventure" />
-
-            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lstSimulation"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cardview_height"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
-
-            <TextView
-                android:textColor="@color/textColor"
-
-                android:id="@+id/lblFavs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_my_favorites"
-                android:layout_marginStart="@dimen/marginstart_lbl_home"
-                android:layout_marginTop="@dimen/margintop_lbl_home"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblSimulation" />
-
-            <TextView
-                android:textColor="@color/textColor"
-                android:drawableTint="@color/white"
-
-                android:id="@+id/lblHomeEmpty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:text="@string/home_no_favorites"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.252"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblVideo" />
-
-            <androidx.recyclerview.widget.RecyclerView
-
-                android:id="@+id/lstFavs"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/cardview_height"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblFavs"
-                tools:listitem="@layout/favorites_fragment_item"/>
-
-
 
 
         </LinearLayout>
