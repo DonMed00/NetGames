@@ -98,7 +98,7 @@ class AccountFragment : Fragment(R.layout.account_fragment) {
             Toast.makeText(
                 activity,
                 it,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }

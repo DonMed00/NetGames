@@ -1,0 +1,35 @@
+App name: %1$s
+Appv version: %1$s
+Version name: %1$s
+Build version: %1$s
+
+Used libraries:
+-Retrofit
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+-Google-gson
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+-LikeButton
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+Thanks for using the app.
+
+
+-Rawg
+Todos los datos e imágenes han sido obtenidos desde un API de libre uso.
+Puede acceder a ella desde aqui   https://rawg.io/apidocs
+
+
+
+
+
