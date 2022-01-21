@@ -3,6 +3,7 @@ package com.donmedapp.netgames.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.donmedapp.netgames.API_KEY_RAWG
 import com.donmedapp.netgames.RawgApi
 import com.donmedapp.netgames.Result
 import kotlinx.coroutines.GlobalScope
@@ -54,7 +55,7 @@ class SearchViewmodel : ViewModel() {
                 rawgService.getGames(
                     text,
                     1,
-                    50
+                    50, API_KEY_RAWG
                 ).results.sortedByDescending { it.rating })
         }
 

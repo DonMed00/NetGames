@@ -16,21 +16,28 @@ interface RawgApi {
     suspend fun getGames(
         @Query("search") name: String,
         @Query("page") page: Int,
-        @Query("page_size") page_size: Int
+        @Query("page_size") page_size: Int,
+        @Query("key") key: String
+
     ): RawgResponse
 
     @Headers("User-Agent: com.donmedapp.netgames")
     @GET("games")
-    suspend fun orderByGenres(@Query("genres") name: String): RawgResponse
+    suspend fun orderByGenres(
+        @Query("genres") name: String,
+        @Query("key") key: String
+    ): RawgResponse
 
 
     @Headers("User-Agent: com.donmedapp.netgames")
     @GET("games/{gameId}")
-    suspend fun getGame(@Path("gameId") gameId: Long): Result
+    suspend fun getGame(@Path("gameId") gameId: Long, @Query("key") key: String): Result
 
 
     @GET("games/{gameId}/screenshots")
-    suspend fun getScreenshotsOfGame(@Path("gameId") gameId: Long): Screenshot2
+    suspend fun getScreenshotsOfGame(
+        @Path("gameId") gameId: Long, @Query("key") key: String
+    ): Screenshot2
 
 }
 

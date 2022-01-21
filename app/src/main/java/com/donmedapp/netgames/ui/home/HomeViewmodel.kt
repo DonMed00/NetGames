@@ -3,6 +3,7 @@ package com.donmedapp.netgames.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.donmedapp.netgames.API_KEY_RAWG
 import com.donmedapp.netgames.RawgApi
 import com.donmedapp.netgames.Result
 import com.donmedapp.netgames.base.Event
@@ -84,7 +85,11 @@ class HomeViewmodel : ViewModel() {
     private fun getGamesByGenre(list: MutableLiveData<List<Result>>, filter: String) {
 
         GlobalScope.launch {
-            list.postValue(rawgService.orderByGenres(filter).results.sortedByDescending { it.rating })
+            list.postValue(
+                rawgService.orderByGenres(
+                    filter,
+                    API_KEY_RAWG
+                ).results.sortedByDescending { it.rating })
         }
 
     }

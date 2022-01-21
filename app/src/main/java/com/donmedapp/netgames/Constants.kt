@@ -27,3 +27,5 @@ val avatars = listOf(
     R.drawable.jill
 
 )
+
+val API_KEY_RAWG : String = "027d0a110fe74fec87b1f6e322188ee9"
